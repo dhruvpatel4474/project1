@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
         Parse.initialize(this);
         mContext= LoginActivity.this;
         Initilize();
