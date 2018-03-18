@@ -12,9 +12,11 @@ import com.parse.ParseObject;
 
 public class Constant {
 
-    public static String categoryId;
-    public static String PGId;
+
+
+
     public static PGObject  pgObject;
+   public static ParseObject PGParseObject;
 
 
 

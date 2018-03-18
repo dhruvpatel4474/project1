@@ -9,6 +9,16 @@ public class Comment {
     String userId;
     String userName;
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    String date;
+
     public String getObjectId() {
         return objectId;
     }

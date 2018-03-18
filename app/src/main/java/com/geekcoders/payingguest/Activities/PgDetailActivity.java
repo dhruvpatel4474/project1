@@ -1,5 +1,8 @@
 package com.geekcoders.payingguest.Activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +25,11 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
+import java.io.ByteArrayInputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PgDetailActivity extends AppCompatActivity {
@@ -30,10 +37,11 @@ public class PgDetailActivity extends AppCompatActivity {
     private TextView title;
     private EditText addCommentEdt;
     private Button addCommentBtn;
-    private String PGid;
+
     ArrayList<Comment> commentList;
     private CommentAdapter adpt;
     private ListView commnetList;
+    private PGObject object;
 
 
     @Override
@@ -42,15 +50,7 @@ public class PgDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pg_detail);
         Parse.initialize(PgDetailActivity.this);
         Initiliztion();
-
-        PGObject object = Constant.pgObject;
-        title.setText(object.getName().toString());
-        PGid = object.getObjectId();
-
-
-
-        GetCommentList();
-
+        PGDetail();
 
         addCommentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +60,12 @@ public class PgDetailActivity extends AppCompatActivity {
                 } else {
 //                    dialog.show();
                     ParseObject commentData = new ParseObject("Feedback");
-                   // commentData.put("post", objpost);
+                    // commentData.put("post", objpost);
 
                     commentData.put("feedbackMessage", addCommentEdt.getText().toString());
                     commentData.put("userName", Constant.getValueForKeyString("name"));
                     commentData.put("userId", Constant.getValueForKeyString("userId"));
-                    commentData.put("PGId", PGid);
+                    commentData.put("PGId", Constant.getValueForKeyString("PGid"));
                     commentData.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
@@ -90,7 +90,6 @@ public class PgDetailActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     private void Initiliztion() {
@@ -102,20 +101,91 @@ public class PgDetailActivity extends AppCompatActivity {
 
     }
 
-//    private void GetPGData(){
+    public void PGDetail() {
+
+        final ParseQuery<ParseObject> query = ParseQuery.getQuery("PGDetail");
+        query.whereEqualTo("objectId", Constant.getValueForKeyString("PGid"));
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(final ParseObject object, ParseException e) {
+
+//                Date date = object.getCreatedAt();
+//                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+//                String fdate = df.format(date);
+                String title = object.getString("title");
+                String objectId = object.getObjectId();
+                int price = object.getInt("price");
+                String city = object.getString("city");
+                String description = object.getString("description");
+                String userId = object.getString("userId");
+                String address = object.getString("address");
+                String number = object.getString("number");
+                String userName = object.getString("userName");
+                String categoryId = object.getString("categoryId");
+                Date date = object.getCreatedAt();
+                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                String fdate = df.format(date);
+
+                GetCommentList();
+
+
+//                ParseQuery<ParseObject> imgQuery = ParseQuery.getQuery("RCPostAttachment");
+//                imgQuery.whereEqualTo("post", object);
+//                imgQuery.findInBackground(new FindCallback<ParseObject>() {
+//                    @Override
+//                    public void done(List<ParseObject> objects, ParseException e) {
 //
-//        ParseQuery<ParseObject> query = ParseQuery.getQuery("GameScore");
-//        query.getInBackground(Constant.PGId, new GetCallback<ParseObject>() {
-//            public void done(ParseObject object, ParseException e) {
-//                if (e == null) {
-//                    String title = object.getString("title");
-//                } else {
-//                    // something went wrong
-//                }
-//            }
-//        });
+//                        if (e == null && objects.size() != 0) {
 //
-//    }
+//                            for (int i = 0; objects.size() > i; i++) {
+//
+//
+//                                final Post obj = new Post();
+//                                obj.setFiletype(objects.get(i).getString("filetype"));
+//                                final ParseObject object = objects.get(i);
+//                                final ParseFile fileObject = (ParseFile) object.get("file");
+//                                obj.setParseFile(fileObject);
+//                                fileObject.getDataInBackground(new GetDataCallback() {
+//                                    @Override
+//                                    public void done(byte[] data, ParseException e) {
+//                                        obj.setBytedata(data);
+//
+//
+//                                        if (obj.getFiletype().equals("image")) {
+//                                            ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(data);
+//                                            Bitmap bitmap = BitmapFactory.decodeStream(arrayInputStream);
+//                                            obj.setImageBit(bitmap);
+//                                        }
+//
+//                                        adapter.notifyDataSetChanged();
+////                                    adpt.notifyDataSetChanged();
+//                                    }
+//                                });
+//
+//                                arrayList.add(obj);
+//                            }
+//
+//
+//                            adapter = new GridImageAdapter(PostDetailActivity.this, R.layout.grid_row, arrayList, GetScreenWidht() / 3);
+//                            gridview.setAdapter(adapter);
+////                            videoGet(object);
+////                            LoadImages();
+//                            if (dialog.isShowing()) {
+//                                dialog.dismiss();
+//                            }
+//                            GetCommentList();
+//
+//
+//                        }
+//
+//                    }
+//                });
+
+
+            }
+        });
+
+    }
 
 
     private void AddComment() {
@@ -125,10 +195,10 @@ public class PgDetailActivity extends AppCompatActivity {
 
     public void GetCommentList() {
 
-        commentList=new ArrayList<>();
+        commentList = new ArrayList<>();
         final ParseQuery<ParseObject> query = ParseQuery.getQuery("Feedback");
-        query.whereEqualTo("PGId", PGid);
-       // query.include("user");
+        query.whereEqualTo("PGId", Constant.getValueForKeyString("PGid"));
+        // query.include("user");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
@@ -143,6 +213,10 @@ public class PgDetailActivity extends AppCompatActivity {
                         obj.setUserName(objects.get(i).getString("userName"));
                         obj.setPGId(objects.get(i).getString("PGId"));
                         obj.setObjectId(objects.get(i).getObjectId());
+                        Date date = objects.get(i).getCreatedAt();
+                        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                        String fdate = df.format(date);
+                        obj.setDate(fdate);
 
 
                         commentList.add(obj);

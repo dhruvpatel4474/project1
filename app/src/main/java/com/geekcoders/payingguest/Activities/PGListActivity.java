@@ -20,7 +20,10 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PGListActivity extends AppCompatActivity {
@@ -41,8 +44,10 @@ public class PGListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Constant.pgObject=arrayList.get(i);
-                Intent intent=new Intent(PGListActivity.this,PgDetailActivity.class);
+                Constant.pgObject = arrayList.get(i);
+
+                Constant.setValueAndKeyString("PGid", arrayList.get(i).getObjectId());
+                Intent intent = new Intent(PGListActivity.this, PgDetailActivity.class);
                 startActivity(intent);
             }
         });
@@ -50,16 +55,16 @@ public class PGListActivity extends AppCompatActivity {
 
     }
 
-    private void Initiliztion(){
+    private void Initiliztion() {
 
-        listView=(ListView)findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
 
     }
 
 
-
     public void PgList() {
-        arrayList=new ArrayList<>();
+        arrayList = new ArrayList<>();
+
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("PGDetail");
 
         final ProgressDialog dialog = new ProgressDialog(PGListActivity.this);
@@ -72,13 +77,12 @@ public class PGListActivity extends AppCompatActivity {
 //        } else {
 //            bandQuery.whereContainedIn("bandMembers", Collections.singletonList(ParseUser.getCurrentUser()));
 //        }
-        bandQuery.whereEqualTo("categoryId", Constant.categoryId);
+        bandQuery.whereEqualTo("categoryId", Constant.getValueForKeyString("categoryId"));
         bandQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
 
                 if (e == null && objects != null && objects.size() > 0) {
-
 
                     for (int i = 0; i < objects.size(); i++) {
 
@@ -93,6 +97,10 @@ public class PGListActivity extends AppCompatActivity {
                         String number = objects.get(i).getString("number");
                         String userName = objects.get(i).getString("userName");
                         String categoryId = objects.get(i).getString("categoryId");
+                        Date date = objects.get(i).getCreatedAt();
+                        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                        String fdate = df.format(date);
+                        obj.setDate(fdate);
 
                         obj.setTitle(title);
                         obj.setObjectId(objectId);
@@ -108,7 +116,6 @@ public class PGListActivity extends AppCompatActivity {
 
                         // FetchListOfVenuesForSelectedBand(objects.get(i));
                         //ImagesBand(objects.get(i));
-
 
 
 //                        ParseQuery<ParseObject> imgQuery = ParseQuery.getQuery("RCBandImage");
@@ -132,6 +139,7 @@ public class PGListActivity extends AppCompatActivity {
 //                            }
 //                        });
                         arrayList.add(obj);
+
 
                     }
 

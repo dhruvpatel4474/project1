@@ -87,7 +87,7 @@ public class SignupActivity extends AppCompatActivity {
 
 // other fields can be set just like with ParseObject
         user.put("name", name);
-       
+
 
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {

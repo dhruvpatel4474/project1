@@ -14,6 +14,15 @@ public class PGObject {
     String userId;
     String number;
     String Username;
+    String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getTitle() {
         return title;

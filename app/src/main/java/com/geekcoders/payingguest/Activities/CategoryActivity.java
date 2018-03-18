@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.geekcoders.payingguest.Adapter.CategoryAdapter;
@@ -27,8 +28,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
-private ListView listView;
-private ArrayList<Category> arrayList;
+    private ListView listView;
+    private ArrayList<Category> arrayList;
     private CategoryAdapter adapter;
 
     @Override
@@ -39,12 +40,13 @@ private ArrayList<Category> arrayList;
         Initiliztion();
         CategoryList();
 
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Constant.categoryId=arrayList.get(i).getObjectId();
-                Intent intent=new Intent(CategoryActivity.this,PGListActivity.class);
+                Constant.setValueAndKeyString("categoryId", arrayList.get(i).getObjectId());
+                Intent intent = new Intent(CategoryActivity.this, PGListActivity.class);
                 startActivity(intent);
             }
         });
@@ -52,16 +54,15 @@ private ArrayList<Category> arrayList;
 
     }
 
-    private void Initiliztion(){
+    private void Initiliztion() {
 
-        listView=(ListView)findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
 
     }
 
 
-
     public void CategoryList() {
-        arrayList=new ArrayList<>();
+        arrayList = new ArrayList<>();
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Category");
 
         final ProgressDialog dialog = new ProgressDialog(CategoryActivity.this);
@@ -93,7 +94,6 @@ private ArrayList<Category> arrayList;
 
                         // FetchListOfVenuesForSelectedBand(objects.get(i));
                         //ImagesBand(objects.get(i));
-
 
 
 //                        ParseQuery<ParseObject> imgQuery = ParseQuery.getQuery("RCBandImage");
