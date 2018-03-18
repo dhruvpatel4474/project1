@@ -43,83 +43,89 @@
                 android:layout_marginRight="@dimen/Margin30"
                 android:orientation="vertical">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edtFname"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edtFnameLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/fname"
-                    android:textCursorDrawable="@drawable/text_cursor_cyan"
-                    android:textSize="@dimen/Largetext"
-                    app:met_accentTypeface="fonts/DroidSans.ttf"
-                    app:met_baseColor="@color/black"
-                    app:met_floatingLabel="highlight"
-                    app:met_primaryColor="@color/lightgrey"
-                    app:met_singleLineEllipsis="true"
-                    app:met_typeface="fonts/DroidSans.ttf" />
+                    android:layout_height="wrap_content">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edtLname"
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edtFname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/fname"
+                        android:inputType="textPersonName"
+                        android:maxLength="50"
+                        android:textSize="@dimen/Largetext" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edtLnameLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/lname"
-                    android:textCursorDrawable="@drawable/text_cursor_cyan"
-                    android:textSize="@dimen/Largetext"
-                    app:met_accentTypeface="fonts/DroidSans.ttf"
-                    app:met_baseColor="@color/black"
-                    app:met_floatingLabel="highlight"
-                    app:met_primaryColor="@color/lightgrey"
-                    app:met_singleLineEllipsis="true"
-                    app:met_typeface="fonts/DroidSans.ttf" />
+                    android:layout_height="wrap_content">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edtEmail"
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edtLname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/lname"
+                        android:inputType="textPersonName"
+                        android:maxLength="50"
+                        android:textSize="@dimen/Largetext" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edtEmailLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress"
-                    android:textCursorDrawable="@drawable/text_cursor_cyan"
-                    android:textSize="@dimen/Largetext"
-                    app:met_accentTypeface="fonts/DroidSans.ttf"
-                    app:met_baseColor="@color/black"
-                    app:met_floatingLabel="highlight"
-                    app:met_primaryColor="@color/lightgrey"
-                    app:met_singleLineEllipsis="true"
-                    app:met_typeface="fonts/DroidSans.ttf" />
+                    android:layout_height="wrap_content">
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edtNumber"
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edtEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="100"
+                        android:textSize="@dimen/Largetext" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edtNumberLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/number"
-                    android:textCursorDrawable="@drawable/text_cursor_cyan"
-                    android:textSize="@dimen/Largetext"
-                    app:met_accentTypeface="fonts/DroidSans.ttf"
-                    app:met_baseColor="@color/black"
-                    app:met_floatingLabel="highlight"
-                    app:met_primaryColor="@color/lightgrey"
-                    app:met_singleLineEllipsis="true"
-                    app:met_typeface="fonts/DroidSans.ttf" />
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edtNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Contact Number"
+                        android:inputType="number"
+                        android:maxLength="15"
+                        android:textSize="@dimen/Largetext" />
+                </android.support.design.widget.TextInputLayout>
 
 
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/edtPassword"
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edtPasswordLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:textCursorDrawable="@drawable/text_cursor_cyan"
-                    android:textSize="@dimen/Largetext"
-                    app:met_accentTypeface="fonts/DroidSans.ttf"
-                    app:met_baseColor="@color/black"
-                    app:met_floatingLabel="highlight"
-                    app:met_primaryColor="@color/lightgrey"
-                    app:met_singleLineEllipsis="true"
-                    app:met_typeface="fonts/DroidSans.ttf" />
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:maxLength="100"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/Largetext" />
+                </android.support.design.widget.TextInputLayout>
 
                 <Spinner
                     android:id="@+id/spinner_city"
-                    android:prompt="City"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
