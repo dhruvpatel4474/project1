@@ -10,6 +10,7 @@ import com.geekcoders.payingguest.Adapter.CategoryAdapter;
 import com.geekcoders.payingguest.Objects.Category;
 import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.R;
+import com.geekcoders.payingguest.Utils.Constant;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -36,6 +37,7 @@ public class AddPgActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_pg);
         Parse.initialize(AddPgActivity.this);
         getSupportActionBar().hide();
+        Constant.mcontext=AddPgActivity.this;
     }
 
 

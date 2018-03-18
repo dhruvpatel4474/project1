@@ -17,6 +17,8 @@ public class Constant {
 
     public static PGObject  pgObject;
    public static ParseObject PGParseObject;
+   public static String recieverId;
+   public  static  int price;
 
 
 

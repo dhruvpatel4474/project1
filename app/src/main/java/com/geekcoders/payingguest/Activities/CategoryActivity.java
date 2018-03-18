@@ -38,6 +38,7 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
         Parse.initialize(CategoryActivity.this);
         getSupportActionBar().hide();
+        Constant.mcontext=CategoryActivity.this;
         Initiliztion();
         CategoryList();
 

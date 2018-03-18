@@ -13,8 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.MainActivity"
-            android:screenOrientation="portrait"
-             />
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.parse.SERVER_URL"
@@ -26,7 +25,8 @@
             android:name="com.parse.CLIENT_KEY"
             android:value="mk4mpe6bKZCi2dktaXntlgalKvZZDXNgIw2hR9Ob" />
 
-        <activity android:name=".Activities.LoginActivity"
+        <activity
+            android:name=".Activities.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,28 +36,23 @@
         </activity>
         <activity
             android:name=".Activities.HomeActivity"
-            android:screenOrientation="portrait"
-             />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.SignupActivity"
-            android:screenOrientation="portrait"
-             />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.CategoryActivity"
-            android:screenOrientation="portrait"
-            ></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.PgDetailActivity"
-            android:screenOrientation="portrait"
-             />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.PGListActivity"
-            android:screenOrientation="portrait"
-             />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.AddPgActivity"
-            android:screenOrientation="portrait"
-            ></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".Activities.PaymentActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.geekcoders.payingguest.Activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -42,6 +43,10 @@ public class PgDetailActivity extends AppCompatActivity {
     private CommentAdapter adpt;
     private ListView commnetList;
     private PGObject object;
+    private Button payBtn;
+   int finalPrice;
+    String recieverId;
+
 
 
     @Override
@@ -50,6 +55,7 @@ public class PgDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pg_detail);
         Parse.initialize(PgDetailActivity.this);
         getSupportActionBar().hide();
+        Constant.mcontext=PgDetailActivity.this;
         Initiliztion();
         PGDetail();
 
@@ -91,6 +97,18 @@ public class PgDetailActivity extends AppCompatActivity {
         });
 
 
+        payBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Constant.price=finalPrice;
+                Constant.recieverId=recieverId;
+                Intent intent=new Intent(PgDetailActivity.this,PaymentActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
     }
 
     private void Initiliztion() {
@@ -99,6 +117,7 @@ public class PgDetailActivity extends AppCompatActivity {
         addCommentEdt = (EditText) findViewById(R.id.addCommentEdt);
         addCommentBtn = (Button) findViewById(R.id.addCommentBtn);
         commnetList = (ListView) findViewById(R.id.commnetList);
+        payBtn = (Button) findViewById(R.id.payBtn);
 
     }
 
@@ -126,6 +145,9 @@ public class PgDetailActivity extends AppCompatActivity {
                 Date date = object.getCreatedAt();
                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                 String fdate = df.format(date);
+                recieverId=userId;
+                finalPrice=price;
+                Constant.PGParseObject=object;
 
                 GetCommentList();
 

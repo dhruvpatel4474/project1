@@ -17,10 +17,15 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/addCommentBtn"/>
+        android:id="@+id/addCommentBtn"
+        android:text="Comment"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/commnetList"></ListView>
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/payBtn"
+        android:text="Pay"/>
 </RelativeLayout>
