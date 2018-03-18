@@ -37,6 +37,7 @@ public class PGListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pglist);
         Parse.initialize(PGListActivity.this);
+        getSupportActionBar().hide();
         Initiliztion();
         PgList();
 

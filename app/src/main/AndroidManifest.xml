@@ -14,7 +14,7 @@
         <activity
             android:name=".Activities.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+             />
 
         <meta-data
             android:name="com.parse.SERVER_URL"
@@ -26,7 +26,8 @@
             android:name="com.parse.CLIENT_KEY"
             android:value="mk4mpe6bKZCi2dktaXntlgalKvZZDXNgIw2hR9Ob" />
 
-        <activity android:name=".Activities.LoginActivity">
+        <activity android:name=".Activities.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,27 +37,27 @@
         <activity
             android:name=".Activities.HomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+             />
         <activity
             android:name=".Activities.SignupActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+             />
         <activity
             android:name=".Activities.CategoryActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            ></activity>
         <activity
             android:name=".Activities.PgDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+             />
         <activity
             android:name=".Activities.PGListActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+             />
         <activity
             android:name=".Activities.AddPgActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            ></activity>
     </application>
 
 </manifest>

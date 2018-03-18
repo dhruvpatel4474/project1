@@ -49,6 +49,7 @@ public class PgDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pg_detail);
         Parse.initialize(PgDetailActivity.this);
+        getSupportActionBar().hide();
         Initiliztion();
         PGDetail();
 

@@ -37,6 +37,7 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         Parse.initialize(CategoryActivity.this);
+        getSupportActionBar().hide();
         Initiliztion();
         CategoryList();
 

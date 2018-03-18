@@ -35,6 +35,7 @@ public class AddPgActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pg);
         Parse.initialize(AddPgActivity.this);
+        getSupportActionBar().hide();
     }
 
 

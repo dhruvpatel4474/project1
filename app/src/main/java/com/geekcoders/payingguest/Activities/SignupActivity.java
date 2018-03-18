@@ -35,6 +35,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         Parse.initialize(this);
         Initilize();
+        getSupportActionBar().hide();
 
 
         signupBtn.setOnClickListener(new View.OnClickListener() {

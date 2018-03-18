@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
         Parse.initialize(this);
+        getSupportActionBar().hide();
         mContext= LoginActivity.this;
         Initilize();
 
