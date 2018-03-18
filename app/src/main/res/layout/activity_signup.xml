@@ -7,26 +7,150 @@
     android:orientation="vertical"
     tools:context="com.geekcoders.payingguest.Activities.SignupActivity">
 
-    <EditText
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Name"
-        android:id="@+id/name"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:id="@+id/email"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:id="@+id/password"/>
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Signup"
-        android:id="@+id/Signup"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/background_signup" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/Margin30"
+                android:layout_marginRight="@dimen/Margin30"
+                android:orientation="vertical">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtFname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fname"
+                    android:textCursorDrawable="@drawable/text_cursor_cyan"
+                    android:textSize="@dimen/Largetext"
+                    app:met_accentTypeface="fonts/DroidSans.ttf"
+                    app:met_baseColor="@color/black"
+                    app:met_floatingLabel="highlight"
+                    app:met_primaryColor="@color/lightgrey"
+                    app:met_singleLineEllipsis="true"
+                    app:met_typeface="fonts/DroidSans.ttf" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtLname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/lname"
+                    android:textCursorDrawable="@drawable/text_cursor_cyan"
+                    android:textSize="@dimen/Largetext"
+                    app:met_accentTypeface="fonts/DroidSans.ttf"
+                    app:met_baseColor="@color/black"
+                    app:met_floatingLabel="highlight"
+                    app:met_primaryColor="@color/lightgrey"
+                    app:met_singleLineEllipsis="true"
+                    app:met_typeface="fonts/DroidSans.ttf" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:textCursorDrawable="@drawable/text_cursor_cyan"
+                    android:textSize="@dimen/Largetext"
+                    app:met_accentTypeface="fonts/DroidSans.ttf"
+                    app:met_baseColor="@color/black"
+                    app:met_floatingLabel="highlight"
+                    app:met_primaryColor="@color/lightgrey"
+                    app:met_singleLineEllipsis="true"
+                    app:met_typeface="fonts/DroidSans.ttf" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:textCursorDrawable="@drawable/text_cursor_cyan"
+                    android:textSize="@dimen/Largetext"
+                    app:met_accentTypeface="fonts/DroidSans.ttf"
+                    app:met_baseColor="@color/black"
+                    app:met_floatingLabel="highlight"
+                    app:met_primaryColor="@color/lightgrey"
+                    app:met_singleLineEllipsis="true"
+                    app:met_typeface="fonts/DroidSans.ttf" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/Margin30"
+                android:layout_marginTop="@dimen/Margin30"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:id="@+id/progReg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/llSuccess"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_btn_bordered"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/Margin10"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/imgSuccess"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_success" />
+
+                    <TextView
+                        android:id="@+id/txtSuccess"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/success"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/MediumText"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnRegistration"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_btn"
+                    android:elevation="@dimen/Margin20"
+                    android:text="@string/sign_up"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
