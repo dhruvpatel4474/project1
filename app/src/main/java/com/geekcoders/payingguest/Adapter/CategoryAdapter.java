@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.geekcoders.payingguest.Objects.Category;
 import com.geekcoders.payingguest.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -44,8 +46,13 @@ public class CategoryAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View view1=LayoutInflater.from(mcontext).inflate(R.layout.category_row_view,viewGroup,false);
         TextView name=(TextView)view1.findViewById(R.id.category_row_name);
+        ImageView img = (ImageView)view1.findViewById(R.id.category_row_img);
         name.setText(arrayList.get(i).getName());
-
+        Picasso.get()
+                .load(arrayList.get(i).getImg())
+                .placeholder(R.drawable.place_holder)
+                .error(R.drawable.place_holder)
+                .into(img);
         return view1;
     }
 }
