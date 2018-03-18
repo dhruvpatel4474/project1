@@ -7,6 +7,7 @@ package com.geekcoders.payingguest.Objects;
 public class Category {
     String objectId;
     String name;
+    String img;
 
     public String getObjectId() {
         return objectId;
@@ -22,5 +23,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

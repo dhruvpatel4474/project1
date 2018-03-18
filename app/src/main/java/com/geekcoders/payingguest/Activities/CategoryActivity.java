@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,6 +32,7 @@ public class CategoryActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayList<Category> arrayList;
     private CategoryAdapter adapter;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
         Parse.initialize(CategoryActivity.this);
         getSupportActionBar().hide();
+
         Constant.mcontext=CategoryActivity.this;
         Initiliztion();
         CategoryList();
@@ -89,9 +92,11 @@ public class CategoryActivity extends AppCompatActivity {
 
                         final Category obj = new Category();
                         String name = objects.get(i).getString("title");
+                        String image = objects.get(i).getString("image");
                         String objectId = objects.get(i).getObjectId();
                         obj.setName(name);
                         obj.setObjectId(objectId);
+                        obj.setImg(image);
 
 
                         // FetchListOfVenuesForSelectedBand(objects.get(i));
