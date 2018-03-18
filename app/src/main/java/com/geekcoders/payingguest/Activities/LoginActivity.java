@@ -81,9 +81,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (user != null) {
                     // Hooray! The user is logged in.
                     String userId=user.getObjectId();
+                    String name=user.getString("name");
                     Constant.mcontext=LoginActivity.this;
                     Constant.setValueAndKeyString("userId",userId);
                     Constant.setValueAndKeyString("email",username);
+                    Constant.setValueAndKeyString("name",name);
+                    Constant.setValueAndKeyBoolean("isLogin",true);
                    Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                     startActivity(intent);
                     finish();

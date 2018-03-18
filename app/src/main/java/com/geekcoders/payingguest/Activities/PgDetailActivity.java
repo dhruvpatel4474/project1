@@ -62,7 +62,10 @@ public class PgDetailActivity extends AppCompatActivity {
                     ParseObject commentData = new ParseObject("Feedback");
                    // commentData.put("post", objpost);
 
-                    commentData.put("comment", addCommentEdt.getText().toString());
+                    commentData.put("feedbackMessage", addCommentEdt.getText().toString());
+                    commentData.put("userName", Constant.getValueForKeyString("name"));
+                    commentData.put("userId", Constant.getValueForKeyString("userId"));
+                    commentData.put("PGId", PGid);
                     commentData.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {

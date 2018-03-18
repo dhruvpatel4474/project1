@@ -23,15 +23,17 @@
             android:name="com.parse.CLIENT_KEY"
             android:value="mk4mpe6bKZCi2dktaXntlgalKvZZDXNgIw2hR9Ob" />
 
-        <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.HomeActivity" />
-        <activity android:name=".Activities.SignupActivity" />
-        <activity android:name=".Activities.CategoryActivity">
+        <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Activities.HomeActivity" />
+        <activity android:name=".Activities.SignupActivity" />
+        <activity android:name=".Activities.CategoryActivity">
+
         </activity>
         <activity android:name=".Activities.PgDetailActivity" />
         <activity android:name=".Activities.PGListActivity" />
