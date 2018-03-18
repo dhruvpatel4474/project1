@@ -1,49 +1,53 @@
 package com.geekcoders.payingguest.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.geekcoders.payingguest.Adapter.CategoryAdapter;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
 
-public class HomeActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-    private Button viewCatBtn;
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
+
+    LinearLayout lineLayCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
-        Initiliztion();
+        intialize();
 
-        if (!Constant.getValueForKeyBoolean("isLogin")){
-            Intent intent=new Intent(HomeActivity.this,LoginActivity.class);
+        lineLayCategory.setOnClickListener(this);
+
+        Constant.mcontext = HomeActivity.this;
+        if (!Constant.getValueForKeyBoolean("isLogin")) {
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
         }
-
-
-        viewCatBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(HomeActivity.this,CategoryActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
-    private void Initiliztion() {
 
+    public void intialize()
+    {
+        lineLayCategory = (LinearLayout)findViewById(R.id.lineLay_category);
+    }
 
-        viewCatBtn = (Button) findViewById(R.id.viewCatBtn);
-
-
+    @Override
+    public void onClick(View view) {
+        switch (view.getId())
+        {
+            case R.id.lineLay_category :
+                startActivity(new Intent(HomeActivity.this,CategoryActivity.class));
+                break;
+        }
     }
 }
