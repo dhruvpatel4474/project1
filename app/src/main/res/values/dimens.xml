@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="Smalltext">12sp</dimen>
+    <dimen name="Mediumtext">16sp</dimen>
+    <dimen name="Largetext">20sp</dimen>
+
+    <dimen name="LoginTitle">20sp</dimen>
+    <dimen name="padding10">10dp</dimen>
+    <dimen name="padding15">15dp</dimen>
+    <dimen name="padding20">20dp</dimen>
+    <dimen name="padding25">25dp</dimen>
+    <dimen name="padding30">30dp</dimen>
+    <dimen name="padding5">5dp</dimen>
+
+    <dimen name="Margin1">1dp</dimen>
+    <dimen name="Margin2">2dp</dimen>
+    <dimen name="Margin5">5dp</dimen>
+    <dimen name="Margin10">10dp</dimen>
+    <dimen name="Margin15">15dp</dimen>
+    <dimen name="Margin20">20dp</dimen>
+    <dimen name="Margin25">25dp</dimen>
+    <dimen name="Margin30">30dp</dimen>
+    <dimen name="Margin35">35dp</dimen>
+    <dimen name="Margin40">40dp</dimen>
+    <dimen name="Margin45">45dp</dimen>
+    <dimen name="Margin50">50dp</dimen>
+    <dimen name="Margin55">55dp</dimen>
+
+    <dimen name="cart_card_elevation">3dp</dimen>
+
+</resources>
