@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.geekcoders.payingguest.R;
@@ -20,8 +21,9 @@ import com.parse.ParseUser;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEdt,passwordEdt;
-    private Button loginBtn,signupBtn;
+    private Button loginBtn;
     private Context mContext;
+    private TextView signupBtn;
 
 
     @Override
@@ -68,10 +70,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void Initilize(){
 
-        usernameEdt=(EditText)findViewById(R.id.email);
-        passwordEdt=(EditText)findViewById(R.id.password);
-        loginBtn=(Button) findViewById(R.id.edtEmail);
-        signupBtn=(Button)findViewById(R.id.Signup);
+        usernameEdt=(EditText)findViewById(R.id.edtEmail);
+        passwordEdt=(EditText)findViewById(R.id.edtPassword);
+        loginBtn=(Button) findViewById(R.id.btnLogin);
+        signupBtn=(TextView)findViewById(R.id.tv_signUp);
 
 
     }
