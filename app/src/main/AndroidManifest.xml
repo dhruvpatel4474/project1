@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.PgDetailActivity" />
-        <activity android:name=".Activities.PGListActivity"></activity>
+        <activity android:name=".Activities.PGListActivity" />
     </application>
 
 </manifest>
