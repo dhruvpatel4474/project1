@@ -11,6 +11,7 @@
     //Sign Up
     <string name="fname">First Name</string>
     <string name="lname">Last Name</string>
+    <string name="number">Contact Number</string>
     <string name="confirmpassword">Conform Password</string>
     <string name="sign_up">Register</string>
 </resources>

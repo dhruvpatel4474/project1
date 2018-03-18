@@ -6,19 +6,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.geekcoders.payingguest.R;
-import com.geekcoders.payingguest.Utils.Constant;
-import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 public class SignupActivity extends AppCompatActivity {
-    private EditText nameEdt,passwordEdt,emailEdt;
+    private EditText fnameEdt,passwordEdt,emailEdt,lnameEdt;
     private Button signupBtn;
+    private Spinner citySpnr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,18 +34,21 @@ public class SignupActivity extends AppCompatActivity {
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String name= nameEdt.getText().toString();
+                final String name= fnameEdt.getText().toString()+ lnameEdt.getText().toString();
                 final String password= passwordEdt.getText().toString();
                 final String email= emailEdt.getText().toString();
-                if (name.trim().equals("")){
+                if (fnameEdt.getText().toString().trim().equals("")){
 
-                    nameEdt.setError("Please enter name");
-                } else if (password.trim().equals("")){
+                    fnameEdt.setError("Please enter First Name");
+                }else if (lnameEdt.getText().toString().trim().equals("")){
 
-                    passwordEdt.setError("Please enter password");
-                }else if (email.trim().equals("")){
+                    lnameEdt.setError("Please enter Last Name");
+                } else if (passwordEdt.getText().toString().trim().equals("")){
 
-                    emailEdt.setError("Please enter email");
+                    passwordEdt.setError("Please enter Password");
+                }else if (emailEdt.getText().toString().trim().equals("")){
+
+                    emailEdt.setError("Please enter Email");
                 } else {
 
 
@@ -57,13 +61,13 @@ public class SignupActivity extends AppCompatActivity {
     }
     private void Initilize(){
 
-        nameEdt=(EditText)findViewById(R.id.name);
-        passwordEdt=(EditText)findViewById(R.id.password);
-        emailEdt=(EditText)findViewById(R.id.email);
-
-        signupBtn=(Button)findViewById(R.id.Signup);
-
-
+        fnameEdt=(EditText)findViewById(R.id.edtFname);
+        lnameEdt = (EditText)findViewById(R.id.edtLname);
+        passwordEdt=(EditText)findViewById(R.id.edtPassword);
+        emailEdt=(EditText)findViewById(R.id.edtEmail);
+        signupBtn=(Button)findViewById(R.id.btnRegistration);
+        citySpnr = (Spinner)findViewById(R.id.spinner_city);
+        setSpinner();
     }
 
     public void Signup(String name, final String email, String password){
@@ -91,11 +95,10 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
-
-
-
-
+    public void setSpinner()
+    {
 
     }
 }

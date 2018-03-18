@@ -24,13 +24,17 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical">
-
-
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:tint="@color/colorPrimary"
                 android:src="@drawable/background_signup" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,6 +87,22 @@
                     app:met_typeface="fonts/DroidSans.ttf" />
 
                 <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/edtNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/number"
+                    android:textCursorDrawable="@drawable/text_cursor_cyan"
+                    android:textSize="@dimen/Largetext"
+                    app:met_accentTypeface="fonts/DroidSans.ttf"
+                    app:met_baseColor="@color/black"
+                    app:met_floatingLabel="highlight"
+                    app:met_primaryColor="@color/lightgrey"
+                    app:met_singleLineEllipsis="true"
+                    app:met_typeface="fonts/DroidSans.ttf" />
+
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
                     android:id="@+id/edtPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -96,6 +116,13 @@
                     app:met_primaryColor="@color/lightgrey"
                     app:met_singleLineEllipsis="true"
                     app:met_typeface="fonts/DroidSans.ttf" />
+
+                <Spinner
+                    android:id="@+id/spinner_city"
+                    android:prompt="City"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
 
 
             </LinearLayout>
