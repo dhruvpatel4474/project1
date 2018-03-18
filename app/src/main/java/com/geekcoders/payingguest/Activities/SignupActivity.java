@@ -9,11 +9,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.geekcoders.payingguest.Objects.Category;
 import com.geekcoders.payingguest.R;
+import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignupActivity extends AppCompatActivity {
     private EditText fnameEdt,passwordEdt,emailEdt,lnameEdt;
@@ -80,6 +87,7 @@ public class SignupActivity extends AppCompatActivity {
 
 // other fields can be set just like with ParseObject
         user.put("name", name);
+       
 
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
@@ -99,6 +107,34 @@ public class SignupActivity extends AppCompatActivity {
 
     public void setSpinner()
     {
+
+    }
+
+
+    public void CityList() {
+        final ArrayList<Category> catList=new ArrayList<>();
+        ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Location");
+        bandQuery.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+
+                if (e == null && objects != null && objects.size() > 0) {
+
+                    for (int i = 0; i < objects.size(); i++) {
+
+                        final Category obj = new Category();
+                        String name = objects.get(i).getString("title");
+                        String objectId = objects.get(i).getObjectId();
+                        obj.setName(name);
+                        obj.setObjectId(objectId);
+                        catList.add(obj);
+                    }
+                    // returnList(catList);
+
+                }
+            }
+        });
+
 
     }
 }

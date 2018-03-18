@@ -32,11 +32,10 @@
         </activity>
         <activity android:name=".Activities.HomeActivity" />
         <activity android:name=".Activities.SignupActivity" />
-        <activity android:name=".Activities.CategoryActivity">
-
-        </activity>
+        <activity android:name=".Activities.CategoryActivity"></activity>
         <activity android:name=".Activities.PgDetailActivity" />
         <activity android:name=".Activities.PGListActivity" />
+        <activity android:name=".Activities.AddPgActivity"></activity>
     </application>
 
 </manifest>
