@@ -148,6 +148,7 @@ public class PgDetailActivity extends AppCompatActivity {
                 recieverId=userId;
                 finalPrice=price;
                 Constant.PGParseObject=object;
+                Constant.recieverName=userName;
 
                 GetCommentList();
 
