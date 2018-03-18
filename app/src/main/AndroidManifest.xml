@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.geekcoders.payingguest">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activities.MainActivity" />
+
+        <meta-data
+            android:name="com.parse.SERVER_URL"
+            android:value="https://parseapi.back4app.com/" />
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="Z22QOopokTddHsmmG7RVZT8OBgo6mMAv1qvu7xNJ" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="mk4mpe6bKZCi2dktaXntlgalKvZZDXNgIw2hR9Ob" />
+
+        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.HomeActivity" />
+        <activity android:name=".Activities.SignupActivity" />
+        <activity android:name=".Activities.CategoryActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activities.PgDetailActivity" />
+        <activity android:name=".Activities.PGListActivity"></activity>
+    </application>
+
+</manifest>
