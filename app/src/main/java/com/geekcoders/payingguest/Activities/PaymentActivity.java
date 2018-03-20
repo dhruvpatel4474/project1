@@ -10,8 +10,14 @@ import com.geekcoders.payingguest.Utils.Constant;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import java.util.ArrayList;
 
 public class PaymentActivity extends AppCompatActivity {
     private String recieverId;
@@ -58,6 +64,7 @@ public class PaymentActivity extends AppCompatActivity {
 
                         //loading.cancel();
                         Toast.makeText(PaymentActivity.this, "Payment Successful", Toast.LENGTH_LONG).show();
+                        SendPushNotification(recieverId,"You received ₹"+price+" from "+Constant.getValueForKeyString("Name"));
                     Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
                     startActivity(intent);
                         finishAffinity();
@@ -71,4 +78,25 @@ public class PaymentActivity extends AppCompatActivity {
             }
         }));
     }
+
+
+    private void SendPushNotification(String recieverId, String text)
+    {
+        String message = ParseUser.getCurrentUser().getUsername() + text;
+        ParseQuery<ParseObject> searchquery = ParseQuery.getQuery("User");
+        searchquery.whereEqualTo("objectId", recieverId);
+
+
+
+        // Create our Installation query
+        ParseQuery pushQuery = ParseInstallation.getQuery();
+        pushQuery.whereMatches("user", String.valueOf(searchquery));
+
+// Send push notification to query
+        ParsePush push = new ParsePush();
+        push.setQuery(pushQuery);
+        push.setMessage(message);
+        push.sendInBackground();
+    }
+
 }
