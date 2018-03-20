@@ -5,10 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.geekcoders.payingguest.Activities.PGListActivity">
-    <ListView
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listView">
+        tools:listitem="@layout/adapter_pglist"
+        >
 
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

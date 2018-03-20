@@ -4,12 +4,15 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.geekcoders.payingguest.Adapter.CategoryAdapter;
 import com.geekcoders.payingguest.Adapter.PGListAdapter;
+import com.geekcoders.payingguest.Adapter.PGListRAdapter;
 import com.geekcoders.payingguest.Objects.Category;
 import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.R;
@@ -28,9 +31,9 @@ import java.util.List;
 
 public class PGListActivity extends AppCompatActivity {
 
-    private ListView listView;
     private ArrayList<PGObject> arrayList;
     private PGListAdapter adapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,25 +44,13 @@ public class PGListActivity extends AppCompatActivity {
         Constant.mcontext=PGListActivity.this;
         Initiliztion();
         PgList();
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                Constant.pgObject = arrayList.get(i);
-
-                Constant.setValueAndKeyString("PGid", arrayList.get(i).getObjectId());
-                Intent intent = new Intent(PGListActivity.this, PgDetailActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
     }
 
     private void Initiliztion() {
 
-        listView = (ListView) findViewById(R.id.listView);
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
 
     }
 
@@ -142,11 +133,17 @@ public class PGListActivity extends AppCompatActivity {
 //                        });
                         arrayList.add(obj);
 
-
                     }
 
-                    adapter = new PGListAdapter(PGListActivity.this, arrayList);
-                    listView.setAdapter(adapter);
+//                    adapter = new PGListAdapter(PGListActivity.this, arrayList);
+                    PGListRAdapter pgListRAdapter = new PGListRAdapter(PGListActivity.this,arrayList);
+                    try {
+                        recyclerView.setAdapter(pgListRAdapter);
+                    }catch (Exception e1)
+                    {
+                        e1.printStackTrace();
+                    }
+
                     dialog.cancel();
 
                 } else {

@@ -6,6 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.geekcoders.payingguest.Adapter.CategoryAdapter;
+import com.geekcoders.payingguest.Adapter.CategoryRAdapter;
 import com.geekcoders.payingguest.Objects.Category;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
@@ -29,10 +33,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
-    private ListView listView;
     private ArrayList<Category> arrayList;
     private CategoryAdapter adapter;
     private Toolbar toolbar;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +49,15 @@ public class CategoryActivity extends AppCompatActivity {
         Initiliztion();
         CategoryList();
 
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                Constant.setValueAndKeyString("categoryId", arrayList.get(i).getObjectId());
-                Intent intent = new Intent(CategoryActivity.this, PGListActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
     }
 
     private void Initiliztion() {
 
-        listView = (ListView) findViewById(R.id.listView);
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        //recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.HORIZONTAL, false));
+
 
     }
 
@@ -127,8 +123,9 @@ public class CategoryActivity extends AppCompatActivity {
 
                     }
 
-                    adapter = new CategoryAdapter(CategoryActivity.this, arrayList);
-                    listView.setAdapter(adapter);
+                    //adapter = new CategoryAdapter(CategoryActivity.this, arrayList);
+                    CategoryRAdapter categoryRAdapter = new CategoryRAdapter(CategoryActivity.this,arrayList);
+                    recyclerView.setAdapter(categoryRAdapter);
                     dialog.cancel();
 
                 } else {
