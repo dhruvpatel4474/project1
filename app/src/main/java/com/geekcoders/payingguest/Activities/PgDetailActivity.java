@@ -35,7 +35,7 @@ import java.util.List;
 
 public class PgDetailActivity extends AppCompatActivity {
 
-    private TextView title;
+
     private EditText addCommentEdt;
     private Button addCommentBtn;
 
@@ -113,7 +113,7 @@ public class PgDetailActivity extends AppCompatActivity {
 
     private void Initiliztion() {
 
-        title = (TextView) findViewById(R.id.title);
+
         addCommentEdt = (EditText) findViewById(R.id.addCommentEdt);
         addCommentBtn = (Button) findViewById(R.id.addCommentBtn);
         commnetList = (ListView) findViewById(R.id.commnetList);
