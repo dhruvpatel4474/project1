@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,10 +44,9 @@ public class PgDetailActivity extends AppCompatActivity {
     private CommentAdapter adpt;
     private ListView commnetList;
     private PGObject object;
-    private Button payBtn;
    int finalPrice;
     String recieverId;
-
+    private LinearLayout lineLayPay;
 
 
     @Override
@@ -97,7 +97,7 @@ public class PgDetailActivity extends AppCompatActivity {
         });
 
 
-        payBtn.setOnClickListener(new View.OnClickListener() {
+        lineLayPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Constant.price=finalPrice;
@@ -117,7 +117,7 @@ public class PgDetailActivity extends AppCompatActivity {
         addCommentEdt = (EditText) findViewById(R.id.addCommentEdt);
         addCommentBtn = (Button) findViewById(R.id.addCommentBtn);
         commnetList = (ListView) findViewById(R.id.commnetList);
-        payBtn = (Button) findViewById(R.id.payBtn);
+        lineLayPay = (LinearLayout)findViewById(R.id.lineLay_pay);
 
     }
 
