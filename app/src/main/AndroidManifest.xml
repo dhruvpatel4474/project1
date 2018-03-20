@@ -23,8 +23,8 @@
         <activity
             android:name=".Activities.MainActivity"
             android:screenOrientation="portrait" />
-        <meta-data android:name="com.parse.push.gcm_sender_id"
-            android:value="id:AAAA1Zxii20:APA91bFBsYKPYarsb0GNKcO1myY5nY3VY-G3XdBySAviftwZNTsA288wnKQEm0V3uTHY7KA2moIV03uR3EV7JZ7YWBovyY8zYWZthZBH8bOlByhzKAAUWFVsYtKmtEDI2LEklI_G89XG" />
+        <!--<meta-data android:name="com.parse.push.gcm_sender_id"-->
+            <!--android:value="id:AAAA1Zxii20:APA91bFBsYKPYarsb0GNKcO1myY5nY3VY-G3XdBySAviftwZNTsA288wnKQEm0V3uTHY7KA2moIV03uR3EV7JZ7YWBovyY8zYWZthZBH8bOlByhzKAAUWFVsYtKmtEDI2LEklI_G89XG" />-->
         <meta-data
             android:name="com.parse.SERVER_URL"
             android:value="https://parseapi.back4app.com/" />
@@ -65,19 +65,43 @@
         <activity android:name=".Activities.PaymentActivity" />
         <activity android:name=".Activities.ViewPaymentActivity" />
         <activity android:name=".Activities.HistoryActivity"></activity>
+        <meta-data
+            android:name="com.parse.push.gcm_sender_id"
+            android:value="id:917451737965" />
         <service android:name="com.parse.PushService" />
-        <receiver android:name="com.parse.GcmBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+
+        <receiver
+            android:name="com.parse.ParsePushBroadcastReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+            <!-- <meta-data -->
+            <!-- android:name="com.parse.push.notification_icon" -->
+            <!-- android:resource="@drawable/icon" /> -->
+        </receiver>
+        <receiver
+            android:name="com.parse.ParseBroadcastReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+            <!-- <meta-data -->
+            <!-- android:name="com.parse.push.notification_icon" -->
+            <!-- android:resource="@drawable/icon" /> -->
+        </receiver>
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
                 <category android:name="com.geekcoders.payingguest" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name="com.parse.ParsePushBroadcastReceiver" android:exported="false">
-            <intent-filter>
-                <action android:name="com.parse.push.intent.RECEIVE" />
-                <action android:name="com.parse.push.intent.OPEN" />
-                <action android:name="com.parse.push.intent.DELETE" />
             </intent-filter>
         </receiver>
     </application>
