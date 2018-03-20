@@ -90,6 +90,7 @@ public class PGListActivity extends AppCompatActivity {
                         String number = objects.get(i).getString("number");
                         String userName = objects.get(i).getString("userName");
                         String categoryId = objects.get(i).getString("categoryId");
+                        String image = objects.get(i).getString("image");
                         Date date = objects.get(i).getCreatedAt();
                         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                         String fdate = df.format(date);
@@ -105,6 +106,7 @@ public class PGListActivity extends AppCompatActivity {
                         obj.setNumber(number);
                         obj.setUsername(userName);
                         obj.setCategoryId(categoryId);
+                        obj.setImage(image);
 
 
                         // FetchListOfVenuesForSelectedBand(objects.get(i));
