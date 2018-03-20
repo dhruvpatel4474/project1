@@ -39,20 +39,20 @@ public class ViewPaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_payment);
         Parse.initialize(ViewPaymentActivity.this);
         Constant.mcontext=ViewPaymentActivity.this;
-        PgList(); // default received
+        PaymentList(); // default received
 
         recievedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 IsRecieved=true;
-                PgList();
+                PaymentList();
             }
         });
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 IsRecieved=true;
-                PgList();
+                PaymentList();
             }
         });
 
@@ -61,7 +61,7 @@ public class ViewPaymentActivity extends AppCompatActivity {
 
 
 
-    public void PgList() {
+    public void PaymentList() {
        final ArrayList<Payment> arrayList = new ArrayList<>();
 
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Payment");

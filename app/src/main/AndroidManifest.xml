@@ -27,7 +27,7 @@
 
         <activity
             android:name=".Activities.LoginActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.HomeActivity"
             android:screenOrientation="portrait">
@@ -53,7 +53,8 @@
             android:name=".Activities.AddPgActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Activities.PaymentActivity" />
-        <activity android:name=".Activities.ViewPaymentActivity"></activity>
+        <activity android:name=".Activities.ViewPaymentActivity" />
+        <activity android:name=".Activities.HistoryActivity"></activity>
     </application>
 
 </manifest>
