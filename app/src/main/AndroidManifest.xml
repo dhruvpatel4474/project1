@@ -55,6 +55,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.PgDetailActivity"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.PGListActivity"
