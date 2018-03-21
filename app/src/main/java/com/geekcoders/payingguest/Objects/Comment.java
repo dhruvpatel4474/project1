@@ -8,6 +8,7 @@ public class Comment {
     String commentMessage;
     String userId;
     String userName;
+    String time;
 
     public String getDate() {
         return date;

@@ -6,15 +6,19 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.geekcoders.payingguest.Adapter.CommentAdapter;
+import com.geekcoders.payingguest.Adapter.CommentRAdapter;
 import com.geekcoders.payingguest.Objects.Comment;
 import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.R;
@@ -26,6 +30,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayInputStream;
 import java.text.DateFormat;
@@ -38,15 +43,19 @@ public class PgDetailActivity extends AppCompatActivity {
 
 
     private EditText addCommentEdt;
-    private Button addCommentBtn;
 
     ArrayList<Comment> commentList;
     private CommentAdapter adpt;
-    private ListView commnetList;
     private PGObject object;
    int finalPrice;
     String recieverId;
     private LinearLayout lineLayPay;
+    private LinearLayout lineLayAddComment;
+    private RecyclerView recyclerView;
+    private ImageView pgImg;
+    private TextView pgName,pgCity,pgPrice,pgDate;
+    private TextView pgDescription;
+    private TextView pgNUmber,pgAddress;
 
 
     @Override
@@ -59,7 +68,7 @@ public class PgDetailActivity extends AppCompatActivity {
         Initiliztion();
         PGDetail();
 
-        addCommentBtn.setOnClickListener(new View.OnClickListener() {
+        lineLayAddComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (addCommentEdt.getText().toString().trim().equals("")) {
@@ -112,12 +121,20 @@ public class PgDetailActivity extends AppCompatActivity {
     }
 
     private void Initiliztion() {
-
-
+        pgImg = (ImageView)findViewById(R.id.img_pgdetail);
+        pgName = (TextView)findViewById(R.id.tv_name_pgdetail);
+        pgCity = (TextView)findViewById(R.id.tv_city_pgdetail);
+        pgPrice = (TextView)findViewById(R.id.tv_price_pgdetail);
+        pgDate = (TextView)findViewById(R.id.tv_date_pgdetail);
+        pgDescription = (TextView)findViewById(R.id.tv_description_pgdetail);
         addCommentEdt = (EditText) findViewById(R.id.addCommentEdt);
-        addCommentBtn = (Button) findViewById(R.id.addCommentBtn);
-        commnetList = (ListView) findViewById(R.id.commnetList);
+        lineLayAddComment = (LinearLayout) findViewById(R.id.lineLay_addcomment);
         lineLayPay = (LinearLayout)findViewById(R.id.lineLay_pay);
+        pgNUmber = (TextView)findViewById(R.id.tv_number_pgdetail);
+        pgAddress = (TextView)findViewById(R.id.tv_address_pgdetail);
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
 
     }
 
@@ -133,6 +150,7 @@ public class PgDetailActivity extends AppCompatActivity {
 //                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 //                String fdate = df.format(date);
                 String title = object.getString("title");
+                String image = object.getString("image");
                 String objectId = object.getObjectId();
                 int price = object.getInt("price");
                 String city = object.getString("city");
@@ -150,6 +168,18 @@ public class PgDetailActivity extends AppCompatActivity {
                 Constant.PGParseObject=object;
                 Constant.recieverName=userName;
 
+                pgName.setText(title);
+                pgCity.setText(city);
+                pgDate.setText(fdate);
+                pgPrice.setText(String.valueOf(price));
+                pgDescription.setText(description);
+                pgAddress.setText(address);
+                pgNUmber.setText(number);
+                Picasso.get()
+                        .load(image)
+                        .placeholder(R.drawable.place_holder)
+                        .error(R.drawable.place_holder)
+                        .into(pgImg);
                 GetCommentList();
 
 
@@ -245,8 +275,9 @@ public class PgDetailActivity extends AppCompatActivity {
 
                         commentList.add(obj);
                     }
-                    adpt = new CommentAdapter(PgDetailActivity.this, commentList);
-                    commnetList.setAdapter(adpt);
+
+                    CommentRAdapter commentRAdapter = new CommentRAdapter(PgDetailActivity.this,commentList);
+                    recyclerView.setAdapter(commentRAdapter);
 //                    dialog.cancel();
 //                    dialog.dismiss();
                 } else {
