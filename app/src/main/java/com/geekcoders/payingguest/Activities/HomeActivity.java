@@ -10,12 +10,14 @@ import android.widget.Toast;
 import com.geekcoders.payingguest.Adapter.CategoryAdapter;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.parse.ParseInstallation;
+import com.parse.ParseUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout lineLayCategory;
 
@@ -34,19 +36,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
             finish();
         }
+        ParseUser user = ParseUser.getCurrentUser();
+        if (user != null) {
+            ParseInstallation.getCurrentInstallation().saveInBackground();
+        }
     }
 
-    public void intialize()
-    {
-        lineLayCategory = (LinearLayout)findViewById(R.id.lineLay_category);
+    public void intialize() {
+        lineLayCategory = (LinearLayout) findViewById(R.id.lineLay_category);
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
-            case R.id.lineLay_category :
-                startActivity(new Intent(HomeActivity.this,CategoryActivity.class));
+        switch (view.getId()) {
+            case R.id.lineLay_category:
+                startActivity(new Intent(HomeActivity.this, CategoryActivity.class));
                 break;
         }
     }

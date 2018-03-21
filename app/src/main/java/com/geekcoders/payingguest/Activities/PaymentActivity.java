@@ -3,6 +3,8 @@ package com.geekcoders.payingguest.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.geekcoders.payingguest.R;
@@ -24,6 +26,7 @@ public class PaymentActivity extends AppCompatActivity {
     private String recieverName;
     private int price;
     public ParseObject pgparseObject;
+    private Button payBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +35,18 @@ public class PaymentActivity extends AppCompatActivity {
         Parse.initialize(PaymentActivity.this);
         Constant.mcontext=PaymentActivity.this;
 
+
+        payBtn=(Button)findViewById(R.id.pay);
         price = Constant.price;
         recieverId= Constant.recieverId;
         recieverName= Constant.recieverName;
         pgparseObject=Constant.PGParseObject;
-
+        payBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddPayment();
+            }
+        });
     }
 
 
