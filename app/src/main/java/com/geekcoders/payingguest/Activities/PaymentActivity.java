@@ -36,7 +36,7 @@ public class PaymentActivity extends AppCompatActivity {
         Constant.mcontext=PaymentActivity.this;
 
 
-        payBtn=(Button)findViewById(R.id.pay);
+        payBtn=(Button)findViewById(R.id.paybtn);
         price = Constant.price;
         recieverId= Constant.recieverId;
         recieverName= Constant.recieverName;

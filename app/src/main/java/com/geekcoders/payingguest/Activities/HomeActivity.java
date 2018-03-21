@@ -36,10 +36,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
             finish();
         }
-        ParseUser user = ParseUser.getCurrentUser();
-        if (user != null) {
-            ParseInstallation.getCurrentInstallation().saveInBackground();
-        }
+//        ParseUser user = ParseUser.getCurrentUser();
+//        if (user != null) {
+//            ParseInstallation.getCurrentInstallation().saveInBackground();
+//        }
     }
 
     public void intialize() {

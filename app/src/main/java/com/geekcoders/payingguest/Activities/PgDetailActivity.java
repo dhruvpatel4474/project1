@@ -158,7 +158,7 @@ public class PgDetailActivity extends AppCompatActivity {
                 String userId = object.getString("userId");
                 String address = object.getString("address");
                 String number = object.getString("number");
-                String userName = object.getString("userName");
+                String userName = object.getString("UserName");
                 String categoryId = object.getString("categoryId");
                 Date date = object.getCreatedAt();
                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
@@ -252,6 +252,7 @@ public class PgDetailActivity extends AppCompatActivity {
         commentList = new ArrayList<>();
         final ParseQuery<ParseObject> query = ParseQuery.getQuery("Feedback");
         query.whereEqualTo("PGId", Constant.getValueForKeyString("PGid"));
+        query.orderByDescending("createdAt");
         // query.include("user");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
