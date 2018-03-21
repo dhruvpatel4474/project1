@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="Category"
+                android:text="PG Details"
                 android:textColor="@color/white"
                 android:textSize="24dp" />
         </RelativeLayout>
@@ -202,22 +202,33 @@
                                 android:id="@+id/lineLay_addcomment"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
+                                android:gravity="center"
                                 android:layout_marginRight="@dimen/Margin5"
-                                android:background="@color/colorPrimary"
-                                android:orientation="vertical"></LinearLayout>
+                                android:orientation="vertical">
+                                <ImageView
+                                    android:src="@drawable/send_button"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp" />
+                            </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/Margin10"
+                >
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/Margin10"
-                android:nestedScrollingEnabled="false"
+                android:nestedScrollingEnabled="true"
                 tools:listitem="@layout/adapter_comment" />
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>
