@@ -55,7 +55,10 @@ public class PgDetailActivity extends AppCompatActivity {
     private ImageView pgImg;
     private TextView pgName,pgCity,pgPrice,pgDate;
     private TextView pgDescription;
-    private TextView pgNUmber,pgAddress;
+    private TextView pgAddress;
+    private LinearLayout lineLayCall;
+    private String number;
+    private TextView pgNumber;
 
 
     @Override
@@ -117,6 +120,15 @@ public class PgDetailActivity extends AppCompatActivity {
             }
         });
 
+        lineLayCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -128,10 +140,11 @@ public class PgDetailActivity extends AppCompatActivity {
         pgDate = (TextView)findViewById(R.id.tv_date_pgdetail);
         pgDescription = (TextView)findViewById(R.id.tv_description_pgdetail);
         addCommentEdt = (EditText) findViewById(R.id.addCommentEdt);
+        lineLayCall = (LinearLayout)findViewById(R.id.lineLay_call);
         lineLayAddComment = (LinearLayout) findViewById(R.id.lineLay_addcomment);
         lineLayPay = (LinearLayout)findViewById(R.id.lineLay_pay);
-        pgNUmber = (TextView)findViewById(R.id.tv_number_pgdetail);
         pgAddress = (TextView)findViewById(R.id.tv_address_pgdetail);
+        pgNumber = (TextView)findViewById(R.id.tv_number_pgdetail);
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -157,7 +170,7 @@ public class PgDetailActivity extends AppCompatActivity {
                 String description = object.getString("description");
                 String userId = object.getString("userId");
                 String address = object.getString("address");
-                String number = object.getString("number");
+                number = object.getString("number");
                 String userName = object.getString("UserName");
                 String categoryId = object.getString("categoryId");
                 Date date = object.getCreatedAt();
@@ -174,7 +187,6 @@ public class PgDetailActivity extends AppCompatActivity {
                 pgPrice.setText(String.valueOf(price));
                 pgDescription.setText(description);
                 pgAddress.setText(address);
-                pgNUmber.setText(number);
                 Picasso.get()
                         .load(image)
                         .placeholder(R.drawable.place_holder)
