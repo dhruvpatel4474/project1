@@ -11,6 +11,8 @@ import com.geekcoders.payingguest.Adapter.CategoryAdapter;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
 import com.parse.ParseInstallation;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import butterknife.BindView;
@@ -40,6 +42,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //        if (user != null) {
 //            ParseInstallation.getCurrentInstallation().saveInBackground();
 //        }
+
+
+       // ParseQuery pushQuery = ParseInstallation.getQuery();
+
+
+// Send push notification to query
+//        ParsePush push = new ParsePush();
+//       push.setChannel("NuDYCP0HdC");
+//        push.setMessage("Willie Hayes injured by own pop fly.");
+//        push.sendInBackground();
+
+
     }
 
     public void intialize() {

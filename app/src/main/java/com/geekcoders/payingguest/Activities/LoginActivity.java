@@ -16,6 +16,8 @@ import com.geekcoders.payingguest.Utils.Constant;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
+import com.parse.ParsePush;
 import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
@@ -90,6 +92,14 @@ public class LoginActivity extends AppCompatActivity {
                     Constant.setValueAndKeyString("email",username);
                     Constant.setValueAndKeyString("name",name);
                     Constant.setValueAndKeyBoolean("isLogin",true);
+
+
+                    // Store app language and version
+                    ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                    installation.put("userId",userId);
+                    installation.saveInBackground();
+
+                    ParsePush.subscribeInBackground(userId);
                    Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                     startActivity(intent);
                     finish();

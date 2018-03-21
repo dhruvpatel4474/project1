@@ -60,7 +60,7 @@ public class PaymentActivity extends AppCompatActivity {
         parseObject.put("recieverId", recieverId);
         parseObject.put("recieverName", recieverName);
         parseObject.put("senderId", Constant.getValueForKeyString("userId"));
-        parseObject.put("senderName", Constant.getValueForKeyString("Name"));
+        parseObject.put("senderName", Constant.getValueForKeyString("name"));
         parseObject.put("PGDetail", pgparseObject);
 
 
@@ -74,7 +74,7 @@ public class PaymentActivity extends AppCompatActivity {
 
                         //loading.cancel();
                         Toast.makeText(PaymentActivity.this, "Payment Successful", Toast.LENGTH_LONG).show();
-                        SendPushNotification(recieverId,"You received ₹"+price+" from "+Constant.getValueForKeyString("Name"));
+                        SendPushNotification(recieverId,"You received ₹"+price+" from "+Constant.getValueForKeyString("name"));
                     Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
                     startActivity(intent);
                         finishAffinity();
@@ -92,21 +92,24 @@ public class PaymentActivity extends AppCompatActivity {
 
     private void SendPushNotification(String recieverId, String text)
     {
-        String message = ParseUser.getCurrentUser().getUsername() + text;
-        ParseQuery<ParseObject> searchquery = ParseQuery.getQuery("User");
-        searchquery.whereEqualTo("objectId", recieverId);
+        String message = text;
+//        ParseQuery<ParseObject> searchquery = ParseQuery.getQuery("User");
+//        searchquery.whereEqualTo("objectId", recieverId);
 
 
 
-        // Create our Installation query
-        ParseQuery pushQuery = ParseInstallation.getQuery();
-        pushQuery.whereMatches("user", String.valueOf(searchquery));
+//        // Create our Installation query
+//        ParseQuery pushQuery = ParseInstallation.getQuery();
+//        pushQuery.whereEqualTo("userId",recieverId );
+//
+//// Send push notification to query
+//        ParsePush push = new ParsePush();
+//        push.setQuery(pushQuery);
+//        push.setMessage(message);
+//        push.sendInBackground();
 
-// Send push notification to query
-        ParsePush push = new ParsePush();
-        push.setQuery(pushQuery);
-        push.setMessage(message);
-        push.sendInBackground();
+
+
     }
 
 }
