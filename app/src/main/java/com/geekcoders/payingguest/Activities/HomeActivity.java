@@ -100,6 +100,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.lineLay_viewPayment :
                 startActivity(new Intent(HomeActivity.this,ViewPaymentActivity.class));
                 break;
+
+            case R.id.lineLay_addpg :
+                startActivity(new Intent(HomeActivity.this,AddPgActivity.class));
+                break;
         }
     }
 }

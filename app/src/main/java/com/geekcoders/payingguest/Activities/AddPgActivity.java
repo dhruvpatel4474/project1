@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,21 +32,10 @@ import butterknife.ButterKnife;
 
 public class AddPgActivity extends AppCompatActivity {
 
-    @BindView(R.id.edt_title)
-    TextInputEditText edtTitle;
-    @BindView(R.id.edt_price)
-    TextInputEditText edtPrice;
-    @BindView(R.id.edt_address)
-    TextInputEditText edtAddress;
-    @BindView(R.id.edt_number)
-    TextInputEditText edtNumber;
-    @BindView(R.id.edt_description)
-    TextInputEditText edtDescription;
-    @BindView(R.id.spinner_city)
+    EditText edtTitle;
+    EditText edtPrice,edtNumber,edtAddress,edtDescription;
     Spinner spinnerCity;
-    @BindView(R.id.spinner_category)
     Spinner spinnerCategory;
-    @BindView(R.id.btnAddPG)
     Button btnAddPG;
     private ParseObject objPGParse;
     private Bitmap imageBit;
@@ -55,7 +46,7 @@ public class AddPgActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pg);
-        ButterKnife.bind(this);
+        initialize();
         getSupportActionBar().hide();
         Parse.initialize(AddPgActivity.this);
         Constant.mcontext = AddPgActivity.this;
@@ -85,7 +76,8 @@ public class AddPgActivity extends AppCompatActivity {
         objPGParse.put("address", edtAddress.getText().toString());
         objPGParse.put("number", edtNumber.getText().toString());
         objPGParse.put("userName", Constant.getValueForKeyString("name"));
-        objPGParse.put("categoryId", spinnerCategory.getSelectedItem().toString());
+        Category category = (Category) spinnerCategory.getSelectedItem();
+        objPGParse.put("categoryId",category.getObjectId());
 
         objPGParse.setACL(acl);
         objPGParse.saveInBackground((new SaveCallback() {
@@ -178,6 +170,9 @@ public class AddPgActivity extends AppCompatActivity {
                         catList.add(obj);
                     }
                     // returnList(catList);
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(AddPgActivity.this,android.R.layout.simple_list_item_1,catList);
+                    spinnerCategory.setAdapter(arrayAdapter);
+
 
                 }
             }
@@ -204,7 +199,8 @@ public class AddPgActivity extends AppCompatActivity {
                         obj.setObjectId(objectId);
                         catList.add(obj);
                     }
-                    // returnList(catList);
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(AddPgActivity.this,android.R.layout.simple_list_item_1,catList);
+                    spinnerCity.setAdapter(arrayAdapter);
 
                 }
             }
@@ -238,6 +234,21 @@ public class AddPgActivity extends AppCompatActivity {
         }else {
             return true;
         }
+    }
+
+    public void initialize()
+    {
+        edtTitle = (EditText) findViewById(R.id.edt_title);
+        edtPrice = (EditText)findViewById(R.id.edt_price);
+        edtNumber = (EditText)findViewById(R.id.edtNumber);
+        edtAddress = (EditText)findViewById(R.id.edt_address);
+        edtDescription = (EditText)findViewById(R.id.edt_description);
+        spinnerCity = (Spinner)findViewById(R.id.spinner_city);
+        spinnerCategory = (Spinner)findViewById(R.id.spinner_category);
+        btnAddPG = (Button)findViewById(R.id.btnAddPG);
+
+        CategoryList();
+        CityList();
     }
 }
 

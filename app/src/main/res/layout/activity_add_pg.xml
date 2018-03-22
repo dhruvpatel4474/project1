@@ -45,6 +45,17 @@
                     android:layout_marginRight="@dimen/Margin30"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/Margin5"
+                        android:gravity="center">
+                        <ImageView
+                            android:id="@+id/img_adddpg"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp" />
+                    </LinearLayout>
+
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -114,7 +125,6 @@
                             android:maxLength="100"
                             android:textSize="@dimen/Largetext" />
                     </android.support.design.widget.TextInputLayout>
-
 
                     <Spinner
                         android:id="@+id/spinner_city"
