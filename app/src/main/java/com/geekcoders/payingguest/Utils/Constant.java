@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.geekcoders.payingguest.Objects.PGObject;
+import com.geekcoders.payingguest.Objects.Worker;
 import com.parse.ParseObject;
 
 /**
@@ -20,6 +21,7 @@ public class Constant {
    public static String recieverId;
    public static String recieverName;
    public  static  int price;
+   public static Worker workerObj;
 
 
 
