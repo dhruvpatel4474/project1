@@ -1,14 +1,15 @@
 package com.geekcoders.payingguest.Activities;
 
-import android.app.ProgressDialog;
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.geekcoders.payingguest.Adapter.CategoryAdapter;
 import com.geekcoders.payingguest.Objects.Category;
-import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
 import com.parse.FindCallback;
@@ -24,8 +25,27 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AddPgActivity extends AppCompatActivity {
 
+    @BindView(R.id.edt_title)
+    TextInputEditText edtTitle;
+    @BindView(R.id.edt_price)
+    TextInputEditText edtPrice;
+    @BindView(R.id.edt_address)
+    TextInputEditText edtAddress;
+    @BindView(R.id.edt_number)
+    TextInputEditText edtNumber;
+    @BindView(R.id.edt_description)
+    TextInputEditText edtDescription;
+    @BindView(R.id.spinner_city)
+    Spinner spinnerCity;
+    @BindView(R.id.spinner_category)
+    Spinner spinnerCategory;
+    @BindView(R.id.btnAddPG)
+    Button btnAddPG;
     private ParseObject objPGParse;
     private Bitmap imageBit;
     private ParseFile parseFile;
@@ -35,9 +55,20 @@ public class AddPgActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pg);
-        Parse.initialize(AddPgActivity.this);
+        ButterKnife.bind(this);
         getSupportActionBar().hide();
-        Constant.mcontext=AddPgActivity.this;
+        Parse.initialize(AddPgActivity.this);
+        Constant.mcontext = AddPgActivity.this;
+
+        btnAddPG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (validate())
+                {
+                    CreatePostOnServer();
+                }
+            }
+        });
     }
 
 
@@ -46,17 +77,15 @@ public class AddPgActivity extends AppCompatActivity {
         acl.setPublicReadAccess(true);
         acl.setPublicWriteAccess(true);
         objPGParse = new ParseObject("PGDetail");
-//        objPGParse.put("title", edtPost.getText().toString());
-//        objPGParse.put("price", edtPost.getText().toString());// int
-//        objPGParse.put("city", edtPost.getText().toString());
-//        objPGParse.put("description", edtPost.getText().toString());
-//        objPGParse.put("userId", edtPost.getText().toString());
-//        objPGParse.put("address", edtPost.getText().toString());
-//        objPGParse.put("number", edtPost.getText().toString());
-//        objPGParse.put("number", edtPost.getText().toString());
-//        objPGParse.put("message", edtPost.getText().toString());
-//        objPGParse.put("userName", edtPost.getText().toString());
-//        objPGParse.put("categoryId", objBand);
+        objPGParse.put("title", edtTitle.getText().toString());
+        objPGParse.put("price", edtPrice.getText().toString());// int
+        objPGParse.put("city", spinnerCity.getSelectedItem().toString());
+        objPGParse.put("description", edtDescription.getText().toString());
+        objPGParse.put("userId", Constant.getValueForKeyString("userId"));
+        objPGParse.put("address", edtAddress.getText().toString());
+        objPGParse.put("number", edtNumber.getText().toString());
+        objPGParse.put("userName", Constant.getValueForKeyString("name"));
+        objPGParse.put("categoryId", spinnerCategory.getSelectedItem().toString());
 
         objPGParse.setACL(acl);
         objPGParse.saveInBackground((new SaveCallback() {
@@ -131,7 +160,7 @@ public class AddPgActivity extends AppCompatActivity {
     }
 
     public void CategoryList() {
-       final ArrayList<Category> catList=new ArrayList<>();
+        final ArrayList<Category> catList = new ArrayList<>();
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Category");
         bandQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -148,7 +177,7 @@ public class AddPgActivity extends AppCompatActivity {
                         obj.setObjectId(objectId);
                         catList.add(obj);
                     }
-                   // returnList(catList);
+                    // returnList(catList);
 
                 }
             }
@@ -158,7 +187,7 @@ public class AddPgActivity extends AppCompatActivity {
     }
 
     public void CityList() {
-        final ArrayList<Category> catList=new ArrayList<>();
+        final ArrayList<Category> catList = new ArrayList<>();
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Location");
         bandQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -184,6 +213,31 @@ public class AddPgActivity extends AppCompatActivity {
 
     }
 
-
+    public boolean validate() {
+        if (edtTitle.getText().toString().trim().equals(""))
+        {
+            edtTitle.setError("Please Enter Title");
+            return false;
+        }
+        else if (edtAddress.getText().toString().trim().equals("")){
+            edtAddress.setError("Please Enter Address");
+            return false;
+        }else if (edtDescription.getText().toString().trim().equals(""))
+        {
+            edtDescription.setError("Please Enter Description");
+            return false;
+        }else if (edtNumber.getText().toString().trim().equals(""))
+        {
+            edtNumber.setError("Please Enter Number");
+            return false;
+        }
+        else if (edtPrice.getText().toString().trim().equals(""))
+        {
+            edtPrice.setError("Please Enter Price");
+            return false;
+        }else {
+            return true;
+        }
+    }
 }
 
