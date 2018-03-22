@@ -44,6 +44,9 @@
             android:name=".Activities.WorkerDetail"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Activities.WorkerListActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Activities.HomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>

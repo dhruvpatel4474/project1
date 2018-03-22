@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.geekcoders.payingguest.Objects.Worker;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.geekcoders.payingguest.Utils.Fonts;
 import com.squareup.picasso.Picasso;
 
 
@@ -38,7 +39,7 @@ public class WorkerDetail extends AppCompatActivity {
         price = (TextView) findViewById(R.id.workprice);
         img = (ImageView) findViewById(R.id.bgheader_w);
 
-        callBtn = (Button) findViewById(R.id.Auc_itemdetail_bidplace_btn);
+        callBtn = (Button) findViewById(R.id.workcall);
 
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.MyToolbar_w);
