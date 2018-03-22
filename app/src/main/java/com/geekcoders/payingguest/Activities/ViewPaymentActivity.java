@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -48,9 +49,10 @@ public class ViewPaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_payment);
+        getSupportActionBar().hide();
         Parse.initialize(ViewPaymentActivity.this);
         Constant.mcontext=ViewPaymentActivity.this;
-
+        initialize();
         PaymentList(); // default received
 
         lineLayPaid.setOnClickListener(new View.OnClickListener() {
@@ -118,10 +120,11 @@ public class ViewPaymentActivity extends AppCompatActivity {
 //                    adapter = new PaymentAdapter(ViewPaymentActivity.this, arrayList);
 //                    listView.setAdapter(adapter);
 //                    dialog.cancel();
-
+                    PaymentRAdapter paymentRAdapter = new PaymentRAdapter(ViewPaymentActivity.this,arrayList);
+                    Log.e("array size",arrayList.size()+ "");
+                    recyclerView.setAdapter(paymentRAdapter);
                     try {
-                        PaymentRAdapter paymentRAdapter = new PaymentRAdapter(ViewPaymentActivity.this,arrayList);
-                        recyclerView.setAdapter(paymentRAdapter);
+
                         if (IsRecieved)
                         {
                             cardRecieved.setCardElevation(3);
@@ -161,6 +164,7 @@ public class ViewPaymentActivity extends AppCompatActivity {
         cardPaid = (CardView)findViewById(R.id.card_paid);
         cardRecieved = (CardView)findViewById(R.id.card_recieved);
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
     }
 }

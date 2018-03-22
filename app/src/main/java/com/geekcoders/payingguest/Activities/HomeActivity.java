@@ -25,6 +25,7 @@ import butterknife.OnClick;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout lineLayCategory;
+    private LinearLayout lineLayViewPayment,lineLayAddPG;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         intialize();
 
         lineLayCategory.setOnClickListener(this);
+        lineLayAddPG.setOnClickListener(this);
+        lineLayViewPayment.setOnClickListener(this);
 
         Constant.mcontext = HomeActivity.this;
         if (!Constant.getValueForKeyBoolean("isLogin")) {
@@ -83,6 +86,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     public void intialize() {
         lineLayCategory = (LinearLayout) findViewById(R.id.lineLay_category);
+        lineLayViewPayment = (LinearLayout)findViewById(R.id.lineLay_viewPayment);
+        lineLayAddPG = (LinearLayout)findViewById(R.id.lineLay_addpg);
     }
 
     @Override
@@ -90,6 +95,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.lineLay_category:
                 startActivity(new Intent(HomeActivity.this, CategoryActivity.class));
+                break;
+
+            case R.id.lineLay_viewPayment :
+                startActivity(new Intent(HomeActivity.this,ViewPaymentActivity.class));
                 break;
         }
     }
