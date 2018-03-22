@@ -32,6 +32,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
         Parse.initialize(HomeActivity.this);
+
         intialize();
 
         lineLayCategory.setOnClickListener(this);
@@ -47,7 +48,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //        if (user != null) {
 //
 //        }
-//            ParseInstallation.getCurrentInstallation().saveInBackground();
+            ParseInstallation.getCurrentInstallation().saveInBackground();
 
             // ParseQuery pushQuery = ParseInstallation.getQuery();
 

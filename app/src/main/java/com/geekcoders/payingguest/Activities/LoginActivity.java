@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                     installation.put("userId",userId);
                     installation.saveInBackground();
 
-//                    ParsePush.subscribeInBackground(userId);
+                    ParsePush.subscribeInBackground(userId);
                    Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                     startActivity(intent);
                     finish();
