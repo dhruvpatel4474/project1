@@ -84,7 +84,6 @@
                         app:met_typeface="fonts/DroidSans.ttf" />-->
 
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/edtEmailLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -99,7 +98,6 @@
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/edtPasswordLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30sp"
@@ -131,7 +129,6 @@
                         android:layout_gravity="center">
 
                         <CheckBox
-                            android:id="@+id/ckb_remember_me"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
@@ -141,7 +138,6 @@
                             android:layout_centerVertical="true"/>
 
                         <TextView
-                            android:id="@+id/textView_forgotPassword_forgotPassword"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -161,13 +157,11 @@
                     android:orientation="vertical">
 
                     <ProgressBar
-                        android:id="@+id/progLogin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone" />
 
                     <LinearLayout
-                        android:id="@+id/llSuccess"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_btn_bordered"
@@ -177,13 +171,11 @@
                         android:visibility="gone">
 
                         <ImageView
-                            android:id="@+id/imgSuccess"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_success" />
 
                         <TextView
-                            android:id="@+id/txtSuccess"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="@string/success"

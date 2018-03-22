@@ -1,14 +1,22 @@
 package com.geekcoders.payingguest.Activities;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.geekcoders.payingguest.Adapter.PGListAdapter;
 import com.geekcoders.payingguest.Adapter.PaymentAdapter;
+import com.geekcoders.payingguest.Adapter.PaymentRAdapter;
 import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.Objects.Payment;
 import com.geekcoders.payingguest.R;
@@ -30,8 +38,11 @@ public class ViewPaymentActivity extends AppCompatActivity {
 
     public boolean IsRecieved=true;
     private PaymentAdapter adapter;
-    private ListView listView;
-    Button recievedBtn,sendBtn;
+    private LinearLayout lineLayPaid,lineLayRecieved;
+    private TextView tvPaid,tvRecieved;
+    private RecyclerView recyclerView;
+    ListView listView;
+    private CardView cardPaid,cardRecieved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +50,17 @@ public class ViewPaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_payment);
         Parse.initialize(ViewPaymentActivity.this);
         Constant.mcontext=ViewPaymentActivity.this;
+
         PaymentList(); // default received
 
-        recievedBtn.setOnClickListener(new View.OnClickListener() {
+        lineLayPaid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IsRecieved=true;
+                IsRecieved=false;
                 PaymentList();
             }
         });
-        sendBtn.setOnClickListener(new View.OnClickListener() {
+        lineLayRecieved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 IsRecieved=true;
@@ -91,6 +103,7 @@ public class ViewPaymentActivity extends AppCompatActivity {
                         obj.setDate(fdate);
 
                         obj.setPrice(price);
+                        obj.setStatus(IsRecieved);
                         obj.setObjectId(objects.get(i).getObjectId());
                         obj.setRecieverId(recieverId);
                         obj.setRecieverName(recieverName);
@@ -102,10 +115,31 @@ public class ViewPaymentActivity extends AppCompatActivity {
 
                     }
 
-                    adapter = new PaymentAdapter(ViewPaymentActivity.this, arrayList);
-                    listView.setAdapter(adapter);
+//                    adapter = new PaymentAdapter(ViewPaymentActivity.this, arrayList);
+//                    listView.setAdapter(adapter);
 //                    dialog.cancel();
 
+                    try {
+                        PaymentRAdapter paymentRAdapter = new PaymentRAdapter(ViewPaymentActivity.this,arrayList);
+                        recyclerView.setAdapter(paymentRAdapter);
+                        if (IsRecieved)
+                        {
+                            cardRecieved.setCardElevation(3);
+                            cardPaid.setCardElevation(0);
+                            cardPaid.setBackgroundResource(R.color.grey);
+                            cardRecieved.setBackgroundResource(R.color.white);
+
+                        }
+                        else {
+                            cardPaid.setCardElevation(3);
+                            cardPaid.setBackgroundResource(R.color.white);
+                            cardRecieved.setBackgroundResource(R.color.grey);
+                            cardRecieved.setCardElevation(0);
+                        }
+                    }catch (Exception e1)
+                    {
+                        e1.printStackTrace();
+                    }
                 } else {
 //                    dialog.cancel();
 
@@ -116,5 +150,17 @@ public class ViewPaymentActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void initialize()
+    {
+        lineLayPaid = (LinearLayout)findViewById(R.id.lineLay_paid);
+        lineLayRecieved = (LinearLayout)findViewById(R.id.lineLay_recieved);
+        tvPaid = (TextView)findViewById(R.id.tv_paid);
+        tvRecieved = (TextView)findViewById(R.id.tv_recieved);
+        cardPaid = (CardView)findViewById(R.id.card_paid);
+        cardRecieved = (CardView)findViewById(R.id.card_recieved);
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
 }
