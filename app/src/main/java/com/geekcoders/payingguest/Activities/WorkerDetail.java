@@ -38,7 +38,7 @@ public class WorkerDetail extends AppCompatActivity {
         price = (TextView) findViewById(R.id.workprice);
         img = (ImageView) findViewById(R.id.bgheader_w);
 
-        callBtn = (Button) findViewById(R.id.Auc_itemdetail_bidplace_btn);
+        callBtn = (Button) findViewById(R.id.workcall);
 
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.MyToolbar_w);
