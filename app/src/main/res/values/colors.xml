@@ -4,25 +4,9 @@
     <color name="colorPrimaryDark">	#8DC138</color>#303F9F
     <color name="colorAccent">#FF4081</color>
 
-    <color name="borderColor">#b9b9b9</color>
-    <color name="secondry_text">#595959</color>
-    <color name="primary_text">#000000</color>
-
     <color name="black">#000000</color>
     <color name="grey">#EEEEEE</color>
     <color name="white">#ffffff</color>
     <color name="lightgrey">#969595</color>
-    <color name="dark_blue">#151941</color>
-    <color name="light_blue">#3662F0</color>
-    <color name="d_gray">#B0B1C1</color>
 
-    <color name="color_cancel">#F18D8D</color>
-    <color name="color_returned">#F6B859</color>
-    <color name="color_delivered">#69D792</color>
-    <color name="color_pending">#3662F0</color>
-
-    <color name="default_screen_bg">#f9f9f9</color>
-    <color name="rounded_container_bg">#222222</color>
-    <color name="rounded_container_border">#3b3f44</color>
-    <color name="light_gray_header_color">#646663</color>
 </resources>

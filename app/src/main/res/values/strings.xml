@@ -5,13 +5,10 @@
     <string name="text_remember_me">Remember Me</string>
     <string name="success">Success</string>
     <string name="sign_in">Login</string>
-    <string name="app_title"></string>
 
 
     //Sign Up
     <string name="fname">First Name</string>
     <string name="lname">Last Name</string>
-    <string name="number">Contact Number</string>
-    <string name="confirmpassword">Conform Password</string>
     <string name="sign_up">Register</string>
 </resources>

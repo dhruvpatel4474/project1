@@ -10,6 +10,15 @@ public class Payment {
     int price;
     Boolean IsRecieved;
     String date;
+    boolean status;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     public String getDate() {
         return date;
