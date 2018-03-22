@@ -47,7 +47,7 @@ public class PaymentRAdapter extends RecyclerView.Adapter<PaymentRAdapter.MyView
             holder.status.setText("to");
         }
 
-        holder.price.setText(object.getPrice());
+        holder.price.setText(object.getPrice()+ "");
         holder.date.setText(object.getDate());
     }
 
