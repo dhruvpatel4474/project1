@@ -41,6 +41,7 @@ public class HistoryActivity extends AppCompatActivity {
 
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Payment");
         bandQuery.include("PGDetail");
+        bandQuery.orderByDescending("createdAt");
 
 
             bandQuery.whereEqualTo("senderId",  Constant.getValueForKeyString("userId"));
@@ -71,18 +72,19 @@ public class HistoryActivity extends AppCompatActivity {
 //                        obj.setSenderId(senderId);
 //                        obj.setSenderName(senderName);
 
+                        ParseObject  object= objects.get(i).getParseObject("PGDetail");
                         final PGObject obj = new PGObject();
-                        String title = objects.get(i).getString("title");
-                        String objectId = objects.get(i).getObjectId();
-                        int price = objects.get(i).getInt("price");
-                        String city = objects.get(i).getString("city");
-                        String description = objects.get(i).getString("description");
-                        String userId = objects.get(i).getString("userId");
-                        String address = objects.get(i).getString("address");
-                        String number = objects.get(i).getString("number");
-                        String userName = objects.get(i).getString("userName");
-                        String categoryId = objects.get(i).getString("categoryId");
-                        String image = objects.get(i).getString("image");
+                        String title = object.getString("title");
+                        String objectId = object.getObjectId();
+                        int price = object.getInt("price");
+                        String city = object.getString("city");
+                        String description = object.getString("description");
+                        String userId = object.getString("userId");
+                        String address = object.getString("address");
+                        String number = object.getString("number");
+                        String userName = object.getString("userName");
+                        String categoryId = object.getString("categoryId");
+                        String image = object.getString("image");
                         Date date = objects.get(i).getCreatedAt();
                         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                         String fdate = df.format(date);
@@ -98,7 +100,7 @@ public class HistoryActivity extends AppCompatActivity {
                         obj.setNumber(number);
                         obj.setUsername(userName);
                         obj.setCategoryId(categoryId);
-                      //  obj.setImage(image);
+                       obj.setImage(image);
 
 
                         arrayList.add(obj);

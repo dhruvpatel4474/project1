@@ -43,7 +43,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+                <android.support.v7.widget.CardView
+                    android:layout_weight="1"
+                    android:id="@+id/card_recieved"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                    <LinearLayout
+                        android:id="@+id/lineLay_recieved"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/tv_recieved"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="Recieved"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/LargeText" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
                 <android.support.v7.widget.CardView
                     android:layout_weight="1"
                     android:id="@+id/card_paid"
@@ -66,28 +87,7 @@
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
-                <android.support.v7.widget.CardView
-                    android:layout_weight="1"
-                    android:id="@+id/card_recieved"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:id="@+id/lineLay_recieved"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    >
-
-                    <TextView
-                        android:id="@+id/tv_recieved"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Recieved"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/LargeText" />
-                </LinearLayout>
-                </android.support.v7.widget.CardView>
 
             </LinearLayout>
 

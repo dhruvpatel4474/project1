@@ -171,7 +171,7 @@ public class PgDetailActivity extends AppCompatActivity {
                 String userId = object.getString("userId");
                 String address = object.getString("address");
                 number = object.getString("number");
-                String userName = object.getString("UserName");
+                String userName = object.getString("userName");
                 String categoryId = object.getString("categoryId");
                 Date date = object.getCreatedAt();
                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
