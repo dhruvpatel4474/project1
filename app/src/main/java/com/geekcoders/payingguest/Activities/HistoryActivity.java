@@ -2,8 +2,11 @@ package com.geekcoders.payingguest.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.geekcoders.payingguest.Adapter.PGListAdapter;
+import com.geekcoders.payingguest.Adapter.PGListRAdapter;
 import com.geekcoders.payingguest.Adapter.PaymentAdapter;
 import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.Objects.Payment;
@@ -22,12 +25,15 @@ import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private PGListAdapter adapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+        getSupportActionBar().hide();
+        initilize();
+        PaymentList();
     }
 
     public void PaymentList() {
@@ -100,7 +106,8 @@ public class HistoryActivity extends AppCompatActivity {
 
                     }
 
-                    adapter = new PGListAdapter(HistoryActivity.this, arrayList);
+                    PGListRAdapter pgListRAdapter = new PGListRAdapter(HistoryActivity.this,arrayList);
+                    recyclerView.setAdapter(pgListRAdapter);
                     //listView.setAdapter(adapter);
 //                    dialog.cancel();
 
@@ -113,6 +120,14 @@ public class HistoryActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void initilize() {
+
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
 
     }
 

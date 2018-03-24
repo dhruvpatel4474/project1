@@ -25,7 +25,7 @@ import butterknife.OnClick;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     LinearLayout lineLayCategory;
-    private LinearLayout lineLayViewPayment,lineLayAddPG;
+    private LinearLayout lineLayViewPayment,lineLayAddPG,lineLayViewHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +35,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Parse.initialize(HomeActivity.this);
 
         intialize();
-
-        lineLayCategory.setOnClickListener(this);
-        lineLayAddPG.setOnClickListener(this);
-        lineLayViewPayment.setOnClickListener(this);
 
         Constant.mcontext = HomeActivity.this;
         if (!Constant.getValueForKeyBoolean("isLogin")) {
@@ -88,6 +84,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         lineLayCategory = (LinearLayout) findViewById(R.id.lineLay_category);
         lineLayViewPayment = (LinearLayout)findViewById(R.id.lineLay_viewPayment);
         lineLayAddPG = (LinearLayout)findViewById(R.id.lineLay_addpg);
+        lineLayViewHistory = (LinearLayout)findViewById(R.id.lineLay_history);
+
+        lineLayCategory.setOnClickListener(this);
+        lineLayAddPG.setOnClickListener(this);
+        lineLayViewPayment.setOnClickListener(this);
+        lineLayViewHistory.setOnClickListener(this);
     }
 
     @Override
@@ -104,6 +106,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.lineLay_addpg :
                 startActivity(new Intent(HomeActivity.this,AddPgActivity.class));
                 break;
+            case R.id.lineLay_history :
+                startActivity(new Intent(HomeActivity.this,HistoryActivity.class));
         }
     }
 }
