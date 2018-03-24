@@ -107,7 +107,7 @@
                         android:layout_height="wrap_content">
 
                         <android.support.design.widget.TextInputEditText
-                            android:id="@+id/edt_number"
+                            android:id="@+id/edtNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Contact Number"

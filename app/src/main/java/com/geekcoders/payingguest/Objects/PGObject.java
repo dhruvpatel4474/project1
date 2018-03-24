@@ -1,5 +1,7 @@
 package com.geekcoders.payingguest.Objects;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by dhruvpatel on 3/15/2018.
  */

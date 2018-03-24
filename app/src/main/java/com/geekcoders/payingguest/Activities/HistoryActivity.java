@@ -92,7 +92,7 @@ public class HistoryActivity extends AppCompatActivity {
                         obj.setNumber(number);
                         obj.setUsername(userName);
                         obj.setCategoryId(categoryId);
-                        obj.setImage(image);
+                      //  obj.setImage(image);
 
 
                         arrayList.add(obj);

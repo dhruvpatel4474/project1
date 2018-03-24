@@ -82,7 +82,7 @@ public class WorkerListActivity extends AppCompatActivity {
     public void CategoryList() {
         arrayList = new ArrayList<>();
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Worker");
-
+        bandQuery.orderByDescending("createdAt");
         final ProgressDialog dialog = new ProgressDialog(WorkerListActivity.this);
         dialog.setMessage("Please wait");
         dialog.show();

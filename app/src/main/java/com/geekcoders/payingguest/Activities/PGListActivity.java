@@ -2,6 +2,8 @@ package com.geekcoders.payingguest.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,11 +20,14 @@ import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
 import com.parse.FindCallback;
+import com.parse.GetDataCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.io.ByteArrayInputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +39,7 @@ public class PGListActivity extends AppCompatActivity {
     private ArrayList<PGObject> arrayList;
     private PGListAdapter adapter;
     private RecyclerView recyclerView;
+    private PGListRAdapter pgListRAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +77,7 @@ public class PGListActivity extends AppCompatActivity {
 //            bandQuery.whereContainedIn("bandMembers", Collections.singletonList(ParseUser.getCurrentUser()));
 //        }
         bandQuery.whereEqualTo("categoryId", Constant.getValueForKeyString("categoryId"));
+        bandQuery.orderByDescending("createdAt");
         bandQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
@@ -95,7 +102,7 @@ public class PGListActivity extends AppCompatActivity {
                         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                         String fdate = df.format(date);
                         obj.setDate(fdate);
-
+                        obj.setImage(image);
                         obj.setTitle(title);
                         obj.setObjectId(objectId);
                         obj.setPrice(price);
@@ -106,28 +113,29 @@ public class PGListActivity extends AppCompatActivity {
                         obj.setNumber(number);
                         obj.setUsername(userName);
                         obj.setCategoryId(categoryId);
-                        obj.setImage(image);
+
 
 
                         // FetchListOfVenuesForSelectedBand(objects.get(i));
                         //ImagesBand(objects.get(i));
 
 
-//                        ParseQuery<ParseObject> imgQuery = ParseQuery.getQuery("RCBandImage");
-//                        imgQuery.whereEqualTo("band", objects.get(i));
+//                        ParseQuery<ParseObject> imgQuery = ParseQuery.getQuery("Images");
+//                        imgQuery.whereEqualTo("sourceId", objects.get(i).getObjectId());
 //                        imgQuery.findInBackground(new FindCallback<ParseObject>() {
 //                            @Override
 //                            public void done(List<ParseObject> objects, ParseException e) {
 //                                if (e == null && objects.size() != 0) {
 //                                    final ParseObject object = objects.get(0);
-//                                    final ParseFile fileObject = (ParseFile) object.get("imageFile");
+//                                    final ParseFile fileObject = (ParseFile) object.get("file");
 //                                    fileObject.getDataInBackground(new GetDataCallback() {
 //                                        @Override
 //                                        public void done(byte[] data, ParseException e) {
 //                                            ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(data);
 //                                            Bitmap bitmap = BitmapFactory.decodeStream(arrayInputStream);
-//                                            objrcband.setImage(bitmap);
-//                                            adapter.notifyDataSetChanged();
+//                                           // objrcband.setImage(bitmap);
+//                                            obj.setImage(bitmap);
+//                                            pgListRAdapter.notifyDataSetChanged();
 //                                        }
 //                                    });
 //                                }
@@ -138,7 +146,7 @@ public class PGListActivity extends AppCompatActivity {
                     }
 
 //                    adapter = new PGListAdapter(PGListActivity.this, arrayList);
-                    PGListRAdapter pgListRAdapter = new PGListRAdapter(PGListActivity.this,arrayList);
+                     pgListRAdapter = new PGListRAdapter(PGListActivity.this,arrayList);
                     try {
                         recyclerView.setAdapter(pgListRAdapter);
                     }catch (Exception e1)

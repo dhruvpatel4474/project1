@@ -26,8 +26,8 @@
                     android:id="@+id/image_pglist"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/cat_icon"
-                    android:tint="@color/colorPrimary" />
+
+                     />
             </LinearLayout>
 
             <LinearLayout

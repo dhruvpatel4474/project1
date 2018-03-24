@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,6 +56,7 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
     private ImageView imgPG;
     private int PICK_IMAGE_REQUEST = 1;
     private String TAG = "Permission";
+    private boolean IsLogoUploaded=false;
 
 
     @Override
@@ -64,21 +67,28 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().hide();
         Parse.initialize(AddPgActivity.this);
         Constant.mcontext = AddPgActivity.this;
+
     }
 
 
-    public void CreatePostOnServer() throws Exception {
+    public void CreatePostOnServer(String imagePath) throws Exception {
+
+        BitmapDrawable drawable = (BitmapDrawable) imgPG.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        imageBit=bitmap;
+
         ParseACL acl = new ParseACL();
         acl.setPublicReadAccess(true);
         acl.setPublicWriteAccess(true);
         objPGParse = new ParseObject("PGDetail");
         objPGParse.put("title", edtTitle.getText().toString());
-        objPGParse.put("price", edtPrice.getText().toString());// int
+        objPGParse.put("price", Integer.parseInt(edtPrice.getText().toString()));// int
         Category city = (Category) spinnerCity.getSelectedItem();
         objPGParse.put("city", city.getName().toString());
         objPGParse.put("description", edtDescription.getText().toString());
         objPGParse.put("userId", Constant.getValueForKeyString("userId"));
         objPGParse.put("address", edtAddress.getText().toString());
+        objPGParse.put("image", imagePath);
         objPGParse.put("number", edtNumber.getText().toString());
         objPGParse.put("userName", Constant.getValueForKeyString("name"));
         Category category = (Category) spinnerCategory.getSelectedItem();
@@ -91,13 +101,11 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
 
                 if (e == null) {
 
-                    if (imageBit != null) {
-                        UploadImageForPost(objPGParse.getObjectId());
-                    } else {
+
                         //loading.cancel();
                         Toast.makeText(AddPgActivity.this, "Successfully added", Toast.LENGTH_LONG).show();
                         finish();
-                    }
+
                 } else
 
                 {
@@ -109,39 +117,32 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    public void UploadImageForPost(final String sourceId) {
+    public void UploadImageForPost() {
 
+        if (IsLogoUploaded) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         Bitmap bitmap = imageBit;
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] image = stream.toByteArray();
-        parseFile = new ParseFile(image);
+        Random r = new Random();
+        int i1 = (r.nextInt(80));
+        Random r2 = new Random();
+        int i2 = (r2.nextInt(99));
+            Random r3 = new Random();
+            int i3 = (r3.nextInt(80));
+        String name = i3 + i1 + i2 + ".png";
+        parseFile = new ParseFile(name, image, ".png");
 
         parseFile.saveInBackground(new SaveCallback() {
                                        @Override
                                        public void done(ParseException e) {
                                            if (e == null) {
-                                               ParseACL acl = new ParseACL();
-                                               acl.setPublicReadAccess(true);
-                                               acl.setPublicWriteAccess(true);
-                                               ParseObject objRcImage = new ParseObject("Images");
-                                               objRcImage.put("sourceId", sourceId);
-                                               objRcImage.put("file", parseFile);
-                                               objRcImage.put("url", parseFile.getUrl());
-                                               objRcImage.setACL(acl);
-                                               objRcImage.saveInBackground((new SaveCallback() {
-                                                   public void done(ParseException e) {
-                                                       // Handle success or failure here ...
-                                                       if (e == null) {
-
-                                                           Toast.makeText(AddPgActivity.this, "Successfully added", Toast.LENGTH_LONG).show();
-//                                                               loading.cancel();
-                                                           finish();
-
-                                                       }
-                                                   }
+                                               try {
+                                                   CreatePostOnServer(parseFile.getUrl());
+                                               } catch (Exception ex) {
+                                                   ex.printStackTrace();
                                                }
-                                               ));
+
 
                                            } else {
 
@@ -153,7 +154,15 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
 
         );
 
+    } else {
 
+            try {
+                CreatePostOnServer("null");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     public void CategoryList() {
@@ -258,7 +267,7 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnAddPG:
                 if (validate()) {
                     try {
-                        CreatePostOnServer();
+                        UploadImageForPost();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -280,6 +289,8 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
 
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                IsLogoUploaded=true;
+                imageBit=bitmap;
                 // Log.d(TAG, String.valueOf(bitmap));
                 imgPG.setImageBitmap(bitmap);
             } catch (IOException e) {

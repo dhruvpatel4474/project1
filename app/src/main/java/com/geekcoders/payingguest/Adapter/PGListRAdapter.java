@@ -43,11 +43,14 @@ public class PGListRAdapter extends RecyclerView.Adapter<PGListRAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.name.setText(arrayList.get(position).getName());
-        Picasso.get()
-                .load(arrayList.get(position).getImage())
-                .placeholder(R.drawable.place_holder)
-                .error(R.drawable.place_holder)
-                .into(holder.image);
+        if (arrayList.get(position).getImage() != null) {
+            Picasso.get()
+                    .load(arrayList.get(position).getImage())
+                    .placeholder(R.drawable.place_holder)
+                    .error(R.drawable.place_holder)
+                    .into(holder.image);
+        }
+       // holder.image.setImageBitmap(arrayList.get(position).getImage());
         holder.city.setText(arrayList.get(position).getName());
         String price=String.valueOf(arrayList.get(position).getPrice());
         holder.price.setText(price);
