@@ -85,6 +85,7 @@ public class ViewPaymentActivity extends AppCompatActivity {
         } else {
             bandQuery.whereEqualTo("senderId",  Constant.getValueForKeyString("userId"));
         }
+        bandQuery.orderByDescending("createdAt");
         bandQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
