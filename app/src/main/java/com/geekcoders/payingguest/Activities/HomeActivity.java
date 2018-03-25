@@ -61,6 +61,10 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ss.com.bannerslider.banners.Banner;
+import ss.com.bannerslider.banners.DrawableBanner;
+import ss.com.bannerslider.banners.RemoteBanner;
+import ss.com.bannerslider.views.BannerSlider;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -125,6 +129,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //        push.setChannel("NuDYCP0HdC");
 //        push.setMessage("test");
 //        push.sendInBackground();
+
+
+
+//            BannerSlider bannerSlider = (BannerSlider) findViewById(R.id.banner_slider1);
+//            List<Banner> banners=new ArrayList<>();
+//            //add banner using image url
+//            banners.add(new RemoteBanner("http://akomgreen.com/wp-content/themes/Divi/images/logo.png"));
+//            banners.add(new RemoteBanner("http://akomgreen.com/wp-content/themes/Divi/images/logo.png"));
+//            banners.add(new RemoteBanner("http://akomgreen.com/wp-content/themes/Divi/images/logo.png"));
+//            //add banner using resource drawable
+//           // banners.add(new DrawableBanner(R.drawable.yourDrawable));
+//            bannerSlider.setBanners(banners);
+
 
 
         }

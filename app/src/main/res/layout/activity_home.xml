@@ -19,6 +19,18 @@
             android:orientation="vertical"
             android:padding="@dimen/padding5">
 
+            <ss.com.bannerslider.views.BannerSlider
+                android:id="@+id/banner_slider1"
+                android:layout_width="match_parent"
+                app:interval="5000"
+                app:defaultIndicators="circle"
+                app:loopSlides="true"
+                app:defaultBanner="1"
+                app:animateIndicators="true"
+                app:indicatorSize="12dp"
+                android:layout_height="wrap_content"
+                />
+
             //Vertical Layout
 
             <LinearLayout
