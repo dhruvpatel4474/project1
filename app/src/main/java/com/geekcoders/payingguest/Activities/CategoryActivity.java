@@ -124,7 +124,7 @@ public class CategoryActivity extends AppCompatActivity {
                     }
 
                     //adapter = new CategoryAdapter(CategoryActivity.this, arrayList);
-                    CategoryRAdapter categoryRAdapter = new CategoryRAdapter(CategoryActivity.this,arrayList);
+                    CategoryRAdapter categoryRAdapter = new CategoryRAdapter(CategoryActivity.this,arrayList,false);
                     recyclerView.setAdapter(categoryRAdapter);
                     dialog.cancel();
 

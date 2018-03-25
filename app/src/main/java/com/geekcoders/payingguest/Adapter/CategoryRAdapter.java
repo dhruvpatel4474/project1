@@ -26,10 +26,12 @@ public class CategoryRAdapter extends RecyclerView.Adapter<CategoryRAdapter.MyVi
 
     private final Context context;
     private final ArrayList<Category> arrayList;
+    private final boolean showOption;
 
-    public CategoryRAdapter(Context context, ArrayList<Category> arrayList) {
+    public CategoryRAdapter(Context context, ArrayList<Category> arrayList,boolean showOption) {
         this.context = context;
         this.arrayList = arrayList;
+        this.showOption = showOption;
     }
 
     @Override
@@ -48,14 +50,25 @@ public class CategoryRAdapter extends RecyclerView.Adapter<CategoryRAdapter.MyVi
                 .error(R.drawable.place_holder)
                 .into(holder.image);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Constant.setValueAndKeyString("categoryId", arrayList.get(position).getObjectId());
-                Intent intent = new Intent(context, PGListActivity.class);
-                context.startActivity(intent);
-            }
-        });
+        if (showOption)
+        {
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    return false;
+
+                }
+            });
+        }else {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Constant.setValueAndKeyString("categoryId", arrayList.get(position).getObjectId());
+                    Intent intent = new Intent(context, PGListActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+        }
     }
 
 
