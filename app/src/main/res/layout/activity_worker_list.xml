@@ -8,11 +8,7 @@
     android:paddingBottom="10dp"
     android:paddingRight="5dp"
     android:paddingLeft="5dp"
-    tools:context="com.geekcoders.payingguest.Activities.WorkerList">
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/auc_item_list_refresh_worker">
+    tools:context="com.geekcoders.payingguest.Activities.WorkerListActivity">
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,5 +16,5 @@
         android:layout_alignParentTop="true"
         
         android:id="@+id/booklist_booklist_lstv"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+
 </RelativeLayout>

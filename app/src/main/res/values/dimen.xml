@@ -2,6 +2,6 @@
 <resources>
 
     <dimen name="SmallText">16sp</dimen>
-    <dimen name="MediumText">20sp</dimen>
-    <dimen name="LargeText">24sp</dimen>
+    <dimen name="MediumText">18sp</dimen>
+    <dimen name="LargeText">20sp</dimen>
 </resources>

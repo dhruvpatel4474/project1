@@ -22,6 +22,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +48,8 @@ public class WorkerListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worker_list);
         ItemList=(ListView)findViewById(R.id.booklist_booklist_lstv);
-        swip_refresh=(SwipeRefreshLayout)findViewById(R.id.auc_item_list_refresh_worker);
-        cat_id=getIntent().getIntExtra("cat_id",0);
-        String cat_name=getIntent().getStringExtra("cat_name");
-
-
-        setTitle(cat_name);
+       // swip_refresh=(SwipeRefreshLayout)findViewById(R.id.auc_item_list_refresh_worker);
+        CategoryList();
 
         ItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -196,7 +193,15 @@ public class WorkerListActivity extends AppCompatActivity {
                  TextView city = (TextView) view.findViewById(R.id.auc_itemlist_custom_time);
                     Worker obj=arrayList.get(position);
 
-
+title.setText(obj.getTitle());
+price.setText("₹"+String.valueOf(obj.getPrice()));
+woek.setText(obj.getWorkType());
+city.setText(obj.getCity());
+                 Picasso.get()
+                         .load(arrayList.get(position).getImage())
+                         .placeholder(R.drawable.place_holder)
+                         .error(R.drawable.place_holder)
+                         .into(img);
 
 
                  return view;

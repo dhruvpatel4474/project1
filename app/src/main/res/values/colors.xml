@@ -8,6 +8,7 @@
     <color name="grey">#EEEEEE</color>
     <color name="white">#ffffff</color>
     <color name="lightgrey">#969595</color>
+    <color name="darkgrey">#797979</color>
     <color name="linecolor">#d7d7d7</color>
 
 </resources>

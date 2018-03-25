@@ -48,8 +48,8 @@
                             android:id="@+id/comment_comment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/MediumText"
-                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textColor="#7b7b7b"
                             android:padding="2dp"
                             android:text="Comment"/>
                     </LinearLayout>

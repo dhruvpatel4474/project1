@@ -51,8 +51,8 @@ public class PGListRAdapter extends RecyclerView.Adapter<PGListRAdapter.MyViewHo
                     .into(holder.image);
         }
        // holder.image.setImageBitmap(arrayList.get(position).getImage());
-        holder.city.setText(arrayList.get(position).getName());
-        String price=String.valueOf(arrayList.get(position).getPrice());
+        holder.city.setText(arrayList.get(position).getCity());
+        String price="₹"+String.valueOf(arrayList.get(position).getPrice());
         holder.price.setText(price);
         holder.date.setText(arrayList.get(position).getDate());
 
