@@ -70,15 +70,31 @@ public class MyPGListRAdapter extends RecyclerSwipeAdapter<MyPGListRAdapter.MyVi
         recyclerManger.bindView(holder.itemView, position);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
+            boolean wasClosed = true;
             @Override
             public void onClick(View view) {
                 //Constant.pgObject = arrayList.get(position);
 
-                if(holder.swipeLayout.getOpenStatus() == SwipeLayout.Status.Close){
-                    //DO WHAT YOU WANT
-                    Constant.setValueAndKeyString("PGid", arrayList.get(position).getObjectId());
-                    Intent intent = new Intent(context, PgDetailActivity.class);
-                    context.startActivity(intent);
+
+                {
+                    if (SwipeLayout.Status.Close == holder.swipeLayout.getOpenStatus())
+                    {
+                        if (wasClosed)
+                        {
+                            //DO WHAT YOU WANT
+                            Constant.setValueAndKeyString("PGid", arrayList.get(position).getObjectId());
+                            Intent intent = new Intent(context, PgDetailActivity.class);
+                            context.startActivity(intent);
+                        }
+                        else
+                        {
+                            wasClosed = true;
+                        }
+                    }
+                    else
+                    {
+                        wasClosed = false;
+                    }
                 }
 
             }
@@ -112,7 +128,7 @@ public class MyPGListRAdapter extends RecyclerSwipeAdapter<MyPGListRAdapter.MyVi
                     public void onClick(View view) {
                         //objectProductArrayList.remove(position);
 
-                        Toast.makeText(context,"Hello",Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Hello", Toast.LENGTH_LONG).show();
 
                         layout.close();
                        /* Snackbar snackbar = Snackbar
@@ -175,8 +191,8 @@ public class MyPGListRAdapter extends RecyclerSwipeAdapter<MyPGListRAdapter.MyVi
             price = (TextView) itemView.findViewById(R.id.price_pglist);
             date = (TextView) itemView.findViewById(R.id.date_pglist);
             city = (TextView) itemView.findViewById(R.id.city_pglist);
-            swipeLayout = (SwipeLayout)itemView.findViewById(R.id.swipeLayout);
-            lineLayDelete = (LinearLayout)itemView.findViewById(R.id.lineLay_delete);
+            swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipeLayout);
+            lineLayDelete = (LinearLayout) itemView.findViewById(R.id.lineLay_delete);
 
 
         }
