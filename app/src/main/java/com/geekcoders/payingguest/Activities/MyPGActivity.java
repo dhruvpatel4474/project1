@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.geekcoders.payingguest.Adapter.MyPGListRAdapter;
 import com.geekcoders.payingguest.Adapter.PGListAdapter;
 import com.geekcoders.payingguest.Adapter.PGListRAdapter;
 import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.geekcoders.payingguest.Utils.Dialog;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -28,7 +30,7 @@ public class MyPGActivity extends AppCompatActivity {
     private ArrayList<PGObject> arrayList;
     private PGListAdapter adapter;
     private RecyclerView recyclerView;
-    private PGListRAdapter pgListRAdapter;
+    private MyPGListRAdapter pgListRAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +57,7 @@ public class MyPGActivity extends AppCompatActivity {
 
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("PGDetail");
 
-        final ProgressDialog dialog = new ProgressDialog(MyPGActivity.this);
-        dialog.setMessage("Please wait");
-        dialog.show();
+        Dialog.showDialog(MyPGActivity.this);
 
 //
 //        if (band_type == 0) {
@@ -135,7 +135,7 @@ public class MyPGActivity extends AppCompatActivity {
                     }
 
 //                    adapter = new PGListAdapter(PGListActivity.this, arrayList);
-                    pgListRAdapter = new PGListRAdapter(MyPGActivity.this,arrayList);
+                    pgListRAdapter = new MyPGListRAdapter(MyPGActivity.this,arrayList);
                     try {
                         recyclerView.setAdapter(pgListRAdapter);
                     }catch (Exception e1)
@@ -143,11 +143,10 @@ public class MyPGActivity extends AppCompatActivity {
                         e1.printStackTrace();
                     }
 
-                    dialog.cancel();
+                   Dialog.closeDialog();
 
                 } else {
-                    dialog.cancel();
-
+                    Dialog.closeDialog();
 
                 }
 
