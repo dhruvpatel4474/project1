@@ -98,7 +98,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         Parse.initialize(HomeActivity.this);
         intialize();
         Constant.mcontext = HomeActivity.this;
