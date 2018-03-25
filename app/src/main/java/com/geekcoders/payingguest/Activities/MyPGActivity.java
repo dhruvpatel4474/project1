@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.geekcoders.payingguest.Adapter.MyPGListRAdapter;
 import com.geekcoders.payingguest.Adapter.PGListAdapter;
@@ -13,6 +14,7 @@ import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
 import com.geekcoders.payingguest.Utils.Dialog;
+import com.geekcoders.payingguest.Utils.Fonts;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -31,6 +33,7 @@ public class MyPGActivity extends AppCompatActivity {
     private PGListAdapter adapter;
     private RecyclerView recyclerView;
     private MyPGListRAdapter pgListRAdapter;
+    private TextView tvActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +51,17 @@ public class MyPGActivity extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
-
+        tvActionBar = (TextView)findViewById(R.id.tv_actionBar);
+        Fonts.setSemiBoldFont(MyPGActivity.this,tvActionBar);
     }
 
 
     public void PgList() {
+        Dialog.showDialog(MyPGActivity.this);
         arrayList = new ArrayList<>();
 
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("PGDetail");
 
-        Dialog.showDialog(MyPGActivity.this);
 
 //
 //        if (band_type == 0) {

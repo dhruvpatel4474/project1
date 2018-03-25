@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.geekcoders.payingguest.Objects.Worker;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.geekcoders.payingguest.Utils.Dialog;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -39,7 +40,7 @@ public class WorkerListActivity extends AppCompatActivity {
     private ArrayList newtimelist;
     ArrayAdapter<Worker> list_adpt;
     private Handler handler;
-    int a=0;
+    int a = 0;
     private Runnable runnable;
 
 
@@ -47,16 +48,16 @@ public class WorkerListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worker_list);
-        ItemList=(ListView)findViewById(R.id.booklist_booklist_lstv);
-       // swip_refresh=(SwipeRefreshLayout)findViewById(R.id.auc_item_list_refresh_worker);
+        ItemList = (ListView) findViewById(R.id.booklist_booklist_lstv);
+        // swip_refresh=(SwipeRefreshLayout)findViewById(R.id.auc_item_list_refresh_worker);
         CategoryList();
 
         ItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Constant.workerObj=arrayList.get(position);
-                Intent Auc_item_intent=new Intent(WorkerListActivity.this,WorkerDetail.class);
+                Constant.workerObj = arrayList.get(position);
+                Intent Auc_item_intent = new Intent(WorkerListActivity.this, WorkerDetail.class);
                 startActivity(Auc_item_intent);
 
             }
@@ -77,12 +78,10 @@ public class WorkerListActivity extends AppCompatActivity {
 
 
     public void CategoryList() {
+        Dialog.showDialog(WorkerListActivity.this);
         arrayList = new ArrayList<>();
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Worker");
         bandQuery.orderByDescending("createdAt");
-        final ProgressDialog dialog = new ProgressDialog(WorkerListActivity.this);
-        dialog.setMessage("Please wait");
-        dialog.show();
 
 //
 //        if (band_type == 0) {
@@ -119,7 +118,6 @@ public class WorkerListActivity extends AppCompatActivity {
                         obj.setImage(image);
 
 
-
                         // FetchListOfVenuesForSelectedBand(objects.get(i));
                         //ImagesBand(objects.get(i));
 
@@ -150,12 +148,10 @@ public class WorkerListActivity extends AppCompatActivity {
 
                     //adapter = new CategoryAdapter(CategoryActivity.this, arrayList);
                     setAdapter(arrayList);
-                    dialog.cancel();
+                    Dialog.closeDialog();
 
                 } else {
-                    dialog.cancel();
-
-
+                    Dialog.closeDialog();
                 }
 
 
@@ -165,50 +161,46 @@ public class WorkerListActivity extends AppCompatActivity {
     }
 
 
-
-    public void setAdapter(final ArrayList<Worker> arrayList)
-    {
-        this.arrayList=arrayList;
+    public void setAdapter(final ArrayList<Worker> arrayList) {
+        this.arrayList = arrayList;
 
 //        BookListAdapter bookListAdapter=new BookListAdapter(BookList.this,arrayList);
 //        bookList.setAdapter(bookListAdapter);
 
 
+        list_adpt = new ArrayAdapter<Worker>(
+                WorkerListActivity.this, R.layout.itemlist_custom, arrayList) {
+
+            @NonNull
+            @Override
+            public View getView(int position, View view, ViewGroup parent) {
+
+                view = getLayoutInflater().inflate(R.layout.itemlist_custom, parent, false);
 
 
-        list_adpt=new ArrayAdapter<Worker>(
-                WorkerListActivity.this,R.layout.itemlist_custom,arrayList) {
+                ImageView img = (ImageView) view.findViewById(R.id.auc_itemlist_custom_img);
+                TextView title = (TextView) view.findViewById(R.id.auc_itemlist_custom_title);
+                TextView price = (TextView) view.findViewById(R.id.auc_itemlist_custom_price);
+                TextView woek = (TextView) view.findViewById(R.id.auc_itemlist_custom_bids);
+                TextView city = (TextView) view.findViewById(R.id.auc_itemlist_custom_time);
+                Worker obj = arrayList.get(position);
 
-             @NonNull
-             @Override
-             public View getView(int position, View view, ViewGroup parent) {
-
-                 view = getLayoutInflater().inflate(R.layout.itemlist_custom,parent,false);
-
-
-                 ImageView img = (ImageView) view.findViewById(R.id.auc_itemlist_custom_img);
-                 TextView title = (TextView) view.findViewById(R.id.auc_itemlist_custom_title);
-                 TextView price = (TextView) view.findViewById(R.id.auc_itemlist_custom_price);
-                 TextView woek = (TextView) view.findViewById(R.id.auc_itemlist_custom_bids);
-                 TextView city = (TextView) view.findViewById(R.id.auc_itemlist_custom_time);
-                    Worker obj=arrayList.get(position);
-
-title.setText(obj.getTitle());
-price.setText("₹"+String.valueOf(obj.getPrice()));
-woek.setText(obj.getWorkType());
-city.setText(obj.getCity());
-                 Picasso.with(WorkerListActivity.this)
-                         .load(arrayList.get(position).getImage())
-                         .placeholder(R.drawable.place_holder)
-                         .error(R.drawable.place_holder)
-                         .into(img);
+                title.setText(obj.getTitle());
+                price.setText("₹" + String.valueOf(obj.getPrice()));
+                woek.setText(obj.getWorkType());
+                city.setText(obj.getCity());
+                Picasso.with(WorkerListActivity.this)
+                        .load(arrayList.get(position).getImage())
+                        .placeholder(R.drawable.place_holder)
+                        .error(R.drawable.place_holder)
+                        .into(img);
 
 
-                 return view;
-             }
-         };
+                return view;
+            }
+        };
 
-         ItemList.setAdapter(list_adpt);
+        ItemList.setAdapter(list_adpt);
 
     }
 

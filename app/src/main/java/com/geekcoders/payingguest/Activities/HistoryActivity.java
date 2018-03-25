@@ -12,6 +12,7 @@ import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.Objects.Payment;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.geekcoders.payingguest.Utils.Dialog;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -37,6 +38,7 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     public void PaymentList() {
+        Dialog.showDialog(HistoryActivity.this);
         final ArrayList<PGObject> arrayList = new ArrayList<>();
 
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Payment");
@@ -122,6 +124,8 @@ public class HistoryActivity extends AppCompatActivity {
 
             }
         });
+
+        Dialog.closeDialog();
 
     }
 

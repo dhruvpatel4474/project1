@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.geekcoders.payingguest.Utils.Dialog;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseException;
@@ -56,6 +57,7 @@ public class PaymentActivity extends AppCompatActivity {
 
 
     public void AddPayment() {
+        Dialog.showDialog(PaymentActivity.this);
         ParseACL acl = new ParseACL();
         acl.setPublicReadAccess(true);
         acl.setPublicWriteAccess(true);
@@ -91,6 +93,7 @@ public class PaymentActivity extends AppCompatActivity {
                 }
             }
         }));
+        Dialog.closeDialog();
     }
 
 

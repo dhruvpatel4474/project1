@@ -22,6 +22,7 @@ import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.Objects.Payment;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.geekcoders.payingguest.Utils.Dialog;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -76,6 +77,7 @@ public class ViewPaymentActivity extends AppCompatActivity {
 
 
     public void PaymentList() {
+        Dialog.showDialog(ViewPaymentActivity.this);
        final ArrayList<Payment> arrayList = new ArrayList<>();
 
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Payment");
@@ -124,6 +126,7 @@ public class ViewPaymentActivity extends AppCompatActivity {
                     PaymentRAdapter paymentRAdapter = new PaymentRAdapter(ViewPaymentActivity.this,arrayList);
                     Log.e("array size",arrayList.size()+ "");
                     recyclerView.setAdapter(paymentRAdapter);
+                    Dialog.closeDialog();
                     try {
 
                         if (IsRecieved)
@@ -146,7 +149,7 @@ public class ViewPaymentActivity extends AppCompatActivity {
                     }
                 } else {
 //                    dialog.cancel();
-
+                    Dialog.closeDialog();
 
                 }
 
