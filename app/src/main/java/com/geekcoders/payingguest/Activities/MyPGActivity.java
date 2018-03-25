@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -179,8 +180,11 @@ public class MyPGActivity extends AppCompatActivity {
     }
     @Override
     public boolean onContextItemSelected(MenuItem item){
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position;
+        PGObject object=arrayList.get(index);
         if(item.getTitle()=="Delete"){
-            deletePg();
+            deletePg(object.getObjectId());
         }
 //        else if(item.getTitle()=="SMS"){
 //            Toast.makeText(getApplicationContext(),"sending sms code",Toast.LENGTH_LONG).show();
@@ -191,12 +195,12 @@ public class MyPGActivity extends AppCompatActivity {
         return true;
     }
 
-    public void deletePg() {
+    public void deletePg(String id) {
 
         Dialog.showDialog(MyPGActivity.this);
 
         final ParseQuery<ParseObject> query = ParseQuery.getQuery("PGDetail");
-        query.whereEqualTo("objectId", "");
+        query.whereEqualTo("objectId", id);
         query.getFirstInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(final ParseObject object, ParseException e) {
