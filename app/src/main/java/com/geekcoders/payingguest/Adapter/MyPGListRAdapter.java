@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.geekcoders.payingguest.Activities.PgDetailActivity;
 import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.R;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  * Created by raj15 on 25-Mar-18.
  */
 
-public class MyPGListRAdapter extends RecyclerView.Adapter<MyPGListRAdapter.MyViewHolder> {
+public class MyPGListRAdapter extends RecyclerSwipeAdapter<MyPGListRAdapter.MyViewHolder> {
 
 
     private final Context context;
@@ -69,6 +70,11 @@ public class MyPGListRAdapter extends RecyclerView.Adapter<MyPGListRAdapter.MyVi
     @Override
     public int getItemCount() {
         return arrayList.size();
+    }
+
+    @Override
+    public int getSwipeLayoutResourceId(int position) {
+        return 0;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
