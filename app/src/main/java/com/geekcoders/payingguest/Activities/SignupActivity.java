@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.geekcoders.payingguest.Objects.Category;
 import com.geekcoders.payingguest.R;
+import com.geekcoders.payingguest.Utils.Dialog;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -87,6 +88,7 @@ public class SignupActivity extends AppCompatActivity {
 
     public void Signup(String name, final String email, String password, String number, String city) {
 
+        Dialog.showDialog(SignupActivity.this);
 
         final ParseUser user = new ParseUser();
         user.setUsername(email);
@@ -115,9 +117,11 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         });
+        Dialog.closeDialog();
     }
 
     public void setSpinner(ArrayList<Category> cityList) {
+        Dialog.showDialog(SignupActivity.this);
         try {
             ArrayList<String> cityList1 = new ArrayList<>();
             if (cityList.size() > 0) {
@@ -134,10 +138,13 @@ public class SignupActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Dialog.closeDialog();
     }
 
 
     public void getCityList() {
+        //Dialog.showDialog(SignupActivity.this);
         final ArrayList<Category> catList = new ArrayList<>();
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Location");
         bandQuery.findInBackground(new FindCallback<ParseObject>() {
@@ -160,7 +167,6 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         });
-
-
+        Dialog.closeDialog();
     }
 }

@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.geekcoders.payingguest.Objects.Category;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.geekcoders.payingguest.Utils.Dialog;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -73,6 +74,8 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
 
     public void CreatePostOnServer(String imagePath) throws Exception {
 
+        Dialog.showDialog(AddPgActivity.this);
+
         BitmapDrawable drawable = (BitmapDrawable) imgPG.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         imageBit=bitmap;
@@ -105,10 +108,11 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
                         //loading.cancel();
                         Toast.makeText(AddPgActivity.this, "Successfully added", Toast.LENGTH_LONG).show();
                         finish();
-
+                        Dialog.closeDialog();
                 } else
 
                 {
+                    Dialog.closeDialog();
 //                loading.cancel();
                     Toast.makeText(AddPgActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -119,6 +123,7 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
 
     public void UploadImageForPost() {
 
+        Dialog.showDialog(AddPgActivity.this);
         if (IsLogoUploaded) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         Bitmap bitmap = imageBit;
@@ -154,7 +159,10 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
 
         );
 
+        Dialog.closeDialog();
+
     } else {
+            Dialog.closeDialog();
 
             try {
                 CreatePostOnServer("null");
@@ -166,6 +174,7 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void CategoryList() {
+        Dialog.showDialog(AddPgActivity.this);
         final ArrayList<Category> catList = new ArrayList<>();
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Category");
         bandQuery.findInBackground(new FindCallback<ParseObject>() {
@@ -187,7 +196,10 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
                     ArrayAdapter arrayAdapter = new ArrayAdapter(AddPgActivity.this, android.R.layout.simple_list_item_1, catList);
                     spinnerCategory.setAdapter(arrayAdapter);
 
-
+                    Dialog.closeDialog();
+                }
+                else {
+                    Dialog.closeDialog();
                 }
             }
         });
@@ -196,6 +208,7 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void CityList() {
+        //Dialog.showDialog(AddPgActivity.this);
         final ArrayList<Category> catList = new ArrayList<>();
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Location");
         bandQuery.findInBackground(new FindCallback<ParseObject>() {
@@ -215,12 +228,10 @@ public class AddPgActivity extends AppCompatActivity implements View.OnClickList
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(AddPgActivity.this, android.R.layout.simple_list_item_1, catList);
                     spinnerCity.setAdapter(arrayAdapter);
-
                 }
             }
         });
-
-
+        Dialog.closeDialog();
     }
 
     public boolean validate() {

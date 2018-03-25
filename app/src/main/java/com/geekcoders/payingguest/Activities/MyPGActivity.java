@@ -53,11 +53,11 @@ public class MyPGActivity extends AppCompatActivity {
 
 
     public void PgList() {
+        Dialog.showDialog(MyPGActivity.this);
         arrayList = new ArrayList<>();
 
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("PGDetail");
 
-        Dialog.showDialog(MyPGActivity.this);
 
 //
 //        if (band_type == 0) {

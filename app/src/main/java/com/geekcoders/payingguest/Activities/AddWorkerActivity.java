@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.geekcoders.payingguest.Objects.Category;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.geekcoders.payingguest.Utils.Dialog;
 import com.parse.FindCallback;
 import com.parse.ParseACL;
 import com.parse.ParseException;
@@ -77,6 +78,7 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void setSpinner(ArrayList<Category> cityList) {
+        Dialog.showDialog(AddWorkerActivity.this);
         try {
             ArrayList<String> cityList1 = new ArrayList<>();
             if (cityList.size() > 0) {
@@ -93,9 +95,12 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Dialog.closeDialog();
     }
 
     public void getCityList() {
+        //Dialog.showDialog(AddWorkerActivity.this);
         final ArrayList<Category> catList = new ArrayList<>();
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Location");
         bandQuery.findInBackground(new FindCallback<ParseObject>() {
@@ -118,7 +123,7 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
                 }
             }
         });
-
+        Dialog.closeDialog();
 
     }
 
@@ -238,13 +243,12 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
     public void data()
     {
 
-
-
     }
 
 
     public void CreatePostOnServer(String imagePath) throws Exception {
 
+        Dialog.showDialog(AddWorkerActivity.this);
         BitmapDrawable drawable = (BitmapDrawable) imgWorker.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         imageBit=bitmap;
@@ -278,8 +282,7 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
                 // Handle success or failure here ...
 
                 if (e == null) {
-
-
+                    Dialog.closeDialog();
                     //loading.cancel();
                     Toast.makeText(AddWorkerActivity.this, "Successfully added", Toast.LENGTH_LONG).show();
                     finish();
@@ -287,6 +290,7 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
                 } else
 
                 {
+                    Dialog.closeDialog();
 //                loading.cancel();
                     Toast.makeText(AddWorkerActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -294,9 +298,8 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
         }));
     }
 
-
     public void UploadImageForPost() {
-
+        Dialog.showDialog(AddWorkerActivity.this);
         if (IsLogoUploaded) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             Bitmap bitmap = imageBit;
@@ -331,8 +334,10 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
                                        }
 
             );
+            Dialog.closeDialog();
 
         } else {
+            Dialog.closeDialog();
 
             try {
                 CreatePostOnServer("null");
@@ -342,7 +347,5 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
 
         }
     }
-
-
 
 }

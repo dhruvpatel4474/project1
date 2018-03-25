@@ -58,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
                     Login(username, password);
-                    Dialog.showDialog(LoginActivity.this);
                 }
             }
         });
@@ -83,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     public void Login(final String username, String password){
+        Dialog.showDialog(LoginActivity.this);
+
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
@@ -106,7 +107,6 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                     startActivity(intent);
                     finish();
-
                 } else {
                     Dialog.closeDialog();
                     String message= e.getLocalizedMessage();
