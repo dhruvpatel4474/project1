@@ -34,9 +34,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.geekcoders.payingguest.Adapter.CategoryAdapter;
 import com.geekcoders.payingguest.Adapter.CategoryRAdapter;
+import com.geekcoders.payingguest.Adapter.PGListRAdapter;
 import com.geekcoders.payingguest.Objects.Category;
+import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
 import com.parse.FindCallback;
@@ -54,19 +61,21 @@ import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import ss.com.bannerslider.banners.Banner;
 import ss.com.bannerslider.banners.DrawableBanner;
 import ss.com.bannerslider.banners.RemoteBanner;
+import ss.com.bannerslider.events.OnBannerClickListener;
 import ss.com.bannerslider.views.BannerSlider;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
     LinearLayout lineLayCategory;
     private LinearLayout lineLayViewPayment, lineLayAddPG, lineLayViewHistory;
@@ -83,6 +92,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView imgAddCat;
     private LinearLayout lineLayMyPG,lineLayAddWorker,lineLayViewWorker;
     private ParseFile parseFile;
+    private SliderLayout mDemoSlider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +140,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //        push.setMessage("test");
 //        push.sendInBackground();
 
-
+            PgList();
 
 //            BannerSlider bannerSlider = (BannerSlider) findViewById(R.id.banner_slider1);
 //            List<Banner> banners=new ArrayList<>();
@@ -138,10 +148,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //            banners.add(new RemoteBanner("http://akomgreen.com/wp-content/themes/Divi/images/logo.png"));
 //            banners.add(new RemoteBanner("http://akomgreen.com/wp-content/themes/Divi/images/logo.png"));
 //            banners.add(new RemoteBanner("http://akomgreen.com/wp-content/themes/Divi/images/logo.png"));
+//            banners.add(new RemoteBanner("http://akomgreen.com/wp-content/themes/Divi/images/logo.png"));
 //            //add banner using resource drawable
-//           // banners.add(new DrawableBanner(R.drawable.yourDrawable));
+//           // banners.add(new DrawableBanner(R.drawable.cat_icon));
 //            bannerSlider.setBanners(banners);
-
+//
+//          //
+//            bannerSlider.setOnBannerClickListener(new OnBannerClickListener() {
+//                @Override
+//                public void onClick(int position) {
+//                    Toast.makeText(HomeActivity.this, "Banner with position " + String.valueOf(position) + " clicked!", Toast.LENGTH_SHORT).show();
+//                }
+//            });
 
 
         }
@@ -615,9 +633,169 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    public void onSliderClick(BaseSliderView slider) {
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+
+    public void slider(ArrayList<PGObject> arrayList1){
+
+        mDemoSlider = (SliderLayout)findViewById(R.id.slider);
+
+
+        HashMap<String,String> url_maps = new HashMap<String, String>();
+        url_maps.put(arrayList1.get(0).getName(), arrayList1.get(0).getImage());
+        url_maps.put(arrayList1.get(1).getName(), arrayList1.get(1).getImage());
+        url_maps.put(arrayList1.get(2).getName(), arrayList1.get(2).getImage());
+        url_maps.put(arrayList1.get(3).getName(), arrayList1.get(3).getImage());
+        url_maps.put(arrayList1.get(4).getName(), arrayList1.get(4).getImage());
+
+//        HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
+//        file_maps.put("Hannibal",R.drawable.hannibal);
+//        file_maps.put("Big Bang Theory",R.drawable.bigbang);
+//        file_maps.put("House of Cards",R.drawable.house);
+//        file_maps.put("Game of Thrones", R.drawable.game_of_thrones);
+
+        for(String name : url_maps.keySet()){
+            TextSliderView textSliderView = new TextSliderView(this);
+            // initialize a SliderLayout
+            textSliderView
+                    .description(name)
+                    .image(url_maps.get(name))
+                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setOnSliderClickListener(this);
+
+            //add your extra information
+            textSliderView.bundle(new Bundle());
+            textSliderView.getBundle()
+                    .putString("extra",name);
+
+            mDemoSlider.addSlider(textSliderView);
+        }
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+        mDemoSlider.setDuration(4000);
+        mDemoSlider.addOnPageChangeListener(this);
+//        ListView l = (ListView)findViewById(R.id.transformers);
+//        l.setAdapter(new TransformerAdapter(this));
+//        l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                mDemoSlider.setPresetTransformer(((TextView) view).getText().toString());
+//                Toast.makeText(MainActivity.this, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+
+    }
+
+
+    public void PgList() {
+         final ArrayList<PGObject> arrayList1 = new ArrayList<>();
+
+        ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("PGDetail");
+        com.geekcoders.payingguest.Utils.Dialog.showDialog(HomeActivity.this);
+        bandQuery.orderByDescending("createdAt");
+        bandQuery.whereNotEqualTo("image","null");
+        bandQuery.setLimit(5);
+        bandQuery.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+
+                if (e == null && objects != null && objects.size() > 0) {
+
+                    for (int i = 0; i < objects.size(); i++) {
+
+                        final PGObject obj = new PGObject();
+                        String title = objects.get(i).getString("title");
+                        String objectId = objects.get(i).getObjectId();
+                        int price = objects.get(i).getInt("price");
+                        String city = objects.get(i).getString("city");
+                        String description = objects.get(i).getString("description");
+                        String userId = objects.get(i).getString("userId");
+                        String address = objects.get(i).getString("address");
+                        String number = objects.get(i).getString("number");
+                        String userName = objects.get(i).getString("userName");
+                        String categoryId = objects.get(i).getString("categoryId");
+                        String image = objects.get(i).getString("image");
+                        Date date = objects.get(i).getCreatedAt();
+                        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                        String fdate = df.format(date);
+                        obj.setDate(fdate);
+                        obj.setImage(image);
+                        obj.setTitle(title);
+                        obj.setObjectId(objectId);
+                        obj.setPrice(price);
+                        obj.setCity(city);
+                        obj.setDescription(description);
+                        obj.setUserId(userId);
+                        obj.setAddress(address);
+                        obj.setNumber(number);
+                        obj.setUsername(userName);
+                        obj.setCategoryId(categoryId);
 
 
 
+                        // FetchListOfVenuesForSelectedBand(objects.get(i));
+                        //ImagesBand(objects.get(i));
 
 
+//                        ParseQuery<ParseObject> imgQuery = ParseQuery.getQuery("Images");
+//                        imgQuery.whereEqualTo("sourceId", objects.get(i).getObjectId());
+//                        imgQuery.findInBackground(new FindCallback<ParseObject>() {
+//                            @Override
+//                            public void done(List<ParseObject> objects, ParseException e) {
+//                                if (e == null && objects.size() != 0) {
+//                                    final ParseObject object = objects.get(0);
+//                                    final ParseFile fileObject = (ParseFile) object.get("file");
+//                                    fileObject.getDataInBackground(new GetDataCallback() {
+//                                        @Override
+//                                        public void done(byte[] data, ParseException e) {
+//                                            ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(data);
+//                                            Bitmap bitmap = BitmapFactory.decodeStream(arrayInputStream);
+//                                           // objrcband.setImage(bitmap);
+//                                            obj.setImage(bitmap);
+//                                            pgListRAdapter.notifyDataSetChanged();
+//                                        }
+//                                    });
+//                                }
+//                            }
+//                        });
+                        arrayList1.add(obj);
+
+                    }
+
+                    slider(arrayList1);
+//                    adapter = new PGListAdapter(PGListActivity.this, arrayList);
+
+
+                    com.geekcoders.payingguest.Utils.Dialog.closeDialog();
+
+                } else {
+                    com.geekcoders.payingguest.Utils.Dialog.closeDialog();
+
+
+                }
+
+
+            }
+        });
+
+    }
 }

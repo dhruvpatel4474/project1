@@ -48,7 +48,7 @@ public class CategoryAdapter extends BaseAdapter {
         TextView name=(TextView)view1.findViewById(R.id.category_row_name);
         ImageView img = (ImageView)view1.findViewById(R.id.category_row_img);
         name.setText(arrayList.get(i).getName());
-        Picasso.get()
+        Picasso.with(mcontext)
                 .load(arrayList.get(i).getImg())
                 .placeholder(R.drawable.place_holder)
                 .error(R.drawable.place_holder)
