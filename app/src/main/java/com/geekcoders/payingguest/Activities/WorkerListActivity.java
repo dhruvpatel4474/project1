@@ -197,7 +197,7 @@ title.setText(obj.getTitle());
 price.setText("₹"+String.valueOf(obj.getPrice()));
 woek.setText(obj.getWorkType());
 city.setText(obj.getCity());
-                 Picasso.get()
+                 Picasso.with(WorkerListActivity.this)
                          .load(arrayList.get(position).getImage())
                          .placeholder(R.drawable.place_holder)
                          .error(R.drawable.place_holder)

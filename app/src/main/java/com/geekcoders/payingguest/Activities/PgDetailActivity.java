@@ -194,7 +194,7 @@ public class PgDetailActivity extends AppCompatActivity {
                 pgPrice.setText("₹"+String.valueOf(price));
                 pgDescription.setText(description);
                 pgAddress.setText(address);
-                Picasso.get()
+                Picasso.with(PgDetailActivity.this)
                         .load(image)
                         .placeholder(R.drawable.place_holder)
                         .error(R.drawable.place_holder)

@@ -5,11 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.geekcoders.payingguest.Activities.HomeActivity">
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
 
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        />
+    <ss.com.bannerslider.views.BannerSlider
+        android:id="@+id/banner_slider1"
+        app:interval="5000"
+        app:loopSlides="true"
+        app:animateIndicators="true"
+        app:indicatorSize="12dp"
+        app:defaultBanner="1"
+        android:visibility="gone"
+        app:defaultIndicators="circle"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:layout_below="@+id/slider">
 
         //Main Layout
 
@@ -19,17 +37,7 @@
             android:orientation="vertical"
             android:padding="@dimen/padding5">
 
-            <ss.com.bannerslider.views.BannerSlider
-                android:id="@+id/banner_slider1"
-                android:layout_width="match_parent"
-                app:interval="5000"
-                app:defaultIndicators="circle"
-                app:loopSlides="true"
-                app:defaultBanner="1"
-                app:animateIndicators="true"
-                app:indicatorSize="12dp"
-                android:layout_height="wrap_content"
-                />
+
 
             //Vertical Layout
 

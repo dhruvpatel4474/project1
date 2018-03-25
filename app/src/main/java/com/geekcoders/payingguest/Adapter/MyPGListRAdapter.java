@@ -43,7 +43,7 @@ public class MyPGListRAdapter extends RecyclerSwipeAdapter<MyPGListRAdapter.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.name.setText(arrayList.get(position).getName());
-        Picasso.get()
+        Picasso.with(context)
                 .load(arrayList.get(position).getImage())
                 .placeholder(R.drawable.place_holder)
                 .error(R.drawable.place_holder)

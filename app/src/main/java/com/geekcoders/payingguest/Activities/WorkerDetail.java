@@ -61,7 +61,7 @@ public class WorkerDetail extends AppCompatActivity {
         disc.setText(workerObj.getDescription());
 
         //btime.setText(object.getAuc_EndingDate().toString());
-        Picasso.get()
+        Picasso.with(WorkerDetail.this)
                 .load(workerObj.getImage())
                 .placeholder(R.drawable.place_holder)
                 .error(R.drawable.place_holder)
