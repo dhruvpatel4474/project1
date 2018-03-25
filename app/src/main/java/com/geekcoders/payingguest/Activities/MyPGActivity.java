@@ -5,7 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.geekcoders.payingguest.Adapter.MyPGListRAdapter;
 import com.geekcoders.payingguest.Adapter.PGListAdapter;
@@ -47,6 +51,8 @@ public class MyPGActivity extends AppCompatActivity {
         Constant.mcontext=MyPGActivity.this;
         Initiliztion();
         PgList();
+
+        registerForContextMenu(recyclerView);
     }
 
     private void Initiliztion() {
@@ -161,6 +167,28 @@ public class MyPGActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        //menu.setHeaderTitle("Select The Action");
+        menu.add(0, v.getId(), 0, "Delete");//groupId, itemId, order, title
+       // menu.add(0, v.getId(), 0, "SMS");
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+        if(item.getTitle()=="Delete"){
+            deletePg();
+        }
+//        else if(item.getTitle()=="SMS"){
+//            Toast.makeText(getApplicationContext(),"sending sms code",Toast.LENGTH_LONG).show();
+//        }
+        else{
+            return false;
+        }
+        return true;
     }
 
     public void deletePg() {
