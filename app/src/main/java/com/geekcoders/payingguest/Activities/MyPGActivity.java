@@ -52,7 +52,7 @@ public class MyPGActivity extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         tvActionBar = (TextView)findViewById(R.id.tv_actionBar);
-        Fonts.setSemiBoldFont(MyPGActivity.this,tvActionBar);
+        Fonts.setRegularFont(MyPGActivity.this,tvActionBar);
     }
 
 
