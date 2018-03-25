@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -49,16 +51,17 @@ public class PgDetailActivity extends AppCompatActivity {
     private PGObject object;
    int finalPrice;
     String recieverId;
-    private LinearLayout lineLayPay;
+
     private LinearLayout lineLayAddComment;
     private RecyclerView recyclerView;
     private ImageView pgImg;
     private TextView pgName,pgCity,pgPrice,pgDate;
     private TextView pgDescription;
     private TextView pgAddress;
-    private LinearLayout lineLayCall;
+    private Button lineLayCall,lineLayPay;
     private String number;
     private TextView pgNumber;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
 
 
     @Override
@@ -140,14 +143,19 @@ public class PgDetailActivity extends AppCompatActivity {
         pgDate = (TextView)findViewById(R.id.tv_date_pgdetail);
         pgDescription = (TextView)findViewById(R.id.tv_description_pgdetail);
         addCommentEdt = (EditText) findViewById(R.id.addCommentEdt);
-        lineLayCall = (LinearLayout)findViewById(R.id.lineLay_call);
+        lineLayCall = (Button)findViewById(R.id.lineLay_call);
         lineLayAddComment = (LinearLayout) findViewById(R.id.lineLay_addcomment);
-        lineLayPay = (LinearLayout)findViewById(R.id.lineLay_pay);
+        lineLayPay = (Button)findViewById(R.id.lineLay_pay);
         pgAddress = (TextView)findViewById(R.id.tv_address_pgdetail);
-        pgNumber = (TextView)findViewById(R.id.tv_number_pgdetail);
+
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
+
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapse_toolbar_w);
+        collapsingToolbarLayout.setTitle(" ");
+
+        collapsingToolbarLayout.setContentScrimColor(ContextCompat.getColor(PgDetailActivity.this, R.color.colorPrimary));
 
     }
 
@@ -184,7 +192,7 @@ public class PgDetailActivity extends AppCompatActivity {
                 pgName.setText(title);
                 pgCity.setText(city);
                 pgDate.setText(fdate);
-                pgPrice.setText(String.valueOf(price));
+                pgPrice.setText("₹"+String.valueOf(price));
                 pgDescription.setText(description);
                 pgAddress.setText(address);
                 Picasso.get()
