@@ -63,7 +63,6 @@
                         android:id="@+id/edtCatName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Category Name"
                         android:inputType="textPersonName"
                         android:maxLength="50"
                         android:padding="@dimen/padding5"
