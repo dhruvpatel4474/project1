@@ -71,6 +71,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private int PICK_IMAGE_REQUEST = 1;
     private boolean IsLogoUploaded = false;
     private ImageView imgAddCat;
+    private LinearLayout lineLayMyPG;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,11 +129,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         lineLayAddPG = (LinearLayout) findViewById(R.id.lineLay_addpg);
         lineLayViewHistory = (LinearLayout) findViewById(R.id.lineLay_history);
         lineLayAddInfo = (LinearLayout) findViewById(R.id.lineLay_addinfo);
+        lineLayMyPG = (LinearLayout)findViewById(R.id.lineLay_myPg);
         lineLayCategory.setOnClickListener(this);
         lineLayAddPG.setOnClickListener(this);
         lineLayViewPayment.setOnClickListener(this);
         lineLayViewHistory.setOnClickListener(this);
         lineLayAddInfo.setOnClickListener(this);
+        lineLayMyPG.setOnClickListener(this);
     }
 
     @Override
@@ -154,6 +157,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.lineLay_addinfo:
                 showAddOptionDialog();
+                break;
+            case R.id.lineLay_myPg :
+                startActivity(new Intent(HomeActivity.this,MyPGActivity.class));
                 break;
         }
     }
