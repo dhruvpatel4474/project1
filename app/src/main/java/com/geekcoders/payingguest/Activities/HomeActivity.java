@@ -381,20 +381,24 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         lineLayAddCat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isCategory)
-                {
-                    //Add category call
-                    UploadImageForPost(catName,imgAddCat);
+                if (!catName.getText().toString().trim().equals("")) {
+                    if (isCategory) {
+                        //Add category call
+                        UploadImageForPost(catName, imgAddCat);
 
 
-                }
-                else {
-                    //Add City Call
-                    try {
-                        AddCityServer(catName);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } else {
+                        //Add City Call
+                        try {
+                            AddCityServer(catName);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
+                }
+                else
+                {
+                    catName.setError("Please fill this field");
                 }
             }
         });
@@ -525,7 +529,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         ParseACL acl = new ParseACL();
         acl.setPublicReadAccess(true);
         acl.setPublicWriteAccess(true);
-       ParseObject objCat = new ParseObject("Category");
+        ParseObject objCat = new ParseObject("Category");
         objCat.put("title", editText.getText().toString());
 
         objCat.put("image", imagePath);
