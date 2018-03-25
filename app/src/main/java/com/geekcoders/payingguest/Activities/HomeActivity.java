@@ -161,7 +161,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void showAddOptionDialog() {
         dialogAddOption = new Dialog(this);
         dialogAddOption.onAttachedToWindow();
-        dialogAddOption.setTitle("Your NearBy Location");
+        dialogAddOption.setTitle("Select Option");
         dialogAddOption.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogAddOption.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogAddOption.setContentView(R.layout.dialog_option);
@@ -216,7 +216,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void showCategoryDialog() {
         dialogCategory = new Dialog(this);
         dialogCategory.onAttachedToWindow();
-        dialogCategory.setTitle("Your NearBy Location");
+        dialogCategory.setTitle("Show Category");
         dialogCategory.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogCategory.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogCategory.setContentView(R.layout.dialog_categorylist);
@@ -255,7 +255,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void showAddCategoryDialog(final boolean isCategory) {
         dialogAddCategory = new Dialog(this);
         dialogAddCategory.onAttachedToWindow();
-        dialogAddCategory.setTitle("Your NearBy Location");
+        dialogAddCategory.setTitle("Add Category");
         dialogAddCategory.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogAddCategory.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialogAddCategory.setContentView(R.layout.dialog_add_cat_city);
