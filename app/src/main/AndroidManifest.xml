@@ -130,7 +130,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Activities.MyPGActivity"></activity>
+        <activity android:name=".Activities.MyPGActivity" />
+        <activity android:name=".Activities.AddWorkerActivity"></activity>
     </application>
 
 </manifest>
