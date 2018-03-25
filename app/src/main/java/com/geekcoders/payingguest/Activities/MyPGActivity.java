@@ -65,7 +65,7 @@ public class MyPGActivity extends AppCompatActivity {
 //        } else {
 //            bandQuery.whereContainedIn("bandMembers", Collections.singletonList(ParseUser.getCurrentUser()));
 //        }
-        bandQuery.whereEqualTo("categoryId", Constant.getValueForKeyString("categoryId"));
+        bandQuery.whereEqualTo("userId", Constant.getValueForKeyString("userId"));
         bandQuery.orderByDescending("createdAt");
         bandQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
