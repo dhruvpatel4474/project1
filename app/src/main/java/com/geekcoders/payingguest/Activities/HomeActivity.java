@@ -100,9 +100,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
         Parse.initialize(HomeActivity.this);
-
         intialize();
-
         Constant.mcontext = HomeActivity.this;
         if (!Constant.getValueForKeyBoolean("isLogin")) {
             Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
