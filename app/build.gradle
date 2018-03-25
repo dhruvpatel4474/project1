@@ -37,4 +37,6 @@ dependencies {
     //noinspection GradleCompatible
     compile 'com.google.firebase:firebase-messaging:10.0.1'
     compile 'com.parse.bolts:bolts-android:1.+'
+    compile 'com.ss.bannerslider:bannerslider:1.8.0'
+
 }
