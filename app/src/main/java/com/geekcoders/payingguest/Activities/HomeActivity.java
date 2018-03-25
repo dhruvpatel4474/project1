@@ -90,10 +90,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private int PICK_IMAGE_REQUEST = 1;
     private boolean IsLogoUploaded = false;
     private ImageView imgAddCat;
-    private LinearLayout lineLayMyPG,lineLayAddWorker,lineLayViewWorker;
+    private LinearLayout lineLayMyPG, lineLayAddWorker, lineLayViewWorker;
     private ParseFile parseFile;
     private SliderLayout mDemoSlider;
     private ImageView logoutBtn;
+    private LinearLayout adminLiner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +108,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
+        } else if (Constant.getValueForKeyBoolean("isAdmin")) {
+
+            adminLiner.setVisibility(View.VISIBLE);
+
         } else {
+            adminLiner.setVisibility(View.GONE);
 //            ParseUser user = ParseUser.getCurrentUser();
 //            Log.d("log", "d");
 //        if (user != null) {
@@ -170,10 +176,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         lineLayAddPG = (LinearLayout) findViewById(R.id.lineLay_addpg);
         lineLayViewHistory = (LinearLayout) findViewById(R.id.lineLay_history);
         lineLayAddInfo = (LinearLayout) findViewById(R.id.lineLay_addinfo);
-        lineLayMyPG = (LinearLayout)findViewById(R.id.lineLay_myPg);
-        lineLayAddWorker = (LinearLayout)findViewById(R.id.lineLay_addworker);
-        lineLayViewWorker = (LinearLayout)findViewById(R.id.lineLay_viewWorker);
-        logoutBtn = (ImageView)findViewById(R.id.logoutbtn);
+        lineLayMyPG = (LinearLayout) findViewById(R.id.lineLay_myPg);
+        lineLayAddWorker = (LinearLayout) findViewById(R.id.lineLay_addworker);
+        lineLayViewWorker = (LinearLayout) findViewById(R.id.lineLay_viewWorker);
+        adminLiner = (LinearLayout) findViewById(R.id.adminLiner);
+        logoutBtn = (ImageView) findViewById(R.id.logoutbtn);
 
         lineLayCategory.setOnClickListener(this);
         lineLayAddPG.setOnClickListener(this);
@@ -206,20 +213,20 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.lineLay_addinfo:
                 showAddOptionDialog();
                 break;
-            case R.id.lineLay_myPg :
-                startActivity(new Intent(HomeActivity.this,MyPGActivity.class));
+            case R.id.lineLay_myPg:
+                startActivity(new Intent(HomeActivity.this, MyPGActivity.class));
                 break;
-            case R.id.lineLay_addworker :
-                startActivity(new Intent(HomeActivity.this,AddWorkerActivity.class));
+            case R.id.lineLay_addworker:
+                startActivity(new Intent(HomeActivity.this, AddWorkerActivity.class));
                 break;
-            case R.id.lineLay_viewWorker :
-                startActivity(new Intent(HomeActivity.this,WorkerListActivity.class));
+            case R.id.lineLay_viewWorker:
+                startActivity(new Intent(HomeActivity.this, WorkerListActivity.class));
                 break;
 
-            case R.id.logoutbtn :
-                Constant.setValueAndKeyBoolean("isLogin",false);
+            case R.id.logoutbtn:
+                Constant.setValueAndKeyBoolean("isLogin", false);
                 ParseUser.logOut();
-                Intent intent =new Intent(HomeActivity.this,LoginActivity.class);
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finishAffinity();
                 break;
@@ -342,11 +349,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         window.setAttributes(wlp);
 
         ImageView imgClose = (ImageView) dialogAddCategory.findViewById(R.id.img_close);
-        imgAddCat = (ImageView)dialogAddCategory.findViewById(R.id.img_addCategory);
-        final EditText catName = (EditText)dialogAddCategory.findViewById(R.id.edtCatName);
-        LinearLayout lineLayAddCat = (LinearLayout)dialogAddCategory.findViewById(R.id.lineLay_addCategory);
-        TextView tvAddCategory = (TextView)dialogAddCategory.findViewById(R.id.tv_addCategory);
-        LinearLayout lineLayImage = (LinearLayout)dialogAddCategory.findViewById(R.id.lineLay_image);
+        imgAddCat = (ImageView) dialogAddCategory.findViewById(R.id.img_addCategory);
+        final EditText catName = (EditText) dialogAddCategory.findViewById(R.id.edtCatName);
+        LinearLayout lineLayAddCat = (LinearLayout) dialogAddCategory.findViewById(R.id.lineLay_addCategory);
+        TextView tvAddCategory = (TextView) dialogAddCategory.findViewById(R.id.tv_addCategory);
+        LinearLayout lineLayImage = (LinearLayout) dialogAddCategory.findViewById(R.id.lineLay_image);
         imgClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -358,21 +365,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         imgAddCat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isCategory)
-                {
+                if (isCategory) {
                     readImage();
                 }
             }
         });
 
-        if (isCategory)
-        {
+        if (isCategory) {
             imgAddCat.setVisibility(View.VISIBLE);
             lineLayImage.setVisibility(View.VISIBLE);
             tvAddCategory.setText("Add Category");
             catName.setHint("Category Name");
-        }
-        else {
+        } else {
             imgAddCat.setVisibility(View.GONE);
             lineLayImage.setVisibility(View.GONE);
             tvAddCategory.setText("Add City");
@@ -395,9 +399,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             e.printStackTrace();
                         }
                     }
-                }
-                else
-                {
+                } else {
                     catName.setError("Please fill this field");
                 }
             }
@@ -467,10 +469,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void readImage()
-    {
-        if (isStoragePermissionGranted())
-        {
+    public void readImage() {
+        if (isStoragePermissionGranted()) {
             Intent intent = new Intent();
             // Show only images, no videos or anything else
             intent.setType("image/*");
@@ -480,21 +480,20 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public  boolean isStoragePermissionGranted() {
+    public boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
-                Log.v(TAG,"Permission is granted");
+                Log.v(TAG, "Permission is granted");
                 return true;
             } else {
 
-                Log.v(TAG,"Permission is revoked");
+                Log.v(TAG, "Permission is revoked");
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                 return false;
             }
-        }
-        else { //permission is automatically granted on sdk<23 upon installation
-            Log.v(TAG,"Permission is granted");
+        } else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG, "Permission is granted");
             return true;
         }
     }
@@ -508,8 +507,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                IsLogoUploaded=true;
-                imageBit=bitmap;
+                IsLogoUploaded = true;
+                imageBit = bitmap;
                 // Log.d(TAG, String.valueOf(bitmap));
                 imgAddCat.setImageBitmap(bitmap);
             } catch (IOException e) {
@@ -519,12 +518,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-    public void CreatePostOnServer(String imagePath,EditText editText,ImageView imageView) throws Exception {
+    public void CreatePostOnServer(String imagePath, EditText editText, ImageView imageView) throws Exception {
 
         BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
-        imageBit=bitmap;
+        imageBit = bitmap;
 
         ParseACL acl = new ParseACL();
         acl.setPublicReadAccess(true);
@@ -543,8 +541,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     //loading.cancel();
                     Toast.makeText(HomeActivity.this, "Successfully added", Toast.LENGTH_LONG).show();
-                   // finish();
-                    if (dialogAddCategory.isShowing()){
+                    // finish();
+                    if (dialogAddCategory.isShowing()) {
                         dialogAddCategory.dismiss();
                     }
 
@@ -580,7 +578,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                            public void done(ParseException e) {
                                                if (e == null) {
                                                    try {
-                                                       CreatePostOnServer(parseFile.getUrl(),editText,imageView);
+                                                       CreatePostOnServer(parseFile.getUrl(), editText, imageView);
                                                    } catch (Exception ex) {
                                                        ex.printStackTrace();
                                                    }
@@ -599,7 +597,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         } else {
 
             try {
-                CreatePostOnServer("null",editText,imageView);
+                CreatePostOnServer("null", editText, imageView);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -608,15 +606,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
-
     public void AddCityServer(final EditText editText) throws Exception {
 
         ParseACL acl = new ParseACL();
         acl.setPublicReadAccess(true);
         acl.setPublicWriteAccess(true);
-       ParseObject objCity = new ParseObject("Location");
+        ParseObject objCity = new ParseObject("Location");
         objCity.put("title", editText.getText().toString());
         objCity.setACL(acl);
         objCity.saveInBackground((new SaveCallback() {
@@ -630,7 +625,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(HomeActivity.this, "Successfully added", Toast.LENGTH_LONG).show();
                     editText.setText("");
                     //finish();
-                    if (dialogAddCategory.isShowing()){
+                    if (dialogAddCategory.isShowing()) {
                         dialogAddCategory.dismiss();
                     }
 
@@ -666,12 +661,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void slider(ArrayList<PGObject> arrayList1){
+    public void slider(ArrayList<PGObject> arrayList1) {
 
-        mDemoSlider = (SliderLayout)findViewById(R.id.slider);
+        mDemoSlider = (SliderLayout) findViewById(R.id.slider);
 
 
-        HashMap<String,String> url_maps = new HashMap<String, String>();
+        HashMap<String, String> url_maps = new HashMap<String, String>();
         url_maps.put(arrayList1.get(0).getName(), arrayList1.get(0).getImage());
         url_maps.put(arrayList1.get(1).getName(), arrayList1.get(1).getImage());
         url_maps.put(arrayList1.get(2).getName(), arrayList1.get(2).getImage());
@@ -684,7 +679,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //        file_maps.put("House of Cards",R.drawable.house);
 //        file_maps.put("Game of Thrones", R.drawable.game_of_thrones);
 
-        for(String name : url_maps.keySet()){
+        for (String name : url_maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);
             // initialize a SliderLayout
             textSliderView
@@ -696,7 +691,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             //add your extra information
             textSliderView.bundle(new Bundle());
             textSliderView.getBundle()
-                    .putString("extra",name);
+                    .putString("extra", name);
 
             mDemoSlider.addSlider(textSliderView);
         }
@@ -720,12 +715,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void PgList() {
-         final ArrayList<PGObject> arrayList1 = new ArrayList<>();
+        final ArrayList<PGObject> arrayList1 = new ArrayList<>();
 
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("PGDetail");
         com.geekcoders.payingguest.Utils.Dialog.showDialog(HomeActivity.this);
         bandQuery.orderByDescending("createdAt");
-        bandQuery.whereNotEqualTo("image","null");
+        bandQuery.whereNotEqualTo("image", "null");
         bandQuery.setLimit(5);
         bandQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -762,7 +757,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         obj.setNumber(number);
                         obj.setUsername(userName);
                         obj.setCategoryId(categoryId);
-
 
 
                         // FetchListOfVenuesForSelectedBand(objects.get(i));

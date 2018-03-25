@@ -90,10 +90,12 @@ public class LoginActivity extends AppCompatActivity {
                     // Hooray! The user is logged in.
                     String userId=user.getObjectId();
                     String name=user.getString("name");
+                    boolean isAdmin=user.getBoolean("isAdmin");
                     Constant.mcontext=LoginActivity.this;
                     Constant.setValueAndKeyString("userId",userId);
                     Constant.setValueAndKeyString("email",username);
                     Constant.setValueAndKeyString("name",name);
+                    Constant.setValueAndKeyBoolean("isAdmin",isAdmin);
                     Constant.setValueAndKeyBoolean("isLogin",true);
 
 

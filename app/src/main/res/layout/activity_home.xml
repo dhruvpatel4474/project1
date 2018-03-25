@@ -26,14 +26,15 @@
                 android:text="Paying Guest"
                 android:textColor="@color/white"
                 android:textSize="24dp" />
+
             <ImageView
+                android:id="@+id/logoutbtn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/logout"
-                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:id="@+id/logoutbtn"/>
+                android:src="@drawable/logout" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
@@ -52,7 +53,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/toolbar"
         android:fillViewport="true">
 
         //Main Layout
@@ -65,9 +66,9 @@ android:layout_below="@+id/toolbar"
 
             <com.daimajia.slider.library.SliderLayout
                 android:id="@+id/slider"
-                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="200dp"
+                android:layout_marginBottom="10dp" />
             //Vertical Layout
 
             <LinearLayout
@@ -75,9 +76,9 @@ android:layout_below="@+id/toolbar"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingTop="10dp"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
 
                 //Horizontal Layout or Grid
 
@@ -102,8 +103,7 @@ android:layout_below="@+id/toolbar"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
                             android:layout_weight="1"
-                            android:src="@drawable/search_pg_ico"
-                            />
+                            android:src="@drawable/search_pg_ico" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -142,8 +142,7 @@ android:layout_below="@+id/toolbar"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
                             android:layout_weight="1"
-                            android:src="@drawable/credit_card"
-                             />
+                            android:src="@drawable/credit_card" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -171,9 +170,9 @@ android:layout_below="@+id/toolbar"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingTop="10dp"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
 
                 //Horizontal Layout or Grid
 
@@ -198,8 +197,7 @@ android:layout_below="@+id/toolbar"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
                             android:layout_weight="1"
-                            android:src="@drawable/addhouse_ico"
-                             />
+                            android:src="@drawable/addhouse_ico" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -238,8 +236,7 @@ android:layout_below="@+id/toolbar"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
                             android:layout_weight="1"
-                            android:src="@drawable/history_ico"
-                             />
+                            android:src="@drawable/history_ico" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -267,11 +264,12 @@ android:layout_below="@+id/toolbar"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingTop="10dp"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
 
                 //Horizontal Layout or Grid
+
                 <android.support.v7.widget.CardView
                     android:layout_width="150dp"
                     android:layout_height="150dp"
@@ -292,8 +290,7 @@ android:layout_below="@+id/toolbar"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
                             android:layout_weight="1"
-                            android:src="@drawable/worker_ico"
-                             />
+                            android:src="@drawable/worker_ico" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -333,8 +330,7 @@ android:layout_below="@+id/toolbar"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
                             android:layout_weight="1"
-                            android:src="@drawable/my_pg_ico"
-                             />
+                            android:src="@drawable/my_pg_ico" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -358,14 +354,16 @@ android:layout_below="@+id/toolbar"
 
 
             <LinearLayout
+                android:id="@+id/adminLiner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:paddingBottom="10dp">
+                android:paddingTop="10dp"
+                android:visibility="gone">
 
                 //Horizontal Layout or Grid
 
@@ -390,8 +388,7 @@ android:layout_below="@+id/toolbar"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
                             android:layout_weight="1"
-                            android:src="@drawable/addworker_ico"
-                             />
+                            android:src="@drawable/addworker_ico" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -431,8 +428,7 @@ android:layout_below="@+id/toolbar"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
                             android:layout_weight="1"
-                            android:src="@drawable/add_ico"
-                             />
+                            android:src="@drawable/add_ico" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

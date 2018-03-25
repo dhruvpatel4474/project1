@@ -99,6 +99,7 @@ public class SignupActivity extends AppCompatActivity {
         user.put("name", name);
 
         user.put("number", number);
+        user.put("isAdmin", false);
         user.put("city", city);
 
 
