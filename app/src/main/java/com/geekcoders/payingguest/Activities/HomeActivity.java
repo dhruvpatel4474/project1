@@ -93,12 +93,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout lineLayMyPG,lineLayAddWorker,lineLayViewWorker;
     private ParseFile parseFile;
     private SliderLayout mDemoSlider;
+    private ImageView logoutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-//        getSupportActionBar().hide();
+        getSupportActionBar().hide();
         Parse.initialize(HomeActivity.this);
         intialize();
         Constant.mcontext = HomeActivity.this;
@@ -172,6 +173,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         lineLayMyPG = (LinearLayout)findViewById(R.id.lineLay_myPg);
         lineLayAddWorker = (LinearLayout)findViewById(R.id.lineLay_addworker);
         lineLayViewWorker = (LinearLayout)findViewById(R.id.lineLay_viewWorker);
+        logoutBtn = (ImageView)findViewById(R.id.logoutbtn);
 
         lineLayCategory.setOnClickListener(this);
         lineLayAddPG.setOnClickListener(this);
@@ -181,6 +183,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         lineLayMyPG.setOnClickListener(this);
         lineLayAddWorker.setOnClickListener(this);
         lineLayViewWorker.setOnClickListener(this);
+        logoutBtn.setOnClickListener(this);
     }
 
     @Override
@@ -211,6 +214,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.lineLay_viewWorker :
                 startActivity(new Intent(HomeActivity.this,WorkerListActivity.class));
+                break;
+
+            case R.id.logoutbtn :
+                Constant.setValueAndKeyBoolean("isLogin",false);
+                ParseUser.logOut();
+                Intent intent =new Intent(HomeActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finishAffinity();
                 break;
         }
     }
