@@ -36,10 +36,11 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/lineLay_addCity"
+                android:id="@+id/lineLay_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/Margin20"
+                android:padding="@dimen/padding5"
                 android:background="@drawable/border_pay"
                 android:gravity="center">
 

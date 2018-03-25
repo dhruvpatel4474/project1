@@ -77,7 +77,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private int PICK_IMAGE_REQUEST = 1;
     private boolean IsLogoUploaded = false;
     private ImageView imgAddCat;
-    private LinearLayout lineLayMyPG;
+    private LinearLayout lineLayMyPG,lineLayAddWorker,lineLayViewWorker;
     private ParseFile parseFile;
 
     @Override
@@ -137,12 +137,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         lineLayViewHistory = (LinearLayout) findViewById(R.id.lineLay_history);
         lineLayAddInfo = (LinearLayout) findViewById(R.id.lineLay_addinfo);
         lineLayMyPG = (LinearLayout)findViewById(R.id.lineLay_myPg);
+        lineLayAddWorker = (LinearLayout)findViewById(R.id.lineLay_addworker);
+        lineLayViewWorker = (LinearLayout)findViewById(R.id.lineLay_viewWorker);
+
         lineLayCategory.setOnClickListener(this);
         lineLayAddPG.setOnClickListener(this);
         lineLayViewPayment.setOnClickListener(this);
         lineLayViewHistory.setOnClickListener(this);
         lineLayAddInfo.setOnClickListener(this);
         lineLayMyPG.setOnClickListener(this);
+        lineLayAddWorker.setOnClickListener(this);
+        lineLayViewWorker.setOnClickListener(this);
     }
 
     @Override
@@ -167,6 +172,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.lineLay_myPg :
                 startActivity(new Intent(HomeActivity.this,MyPGActivity.class));
+                break;
+            case R.id.lineLay_addworker :
+                startActivity(new Intent(HomeActivity.this,AddWorkerActivity.class));
+                break;
+            case R.id.lineLay_viewWorker :
+                startActivity(new Intent(HomeActivity.this,WorkerListActivity.class));
                 break;
         }
     }
@@ -291,6 +302,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         final EditText catName = (EditText)dialogAddCategory.findViewById(R.id.edtCatName);
         LinearLayout lineLayAddCat = (LinearLayout)dialogAddCategory.findViewById(R.id.lineLay_addCategory);
         TextView tvAddCategory = (TextView)dialogAddCategory.findViewById(R.id.tv_addCategory);
+        LinearLayout lineLayImage = (LinearLayout)dialogAddCategory.findViewById(R.id.lineLay_image);
         imgClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -312,11 +324,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (isCategory)
         {
             imgAddCat.setVisibility(View.VISIBLE);
+            lineLayImage.setVisibility(View.VISIBLE);
             tvAddCategory.setText("Add Category");
             catName.setHint("Category Name");
         }
         else {
             imgAddCat.setVisibility(View.GONE);
+            lineLayImage.setVisibility(View.GONE);
             tvAddCategory.setText("Add City");
             catName.setHint("City Name");
         }
