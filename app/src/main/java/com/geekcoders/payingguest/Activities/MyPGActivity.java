@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,8 +41,9 @@ public class MyPGActivity extends AppCompatActivity {
     private ArrayList<PGObject> arrayList;
     private PGListAdapter adapter;
     private RecyclerView recyclerView;
-    private MyPGListRAdapter pgListRAdapter;
+    private PGListRAdapter pgListRAdapter;
     private TextView tvActionBar;
+    private String TAG = "Permission";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,7 +151,7 @@ public class MyPGActivity extends AppCompatActivity {
                     }
 
 //                    adapter = new PGListAdapter(PGListActivity.this, arrayList);
-                    pgListRAdapter = new MyPGListRAdapter(MyPGActivity.this,arrayList);
+                    pgListRAdapter = new PGListRAdapter(MyPGActivity.this,arrayList);
                     try {
                         recyclerView.setAdapter(pgListRAdapter);
                     }catch (Exception e1)
@@ -170,16 +172,18 @@ public class MyPGActivity extends AppCompatActivity {
 
     }
 
-    @Override
+    /*@Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
     {
         super.onCreateContextMenu(menu, v, menuInfo);
         //menu.setHeaderTitle("Select The Action");
         menu.add(0, v.getId(), 0, "Delete");//groupId, itemId, order, title
        // menu.add(0, v.getId(), 0, "SMS");
-    }
+    }*/
     @Override
     public boolean onContextItemSelected(MenuItem item){
+
+
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int index = info.position;
         PGObject object=arrayList.get(index);
@@ -194,6 +198,26 @@ public class MyPGActivity extends AppCompatActivity {
         }
         return true;
     }
+
+/*    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        int position = -1;
+        try {
+            position = ((PGListRAdapter)getAdapter()).getPosition();
+        } catch (Exception e) {
+            Log.d(TAG, e.getLocalizedMessage(), e);
+            return super.onContextItemSelected(item);
+        }
+        switch (item.getItemId()) {
+            case R.id.ctx_menu_remove_backup:
+                // do your stuff
+                break;
+            case R.id.ctx_menu_restore_backup:
+                // do your stuff
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }*/
 
     public void deletePg(String id) {
 

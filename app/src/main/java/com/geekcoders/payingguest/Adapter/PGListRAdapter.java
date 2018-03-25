@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by raj15 on 20-Mar-18.
  */
 
-public class PGListRAdapter extends RecyclerView.Adapter<PGListRAdapter.MyViewHolder> {
+public class PGListRAdapter extends RecyclerView.Adapter<PGListRAdapter.MyViewHolder>  {
 
 
     private final Context context;
