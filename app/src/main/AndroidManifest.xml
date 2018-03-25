@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.geekcoders.payingguest">
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-
-    <!-- ${packageName} is substituted for the package name declared above. -->
-    <!-- <permission android:protectionLevel="signature" android:name="com.geekcoders.payingguest.permission.C2D_MESSAGE" /> -->
-    <!-- <uses-permission android:name="com.geekcoders.payingguest.permission.C2D_MESSAGE" /> -->
-
-    <permission
-        android:name="com.geekcoders.payingguest.permission.C2D_MESSAGE"
+    <permission android:name="com.geekcoders.payingguest.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-
     <uses-permission android:name="com.geekcoders.payingguest.permission.C2D_MESSAGE" />
 
     <application
@@ -32,6 +22,23 @@
         <activity
             android:name=".Activities.MainActivity"
             android:screenOrientation="portrait" />
+        <meta-data android:name="com.parse.push.gcm_sender_id"
+            android:value="id:917451737965" />
+        <service android:name="com.parse.PushService" />
+        <receiver android:name="com.parse.GcmBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.geekcoders.payingguest" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.parse.ParsePushBroadcastReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+                <action android:name="com.parse.push.intent.DELETE" />
+            </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="com.parse.SERVER_URL"
@@ -81,54 +88,6 @@
         <activity android:name=".Activities.ViewPaymentActivity" />
         <activity android:name=".Activities.HistoryActivity" />
 
-        <!-- <meta-data android:name="com.parse.push.gcm_sender_id" -->
-        <!-- android:value="917451737965"/> -->
-        <!-- <receiver android:name="com.parse.GcmBroadcastReceiver" -->
-        <!-- android:permission="com.google.android.c2dm.permission.SEND"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="com.google.android.c2dm.intent.RECEIVE" /> -->
-        <!-- <action android:name="com.google.android.c2dm.intent.REGISTRATION" /> -->
-
-
-        <!-- <category android:name="com.geekcoders.payingguest" /> -->
-        <!-- </intent-filter> -->
-        <!-- </receiver> -->
-        <!-- <service android:name="com.parse.PushService" /> -->
-        <!-- <receiver android:name="com.parse.ParsePushBroadcastReceiver" -->
-        <!-- android:exported="false"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="com.parse.push.intent.RECEIVE" /> -->
-        <!-- <action android:name="com.parse.push.intent.DELETE" /> -->
-        <!-- <action android:name="com.parse.push.intent.OPEN" /> -->
-        <!-- </intent-filter> -->
-        <!-- </receiver> -->
-
-        <meta-data
-            android:name="com.parse.push.gcm_sender_id"
-            android:value="917451737965" />
-
-        <receiver
-            android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
-                <category android:name="com.geekcoders.payingguest" />
-            </intent-filter>
-        </receiver>
-
-        <service android:name="com.parse.PushService" />
-
-        <receiver
-            android:name="com.parse.ParsePushBroadcastReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.parse.push.intent.RECEIVE" />
-                <action android:name="com.parse.push.intent.DELETE" />
-                <action android:name="com.parse.push.intent.OPEN" />
-            </intent-filter>
-        </receiver>
 
         <activity android:name=".Activities.MyPGActivity" />
         <activity android:name=".Activities.AddWorkerActivity"></activity>

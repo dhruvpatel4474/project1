@@ -49,6 +49,7 @@ import com.geekcoders.payingguest.Utils.Constant;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
+import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseInstallation;
@@ -121,7 +122,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //        if (user != null) {
 //
 //        }
-            ParseInstallation.getCurrentInstallation().saveInBackground();
+//            ParseInstallation.getCurrentInstallation().saveInBackground();
+//            ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
             // ParseQuery pushQuery = ParseInstallation.getQuery();
 
@@ -138,14 +140,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
             // Create our Installation query
-//        ParseQuery pushQuery = ParseInstallation.getQuery();
-//        pushQuery.whereEqualTo("userId","NuDYCP0HdC" );
 
-// Send push notification to query
-//        ParsePush push = new ParsePush();
-//        push.setChannel("NuDYCP0HdC");
-//        push.setMessage("test");
-//        push.sendInBackground();
 
             PgList();
 

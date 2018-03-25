@@ -115,7 +115,13 @@ public class PaymentActivity extends AppCompatActivity {
 //        push.setMessage(message);
 //        push.sendInBackground();
 
-
+        ParseQuery pushQuery = ParseInstallation.getQuery();
+        pushQuery.whereEqualTo("userId",recieverId );
+        
+        ParsePush push = new ParsePush();
+        push.setQuery(pushQuery);
+        push.setMessage(message);
+        push.sendInBackground();
 
     }
 

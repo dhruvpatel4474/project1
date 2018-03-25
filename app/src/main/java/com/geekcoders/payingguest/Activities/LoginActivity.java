@@ -2,6 +2,7 @@ package com.geekcoders.payingguest.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import com.geekcoders.payingguest.Utils.Constant;
 import com.geekcoders.payingguest.Utils.Dialog;
 import com.parse.LogInCallback;
 import com.parse.Parse;
+import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParsePush;
@@ -99,12 +101,17 @@ public class LoginActivity extends AppCompatActivity {
                     Constant.setValueAndKeyBoolean("isLogin",true);
 
 
-                    // Store app language and version
-                    ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-                    installation.put("userId",userId);
-                    installation.saveInBackground();
+                    Parse.initialize(new Parse.Configuration.Builder(LoginActivity.this)
+                            .applicationId("Z22QOopokTddHsmmG7RVZT8OBgo6mMAv1qvu7xNJ")
+                            .clientKey("mk4mpe6bKZCi2dktaXntlgalKvZZDXNgIw2hR9Ob")
+                            .server("https://parseapi.back4app.com/").build()
+                    );
 
-                    ParsePush.subscribeInBackground(userId);
+// This is the installation part
+                    ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                    installation.put("GCMSenderId", "917451737965");
+                    installation.put("userId", userId);
+                    installation.saveInBackground();
                     Dialog.closeDialog();
                     Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                     startActivity(intent);
