@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -18,17 +19,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.geekcoders.payingguest.Objects.Category;
 import com.geekcoders.payingguest.R;
+import com.geekcoders.payingguest.Utils.Constant;
 import com.parse.FindCallback;
+import com.parse.ParseACL;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class AddWorkerActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -40,6 +48,7 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
     private int PICK_IMAGE_REQUEST = 1;
     private boolean IsLogoUploaded = false;
     private Bitmap imageBit;
+    private ParseFile parseFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,15 +235,114 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public void UploadImageForPost()
+    public void data()
     {
-        String name,price,number,type,city,description;
 
+
+
+    }
+
+
+    public void CreatePostOnServer(String imagePath) throws Exception {
+
+        BitmapDrawable drawable = (BitmapDrawable) imgWorker.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        imageBit=bitmap;
+
+        ParseACL acl = new ParseACL();
+        acl.setPublicReadAccess(true);
+        acl.setPublicWriteAccess(true);
+       ParseObject objP = new ParseObject("Worker");
+
+        String name,price,number,type,cityname,description;
         name = edtFname.getText().toString() +" "+edtLname.getText().toString();
         price = edtPrice.getText().toString();
         number = edtNumber.getText().toString();
         type = edtWorkerType.getText().toString();
-        city = ((Category)spnrCity.getSelectedItem()).getName();
+        //Category city = (Category) spnrCity.getSelectedItem();
+        cityname = spnrCity.getSelectedItem().toString();
         description = edtDescription.getText().toString();
+
+
+        objP.put("name", name);
+        objP.put("description", description);
+        objP.put("worktype",type);
+        objP.put("price", Integer.parseInt(price));// int
+        objP.put("city",cityname);
+        objP.put("number",number);
+        objP.put("image",imagePath);
+
+        objP.setACL(acl);
+        objP.saveInBackground((new SaveCallback() {
+            public void done(ParseException e) {
+                // Handle success or failure here ...
+
+                if (e == null) {
+
+
+                    //loading.cancel();
+                    Toast.makeText(AddWorkerActivity.this, "Successfully added", Toast.LENGTH_LONG).show();
+                    finish();
+
+                } else
+
+                {
+//                loading.cancel();
+                    Toast.makeText(AddWorkerActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }));
     }
+
+
+    public void UploadImageForPost() {
+
+        if (IsLogoUploaded) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            Bitmap bitmap = imageBit;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] image = stream.toByteArray();
+            Random r = new Random();
+            int i1 = (r.nextInt(80));
+            Random r2 = new Random();
+            int i2 = (r2.nextInt(99));
+            Random r3 = new Random();
+            int i3 = (r3.nextInt(80));
+            String name = i3 + i1 + i2 + ".png";
+            parseFile = new ParseFile(name, image, ".png");
+
+            parseFile.saveInBackground(new SaveCallback() {
+                                           @Override
+                                           public void done(ParseException e) {
+                                               if (e == null) {
+                                                   try {
+                                                       CreatePostOnServer(parseFile.getUrl());
+                                                   } catch (Exception ex) {
+                                                       ex.printStackTrace();
+                                                   }
+
+
+                                               } else {
+
+                                                   Toast.makeText(AddWorkerActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                                                   //  loading.cancel();
+                                               }
+                                           }
+                                       }
+
+            );
+
+        } else {
+
+            try {
+                CreatePostOnServer("null");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
+
 }

@@ -41,9 +41,9 @@ public class WorkerDetail extends AppCompatActivity {
 
         callBtn = (Button) findViewById(R.id.workcall);
 
-
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.MyToolbar_w);
-        setSupportActionBar(toolbar);
+        getSupportActionBar().hide();
+//        final Toolbar toolbar = (Toolbar) findViewById(R.id.MyToolbar_w);
+//        setSupportActionBar(toolbar);
 
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapse_toolbar_w);
