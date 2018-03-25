@@ -38,12 +38,12 @@ public class PaymentRAdapter extends RecyclerView.Adapter<PaymentRAdapter.MyView
         Payment object = arrayList.get(position);
         if (object.isStatus())
         {//for recived
-            holder.name.setText(object.getRecieverName());
+            holder.name.setText(object.getSenderName());
             holder.status.setText("from");
         }
         else
         {//for paid
-            holder.name.setText(object.getSenderName());
+            holder.name.setText(object.getRecieverName());
             holder.status.setText("to");
         }
 

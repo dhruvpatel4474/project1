@@ -117,7 +117,7 @@ public class PaymentActivity extends AppCompatActivity {
 
         ParseQuery pushQuery = ParseInstallation.getQuery();
         pushQuery.whereEqualTo("userId",recieverId );
-        
+
         ParsePush push = new ParsePush();
         push.setQuery(pushQuery);
         push.setMessage(message);
