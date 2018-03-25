@@ -25,6 +25,7 @@ import com.geekcoders.payingguest.Objects.Comment;
 import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.geekcoders.payingguest.Utils.Dialog;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
@@ -80,7 +81,7 @@ public class PgDetailActivity extends AppCompatActivity {
                 if (addCommentEdt.getText().toString().trim().equals("")) {
                     addCommentEdt.setError("Please enter feedback");
                 } else {
-//                    dialog.show();
+                    Dialog.showDialog(PgDetailActivity.this);
                     ParseObject commentData = new ParseObject("Feedback");
                     // commentData.put("post", objpost);
 
@@ -94,14 +95,10 @@ public class PgDetailActivity extends AppCompatActivity {
                             if (e == null) {
                                 addCommentEdt.setText("");
                                 GetCommentList();
-//                                if (dialog.isShowing()) {
-//                                    dialog.dismiss();
-//                                }
+                                Dialog.closeDialog();
                             } else {
                                 Toast.makeText(PgDetailActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-//                                if (dialog.isShowing()) {
-//                                    dialog.dismiss();
-//                                }
+                                Dialog.closeDialog();
                             }
                         }
                     });
@@ -160,6 +157,8 @@ public class PgDetailActivity extends AppCompatActivity {
     }
 
     public void PGDetail() {
+
+        Dialog.showDialog(PgDetailActivity.this);
 
         final ParseQuery<ParseObject> query = ParseQuery.getQuery("PGDetail");
         query.whereEqualTo("objectId", Constant.getValueForKeyString("PGid"));
@@ -244,9 +243,7 @@ public class PgDetailActivity extends AppCompatActivity {
 //                            gridview.setAdapter(adapter);
 ////                            videoGet(object);
 ////                            LoadImages();
-//                            if (dialog.isShowing()) {
-//                                dialog.dismiss();
-//                            }
+//
 //                            GetCommentList();
 //
 //
@@ -299,11 +296,11 @@ public class PgDetailActivity extends AppCompatActivity {
 
                     CommentRAdapter commentRAdapter = new CommentRAdapter(PgDetailActivity.this,commentList);
                     recyclerView.setAdapter(commentRAdapter);
-//                    dialog.cancel();
-//                    dialog.dismiss();
+//
+                    Dialog.closeDialog();
                 } else {
-//                    dialog.cancel();
-//                    dialog.dismiss();
+                    Dialog.closeDialog();
+
 
                 }
             }

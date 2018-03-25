@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.geekcoders.payingguest.Utils.Dialog;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -57,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                     Login(username, password);
+                    Dialog.showDialog(LoginActivity.this);
                 }
             }
         });
@@ -100,11 +102,13 @@ public class LoginActivity extends AppCompatActivity {
                     installation.saveInBackground();
 
                     ParsePush.subscribeInBackground(userId);
-                   Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+                    Dialog.closeDialog();
+                    Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                     startActivity(intent);
                     finish();
 
                 } else {
+                    Dialog.closeDialog();
                     String message= e.getLocalizedMessage();
                     Toast.makeText(LoginActivity.this,message,Toast.LENGTH_SHORT).show();
                 }

@@ -20,6 +20,7 @@ import com.geekcoders.payingguest.Adapter.CategoryRAdapter;
 import com.geekcoders.payingguest.Objects.Category;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.geekcoders.payingguest.Utils.Dialog;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -65,10 +66,7 @@ public class CategoryActivity extends AppCompatActivity {
     public void CategoryList() {
         arrayList = new ArrayList<>();
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("Category");
-
-        final ProgressDialog dialog = new ProgressDialog(CategoryActivity.this);
-        dialog.setMessage("Please wait");
-        dialog.show();
+        Dialog.showDialog(CategoryActivity.this);
 
 //
 //        if (band_type == 0) {
@@ -126,10 +124,10 @@ public class CategoryActivity extends AppCompatActivity {
                     //adapter = new CategoryAdapter(CategoryActivity.this, arrayList);
                     CategoryRAdapter categoryRAdapter = new CategoryRAdapter(CategoryActivity.this,arrayList,false);
                     recyclerView.setAdapter(categoryRAdapter);
-                    dialog.cancel();
+                    Dialog.closeDialog();
 
                 } else {
-                    dialog.cancel();
+                    Dialog.closeDialog();
 
 
                 }

@@ -19,6 +19,7 @@ import com.geekcoders.payingguest.Objects.Category;
 import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.geekcoders.payingguest.Utils.Dialog;
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
 import com.parse.Parse;
@@ -66,9 +67,7 @@ public class PGListActivity extends AppCompatActivity {
 
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("PGDetail");
 
-        final ProgressDialog dialog = new ProgressDialog(PGListActivity.this);
-        dialog.setMessage("Please wait");
-        dialog.show();
+        Dialog.showDialog(PGListActivity.this);
 
 //
 //        if (band_type == 0) {
@@ -154,10 +153,10 @@ public class PGListActivity extends AppCompatActivity {
                         e1.printStackTrace();
                     }
 
-                    dialog.cancel();
+                    Dialog.closeDialog();
 
                 } else {
-                    dialog.cancel();
+                    Dialog.closeDialog();
 
 
                 }
