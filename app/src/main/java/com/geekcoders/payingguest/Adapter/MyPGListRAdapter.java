@@ -48,7 +48,7 @@ public class MyPGListRAdapter extends RecyclerSwipeAdapter<MyPGListRAdapter.MyVi
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context)
-                .inflate(R.layout.adapter_pglist, parent, false);
+                .inflate(R.layout.adapter_mypglist, parent, false);
         return new MyViewHolder(itemView);
     }
 
@@ -73,8 +73,8 @@ public class MyPGListRAdapter extends RecyclerSwipeAdapter<MyPGListRAdapter.MyVi
                 //Constant.pgObject = arrayList.get(position);
 
                 Constant.setValueAndKeyString("PGid", arrayList.get(position).getObjectId());
-                Intent intent = new Intent(context, PgDetailActivity.class);
-                context.startActivity(intent);
+                //Intent intent = new Intent(context, PgDetailActivity.class);
+                //context.startActivity(intent);
             }
         });
 
