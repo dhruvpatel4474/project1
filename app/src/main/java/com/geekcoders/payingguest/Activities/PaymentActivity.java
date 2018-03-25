@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.geekcoders.payingguest.R;
@@ -27,6 +28,7 @@ public class PaymentActivity extends AppCompatActivity {
     private int price;
     public ParseObject pgparseObject;
     private Button payBtn;
+    private TextView payTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,12 @@ public class PaymentActivity extends AppCompatActivity {
 
 
         payBtn=(Button)findViewById(R.id.paybtn);
+        payTxt=(TextView)findViewById(R.id.paytxt);
         price = Constant.price;
         recieverId= Constant.recieverId;
         recieverName= Constant.recieverName;
         pgparseObject=Constant.PGParseObject;
+        payTxt.setText("Pay ₹"+String.valueOf(price)+" to "+recieverName);
         payBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
