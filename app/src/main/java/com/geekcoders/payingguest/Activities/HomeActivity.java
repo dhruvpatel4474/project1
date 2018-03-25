@@ -635,7 +635,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-
     }
 
     @Override
