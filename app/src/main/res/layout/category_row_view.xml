@@ -27,8 +27,7 @@
                     android:id="@+id/category_row_img"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/cat_icon"
-                    android:tint="@color/colorPrimary" />
+                 />
             </LinearLayout>
 
             <LinearLayout

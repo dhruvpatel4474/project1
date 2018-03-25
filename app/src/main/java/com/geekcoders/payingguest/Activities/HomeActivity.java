@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.net.Uri;
@@ -40,17 +41,22 @@ import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
 import com.parse.FindCallback;
 import com.parse.Parse;
+import com.parse.ParseACL;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.PushService;
+import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,6 +78,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private boolean IsLogoUploaded = false;
     private ImageView imgAddCat;
     private LinearLayout lineLayMyPG;
+    private ParseFile parseFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -281,7 +288,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         ImageView imgClose = (ImageView) dialogAddCategory.findViewById(R.id.img_close);
         imgAddCat = (ImageView)dialogAddCategory.findViewById(R.id.img_addCategory);
-        EditText catName = (EditText)dialogAddCategory.findViewById(R.id.edtCatName);
+        final EditText catName = (EditText)dialogAddCategory.findViewById(R.id.edtCatName);
         LinearLayout lineLayAddCat = (LinearLayout)dialogAddCategory.findViewById(R.id.lineLay_addCategory);
         TextView tvAddCategory = (TextView)dialogAddCategory.findViewById(R.id.tv_addCategory);
         imgClose.setOnClickListener(new View.OnClickListener() {
@@ -306,12 +313,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         {
             imgAddCat.setVisibility(View.VISIBLE);
             tvAddCategory.setText("Add Category");
-            tvAddCategory.setHint("City Name");
+            catName.setHint("Category Name");
         }
         else {
             imgAddCat.setVisibility(View.GONE);
             tvAddCategory.setText("Add City");
-            tvAddCategory.setHint("Category Name");
+            catName.setHint("City Name");
         }
         lineLayAddCat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -319,9 +326,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 if (isCategory)
                 {
                     //Add category call
+                    UploadImageForPost(catName,imgAddCat);
+
+
                 }
                 else {
                     //Add City Call
+                    try {
+                        AddCityServer(catName);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -440,5 +455,138 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
+
+
+    public void CreatePostOnServer(String imagePath,EditText editText,ImageView imageView) throws Exception {
+
+        BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        imageBit=bitmap;
+
+        ParseACL acl = new ParseACL();
+        acl.setPublicReadAccess(true);
+        acl.setPublicWriteAccess(true);
+       ParseObject objCat = new ParseObject("Category");
+        objCat.put("title", editText.getText().toString());
+
+        objCat.put("image", imagePath);
+        objCat.setACL(acl);
+        objCat.saveInBackground((new SaveCallback() {
+            public void done(ParseException e) {
+                // Handle success or failure here ...
+
+                if (e == null) {
+
+
+                    //loading.cancel();
+                    Toast.makeText(HomeActivity.this, "Successfully added", Toast.LENGTH_LONG).show();
+                   // finish();
+                    if (dialogAddCategory.isShowing()){
+                        dialogAddCategory.dismiss();
+                    }
+
+                } else
+
+                {
+//                loading.cancel();
+                    Toast.makeText(HomeActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }));
+    }
+
+
+    public void UploadImageForPost(final EditText editText, final ImageView imageView) {
+
+        if (IsLogoUploaded) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            Bitmap bitmap = imageBit;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] image = stream.toByteArray();
+            Random r = new Random();
+            int i1 = (r.nextInt(80));
+            Random r2 = new Random();
+            int i2 = (r2.nextInt(99));
+            Random r3 = new Random();
+            int i3 = (r3.nextInt(80));
+            String name = i3 + i1 + i2 + ".png";
+            parseFile = new ParseFile(name, image, ".png");
+
+            parseFile.saveInBackground(new SaveCallback() {
+                                           @Override
+                                           public void done(ParseException e) {
+                                               if (e == null) {
+                                                   try {
+                                                       CreatePostOnServer(parseFile.getUrl(),editText,imageView);
+                                                   } catch (Exception ex) {
+                                                       ex.printStackTrace();
+                                                   }
+
+
+                                               } else {
+
+                                                   Toast.makeText(HomeActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                                                   //  loading.cancel();
+                                               }
+                                           }
+                                       }
+
+            );
+
+        } else {
+
+            try {
+                CreatePostOnServer("null",editText,imageView);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
+
+
+
+    public void AddCityServer(final EditText editText) throws Exception {
+
+        ParseACL acl = new ParseACL();
+        acl.setPublicReadAccess(true);
+        acl.setPublicWriteAccess(true);
+       ParseObject objCity = new ParseObject("Location");
+        objCity.put("title", editText.getText().toString());
+        objCity.setACL(acl);
+        objCity.saveInBackground((new SaveCallback() {
+            public void done(ParseException e) {
+                // Handle success or failure here ...
+
+                if (e == null) {
+
+
+                    //loading.cancel();
+                    Toast.makeText(HomeActivity.this, "Successfully added", Toast.LENGTH_LONG).show();
+                    editText.setText("");
+                    //finish();
+                    if (dialogAddCategory.isShowing()){
+                        dialogAddCategory.dismiss();
+                    }
+
+                } else
+
+                {
+//                loading.cancel();
+                    Toast.makeText(HomeActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+
+                }
+            }
+        }));
+    }
+
+
+
+
+
+
 
 }
