@@ -5,7 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.geekcoders.payingguest.Adapter.MyPGListRAdapter;
 import com.geekcoders.payingguest.Adapter.PGListAdapter;
@@ -15,11 +20,14 @@ import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
 import com.geekcoders.payingguest.Utils.Dialog;
 import com.geekcoders.payingguest.Utils.Fonts;
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -44,6 +52,8 @@ public class MyPGActivity extends AppCompatActivity {
         Constant.mcontext=MyPGActivity.this;
         Initiliztion();
         PgList();
+
+        registerForContextMenu(recyclerView);
     }
 
     private void Initiliztion() {
@@ -159,4 +169,56 @@ public class MyPGActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        //menu.setHeaderTitle("Select The Action");
+        menu.add(0, v.getId(), 0, "Delete");//groupId, itemId, order, title
+       // menu.add(0, v.getId(), 0, "SMS");
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position;
+        PGObject object=arrayList.get(index);
+        if(item.getTitle()=="Delete"){
+            deletePg(object.getObjectId());
+        }
+//        else if(item.getTitle()=="SMS"){
+//            Toast.makeText(getApplicationContext(),"sending sms code",Toast.LENGTH_LONG).show();
+//        }
+        else{
+            return false;
+        }
+        return true;
+    }
+
+    public void deletePg(String id) {
+
+        Dialog.showDialog(MyPGActivity.this);
+
+        final ParseQuery<ParseObject> query = ParseQuery.getQuery("PGDetail");
+        query.whereEqualTo("objectId", id);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(final ParseObject object, ParseException e) {
+
+                object.deleteInBackground(new DeleteCallback() {
+                    @Override
+                    public void done(ParseException e) {
+
+
+                        // delete done
+
+
+                    }
+                });
+            }
+        });
+
+    }
+
+
 }
