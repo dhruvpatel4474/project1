@@ -15,11 +15,14 @@ import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
 import com.geekcoders.payingguest.Utils.Dialog;
 import com.geekcoders.payingguest.Utils.Fonts;
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -159,4 +162,31 @@ public class MyPGActivity extends AppCompatActivity {
         });
 
     }
+
+    public void deletePg() {
+
+        Dialog.showDialog(MyPGActivity.this);
+
+        final ParseQuery<ParseObject> query = ParseQuery.getQuery("PGDetail");
+        query.whereEqualTo("objectId", "");
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(final ParseObject object, ParseException e) {
+
+                object.deleteInBackground(new DeleteCallback() {
+                    @Override
+                    public void done(ParseException e) {
+
+
+                        // delete done
+
+
+                    }
+                });
+            }
+        });
+
+    }
+
+
 }
