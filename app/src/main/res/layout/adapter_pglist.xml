@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/Margin5"
+    android:layout_marginTop="@dimen/Margin2"
+    android:layout_marginLeft="@dimen/Margin5"
+    android:layout_marginRight="@dimen/Margin5"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp">
 
@@ -61,7 +63,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/SmallText"
-                            android:textColor="@color/black"
+                            android:textColor="@color/darkgrey"
                             android:padding="2dp"
                             android:text="City"/>
                     </LinearLayout>
@@ -88,7 +90,7 @@
                             android:layout_height="wrap_content"
                             android:padding="@dimen/Margin2"
                             android:text="25/12/2018"
-                            android:textColor="@color/black"
+                            android:textColor="@color/darkgrey"
                             android:textSize="@dimen/Smalltext" />
                     </LinearLayout>
                 </RelativeLayout>
