@@ -67,14 +67,20 @@ public class MyPGListRAdapter extends RecyclerSwipeAdapter<MyPGListRAdapter.MyVi
         holder.price.setText(price);
         holder.date.setText(arrayList.get(position).getDate());
 
+        recyclerManger.bindView(holder.itemView, position);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Constant.pgObject = arrayList.get(position);
 
-                Constant.setValueAndKeyString("PGid", arrayList.get(position).getObjectId());
-                //Intent intent = new Intent(context, PgDetailActivity.class);
-                //context.startActivity(intent);
+                if(holder.swipeLayout.getOpenStatus() == SwipeLayout.Status.Close){
+                    //DO WHAT YOU WANT
+                    Constant.setValueAndKeyString("PGid", arrayList.get(position).getObjectId());
+                    Intent intent = new Intent(context, PgDetailActivity.class);
+                    context.startActivity(intent);
+                }
+
             }
         });
 
