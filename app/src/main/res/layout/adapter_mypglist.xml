@@ -2,10 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipeLayout"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/Margin5"
     android:layout_marginRight="@dimen/Margin5"
-    android:layout_marginTop="@dimen/Margin2"
-    android:layout_height="wrap_content">
+    android:layout_marginTop="@dimen/Margin2">
     <!-- Bottom View Start-->
 
 
@@ -13,13 +13,13 @@
         android:id="@+id/bottom_wrapper"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="visible">
+        android:gravity="center">
 
         <LinearLayout
             android:layout_width="71dp"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/lineLay_delete"
@@ -36,6 +36,7 @@
                     android:tint="@color/white" />
             </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
     <!-- Bottom View End-->
 
