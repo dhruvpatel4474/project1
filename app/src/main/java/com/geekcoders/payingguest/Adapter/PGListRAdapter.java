@@ -12,11 +12,18 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.geekcoders.payingguest.Activities.MyPGActivity;
 import com.geekcoders.payingguest.Activities.PGListActivity;
 import com.geekcoders.payingguest.Activities.PgDetailActivity;
 import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
+import com.geekcoders.payingguest.Utils.Dialog;
+import com.parse.DeleteCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -81,7 +88,7 @@ public class PGListRAdapter extends RecyclerView.Adapter<PGListRAdapter.MyViewHo
                         switch (item.getItemId()) {
                             case R.id.menu1:
                                 //handle menu1 click
-                                Toast.makeText(context,"Hello",Toast.LENGTH_LONG).show();
+                               deletePg(arrayList.get(position).getObjectId(),position);
                                 break;
                         }
                         return false;
@@ -113,5 +120,32 @@ public class PGListRAdapter extends RecyclerView.Adapter<PGListRAdapter.MyViewHo
             tvOptionMenu = (TextView)itemView.findViewById(R.id.textViewOptions);
 
         }
+    }
+    public void deletePg(String id, final int position) {
+
+        Dialog.showDialog(context);
+
+        final ParseQuery<ParseObject> query = ParseQuery.getQuery("PGDetail");
+        query.whereEqualTo("objectId", id);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(final ParseObject object, ParseException e) {
+
+                object.deleteInBackground(new DeleteCallback() {
+                    @Override
+                    public void done(ParseException e) {
+
+                        Dialog.closeDialog();
+
+                        arrayList.remove(position);
+                        // delete done
+                        MyPGActivity.notifydata();
+
+
+                    }
+                });
+            }
+        });
+
     }
 }

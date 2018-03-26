@@ -65,6 +65,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -96,6 +97,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private SliderLayout mDemoSlider;
     private ImageView logoutBtn;
     private LinearLayout adminLiner;
+    private ArrayList<PGObject> arrayList1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +144,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             // Create our Installation query
 
 
-            PgList();
+
 
 //            BannerSlider bannerSlider = (BannerSlider) findViewById(R.id.banner_slider1);
 //            List<Banner> banners=new ArrayList<>();
@@ -165,6 +167,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PgList();
     }
 
     public void intialize() {
@@ -640,6 +648,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
+//
+//        Constant.setValueAndKeyString("PGid", arrayList1.get( mDemoSlider.getCurrentPosition()).getObjectId());
+//        Intent intent = new Intent(HomeActivity.this, PgDetailActivity.class);
+//        startActivity(intent);
+
     }
 
     @Override
@@ -649,6 +662,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onPageSelected(int position) {
+//        Constant.setValueAndKeyString("PGid", arrayList1.get(position).getObjectId());
+//        Intent intent = new Intent(HomeActivity.this, PgDetailActivity.class);
+//        startActivity(intent);
 
     }
 
@@ -660,15 +676,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     public void slider(ArrayList<PGObject> arrayList1) {
 
-        mDemoSlider = (SliderLayout) findViewById(R.id.slider);
 
+        mDemoSlider = (SliderLayout) findViewById(R.id.slider);
+mDemoSlider.removeAllSliders();
 
         HashMap<String, String> url_maps = new HashMap<String, String>();
-        url_maps.put(arrayList1.get(0).getName(), arrayList1.get(0).getImage());
-        url_maps.put(arrayList1.get(1).getName(), arrayList1.get(1).getImage());
-        url_maps.put(arrayList1.get(2).getName(), arrayList1.get(2).getImage());
-        url_maps.put(arrayList1.get(3).getName(), arrayList1.get(3).getImage());
-        url_maps.put(arrayList1.get(4).getName(), arrayList1.get(4).getImage());
+//        url_maps.put(arrayList1.get(0).getName(), arrayList1.get(0).getImage());
+//        url_maps.put(arrayList1.get(1).getName(), arrayList1.get(1).getImage());
+//        url_maps.put(arrayList1.get(2).getName(), arrayList1.get(2).getImage());
+//        url_maps.put(arrayList1.get(3).getName(), arrayList1.get(3).getImage());
+//        url_maps.put(arrayList1.get(4).getName(), arrayList1.get(4).getImage());
+
+        for (PGObject obj :
+                arrayList1) {
+
+            url_maps.put(obj.getName(), obj.getImage());
+        }
 
 //        HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
 //        file_maps.put("Hannibal",R.drawable.hannibal);
@@ -697,6 +720,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(4000);
         mDemoSlider.addOnPageChangeListener(this);
+
+
 //        ListView l = (ListView)findViewById(R.id.transformers);
 //        l.setAdapter(new TransformerAdapter(this));
 //        l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -712,7 +737,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void PgList() {
-        final ArrayList<PGObject> arrayList1 = new ArrayList<>();
+        arrayList1 = new ArrayList<>();
 
         ParseQuery<ParseObject> bandQuery = ParseQuery.getQuery("PGDetail");
         com.geekcoders.payingguest.Utils.Dialog.showDialog(HomeActivity.this);
@@ -784,7 +809,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         arrayList1.add(obj);
 
                     }
-
+                   // Collections.reverse(arrayList1);
                     slider(arrayList1);
 //                    adapter = new PGListAdapter(PGListActivity.this, arrayList);
 

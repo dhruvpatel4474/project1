@@ -41,7 +41,7 @@ public class MyPGActivity extends AppCompatActivity {
     private ArrayList<PGObject> arrayList;
     private PGListAdapter adapter;
     private RecyclerView recyclerView;
-    private PGListRAdapter pgListRAdapter;
+    private static PGListRAdapter pgListRAdapter;
     private TextView tvActionBar;
     private String TAG = "Permission";
 
@@ -172,32 +172,37 @@ public class MyPGActivity extends AppCompatActivity {
 
     }
 
-    /*@Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
-    {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        //menu.setHeaderTitle("Select The Action");
-        menu.add(0, v.getId(), 0, "Delete");//groupId, itemId, order, title
-       // menu.add(0, v.getId(), 0, "SMS");
-    }*/
-    @Override
-    public boolean onContextItemSelected(MenuItem item){
+    public static void notifydata(){
 
-
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int index = info.position;
-        PGObject object=arrayList.get(index);
-        if(item.getTitle()=="Delete"){
-            deletePg(object.getObjectId());
-        }
-//        else if(item.getTitle()=="SMS"){
-//            Toast.makeText(getApplicationContext(),"sending sms code",Toast.LENGTH_LONG).show();
-//        }
-        else{
-            return false;
-        }
-        return true;
+        pgListRAdapter.notifyDataSetChanged();
     }
+
+//    /*@Override
+//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+//    {
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//        //menu.setHeaderTitle("Select The Action");
+//        menu.add(0, v.getId(), 0, "Delete");//groupId, itemId, order, title
+//       // menu.add(0, v.getId(), 0, "SMS");
+//    }*/
+//    @Override
+//    public boolean onContextItemSelected(MenuItem item){
+//
+//
+//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+//        int index = info.position;
+//        PGObject object=arrayList.get(index);
+//        if(item.getTitle()=="Delete"){
+//            deletePg(object.getObjectId());
+//        }
+////        else if(item.getTitle()=="SMS"){
+////            Toast.makeText(getApplicationContext(),"sending sms code",Toast.LENGTH_LONG).show();
+////        }
+//        else{
+//            return false;
+//        }
+//        return true;
+//    }
 
 /*    @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -219,30 +224,7 @@ public class MyPGActivity extends AppCompatActivity {
         return super.onContextItemSelected(item);
     }*/
 
-    public void deletePg(String id) {
 
-        Dialog.showDialog(MyPGActivity.this);
-
-        final ParseQuery<ParseObject> query = ParseQuery.getQuery("PGDetail");
-        query.whereEqualTo("objectId", id);
-        query.getFirstInBackground(new GetCallback<ParseObject>() {
-            @Override
-            public void done(final ParseObject object, ParseException e) {
-
-                object.deleteInBackground(new DeleteCallback() {
-                    @Override
-                    public void done(ParseException e) {
-
-
-                        // delete done
-
-
-                    }
-                });
-            }
-        });
-
-    }
 
 
 }
