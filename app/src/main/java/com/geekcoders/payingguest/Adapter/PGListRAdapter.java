@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.geekcoders.payingguest.Activities.PGListActivity;
 import com.geekcoders.payingguest.Activities.PgDetailActivity;
@@ -41,7 +44,7 @@ public class PGListRAdapter extends RecyclerView.Adapter<PGListRAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.name.setText(arrayList.get(position).getName());
             Picasso.with(context)
                     .load(arrayList.get(position).getImage())
@@ -65,6 +68,29 @@ public class PGListRAdapter extends RecyclerView.Adapter<PGListRAdapter.MyViewHo
                 context.startActivity(intent);
             }
         });
+
+
+        holder.tvOptionMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(context,holder.tvOptionMenu);
+                popup.inflate(R.menu.options_menu);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menu1:
+                                //handle menu1 click
+                                Toast.makeText(context,"Hello",Toast.LENGTH_LONG).show();
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popup.show();
+
+            }
+        });
     }
 
     @Override
@@ -72,9 +98,10 @@ public class PGListRAdapter extends RecyclerView.Adapter<PGListRAdapter.MyViewHo
         return arrayList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder  {
         private final ImageView image;
         private final TextView name, price, date, city;
+        private final TextView tvOptionMenu;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -83,6 +110,7 @@ public class PGListRAdapter extends RecyclerView.Adapter<PGListRAdapter.MyViewHo
             price = (TextView) itemView.findViewById(R.id.price_pglist);
             date = (TextView) itemView.findViewById(R.id.date_pglist);
             city = (TextView) itemView.findViewById(R.id.city_pglist);
+            tvOptionMenu = (TextView)itemView.findViewById(R.id.textViewOptions);
 
         }
     }

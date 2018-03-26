@@ -66,7 +66,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Title"
-                            android:text="Vishal"
                             android:inputType="textPersonName"
                             android:maxLength="50"
                             android:textSize="@dimen/Largetext" />
@@ -81,7 +80,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Price"
-                            android:text="5000"
                             android:inputType="number"
                             android:maxLength="10"
                             android:textSize="@dimen/Largetext" />
@@ -96,7 +94,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Address"
-                            android:text="Vishal Nagar"
                             android:inputType="textPostalAddress"
                             android:maxLength="100"
                             android:textSize="@dimen/Largetext" />
@@ -113,7 +110,6 @@
                             android:hint="Contact Number"
                             android:inputType="number"
                             android:maxLength="15"
-                            android:text="1234567890"
                             android:textSize="@dimen/Largetext" />
                     </android.support.design.widget.TextInputLayout>
 
@@ -128,7 +124,6 @@
                             android:hint="Description"
                             android:inputType="textMultiLine"
                             android:maxLength="100"
-                            android:text="Food is included"
                             android:textSize="@dimen/Largetext" />
                     </android.support.design.widget.TextInputLayout>
 
