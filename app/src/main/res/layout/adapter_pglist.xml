@@ -73,7 +73,7 @@
                             android:lineSpacingExtra="2dp"
                             android:text="name"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/LargeText" />
+                            android:textSize="@dimen/Largetext" />
 
                         <TextView
                             android:id="@+id/city_pglist"
