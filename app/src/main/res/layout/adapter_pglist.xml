@@ -70,6 +70,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="left"
                             android:padding="2dp"
+                            android:lineSpacingExtra="2dp"
                             android:text="name"
                             android:textColor="@color/black"
                             android:textSize="@dimen/LargeText" />
