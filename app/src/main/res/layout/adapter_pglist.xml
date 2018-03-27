@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/Margin2"
     android:layout_marginLeft="@dimen/Margin5"
     android:layout_marginRight="@dimen/Margin5"
+    android:layout_marginTop="@dimen/Margin2"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp">
 
@@ -26,9 +26,9 @@
 
 
         <LinearLayout
-            android:layout_toLeftOf="@id/textViewOptions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/textViewOptions"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -41,7 +41,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
 
-                     />
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -50,49 +50,55 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:id="@+id/name_city"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/Margin5"
-                        android:orientation="vertical"
-                        >
-                    <TextView
-                        android:id="@+id/name_pglist"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="2dp"
-                        android:text="name"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/LargeText" />
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/name_pglist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="2dp"
+                            android:text="name"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/LargeText" />
+
                         <TextView
                             android:id="@+id/city_pglist"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/SmallText"
-                            android:textColor="@color/darkgrey"
                             android:padding="2dp"
-                            android:text="City"/>
+                            android:text="City"
+                            android:textColor="@color/darkgrey"
+                            android:textSize="@dimen/SmallText" />
                     </LinearLayout>
+
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/Margin5"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/price_pglist"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1500/m"
                             android:padding="@dimen/Margin2"
+                            android:text="1500/m"
                             android:textColor="@color/black"
                             android:textSize="@dimen/MediumText" />
 
@@ -105,11 +111,9 @@
                             android:textColor="@color/darkgrey"
                             android:textSize="@dimen/Smalltext" />
                     </LinearLayout>
-                </RelativeLayout>
+                </LinearLayout>
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>

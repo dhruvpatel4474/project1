@@ -76,6 +76,13 @@ public class PGListRAdapter extends RecyclerView.Adapter<PGListRAdapter.MyViewHo
             }
         });
 
+        if (context.equals(MyPGActivity.class))
+        {
+            holder.tvOptionMenu.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.tvOptionMenu.setVisibility(View.GONE);
+        }
 
         holder.tvOptionMenu.setOnClickListener(new View.OnClickListener() {
             @Override
