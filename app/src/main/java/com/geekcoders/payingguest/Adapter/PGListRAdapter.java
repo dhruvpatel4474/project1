@@ -19,6 +19,7 @@ import com.geekcoders.payingguest.Objects.PGObject;
 import com.geekcoders.payingguest.R;
 import com.geekcoders.payingguest.Utils.Constant;
 import com.geekcoders.payingguest.Utils.Dialog;
+import com.geekcoders.payingguest.Utils.Fonts;
 import com.parse.DeleteCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -125,6 +126,11 @@ public class PGListRAdapter extends RecyclerView.Adapter<PGListRAdapter.MyViewHo
             date = (TextView) itemView.findViewById(R.id.date_pglist);
             city = (TextView) itemView.findViewById(R.id.city_pglist);
             tvOptionMenu = (TextView)itemView.findViewById(R.id.textViewOptions);
+
+            Fonts.setSemiBoldFont(context,name);
+            Fonts.setSemiBoldFont(context,city);
+            Fonts.setBoldFont(context,price);
+            Fonts.setSemiBoldFont(context,date);
 
         }
     }

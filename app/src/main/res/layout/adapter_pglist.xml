@@ -22,7 +22,8 @@
             android:layout_alignParentTop="true"
             android:padding="@dimen/padding5"
             android:text="&#8942;"
-            android:textAppearance="?android:textAppearanceLarge" />
+            android:textAppearance="?android:textAppearanceLarge"
+            android:visibility="gone" />
 
 
         <LinearLayout
@@ -70,48 +71,59 @@
                             android:layout_height="wrap_content"
                             android:gravity="left"
                             android:padding="2dp"
-                            android:lineSpacingExtra="2dp"
                             android:text="name"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/Largetext" />
-
-                        <TextView
-                            android:id="@+id/city_pglist"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="2dp"
-                            android:text="City"
-                            android:textColor="@color/darkgrey"
-                            android:textSize="@dimen/SmallText" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:gravity="right"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/Margin5"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/price_pglist"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/Margin2"
+                            android:layout_gravity="bottom"
+                            android:padding="@dimen/Margin5"
                             android:text="1500/m"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/MediumText" />
+                            android:textSize="@dimen/MediumText"
+                            />
 
-                        <TextView
-                            android:id="@+id/date_pglist"
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginRight="@dimen/Margin5"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:orientation="vertical">
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/Margin2"
-                            android:text="25/12/2018"
-                            android:textColor="@color/darkgrey"
-                            android:textSize="@dimen/Smalltext" />
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/city_pglist"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/Margin5"
+                                android:text="City"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/Smalltext" />
+
+
+                            <TextView
+                                android:id="@+id/date_pglist"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:padding="@dimen/Margin2"
+                                android:text="25/12/2018"
+                                android:textColor="@color/darkgrey"
+                                android:textSize="@dimen/Smalltext" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
