@@ -29,13 +29,6 @@
                     android:gravity="center"
                     android:backgroundTint="@color/colorPrimary"
                     android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="174sp"
-                        android:layout_height="58sp"
-                        android:layout_marginBottom="@dimen/Margin30"
-                        android:src="@drawable/splash_text"
-                        android:tint="@color/white" />
                 </LinearLayout>
 
             </RelativeLayout>
