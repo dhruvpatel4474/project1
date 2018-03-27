@@ -71,19 +71,7 @@
                         android:textSize="@dimen/Largetext" />
                 </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/edtLname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/lname"
-                        android:inputType="textPersonName"
-                        android:maxLength="50"
-                        android:textSize="@dimen/Largetext" />
-                </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -93,7 +81,7 @@
                         android:id="@+id/edtWorkerType"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Worker Type"
+                        android:hint="Service Type"
                         android:inputType="text"
                         android:maxLength="50"
                         android:textSize="@dimen/Largetext" />
@@ -194,7 +182,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_btn"
                     android:elevation="@dimen/Margin20"
-                    android:text="Add Worker"
+                    android:text="Add Service"
                     android:textColor="@color/white" />
             </LinearLayout>
 
