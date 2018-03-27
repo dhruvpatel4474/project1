@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                     Dialog.closeDialog();
                     Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                     startActivity(intent);
-                    finish();
+                    finishAffinity();
                 } else {
                     Dialog.closeDialog();
                     String message= e.getLocalizedMessage();

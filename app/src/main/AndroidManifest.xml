@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.geekcoders.payingguest">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -8,8 +9,11 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <permission android:name="com.geekcoders.payingguest.permission.C2D_MESSAGE"
+
+    <permission
+        android:name="com.geekcoders.payingguest.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="com.geekcoders.payingguest.permission.C2D_MESSAGE" />
 
     <application
@@ -22,17 +26,26 @@
         <activity
             android:name=".Activities.MainActivity"
             android:screenOrientation="portrait" />
-        <meta-data android:name="com.parse.push.gcm_sender_id"
+
+        <meta-data
+            android:name="com.parse.push.gcm_sender_id"
             android:value="id:917451737965" />
+
         <service android:name="com.parse.PushService" />
-        <receiver android:name="com.parse.GcmBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
                 <category android:name="com.geekcoders.payingguest" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.parse.ParsePushBroadcastReceiver" android:exported="false">
+        <receiver
+            android:name="com.parse.ParsePushBroadcastReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
                 <action android:name="com.parse.push.intent.OPEN" />
@@ -62,11 +75,7 @@
         <activity
             android:name=".Activities.HomeActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activities.SignupActivity"
@@ -87,10 +96,17 @@
         <activity android:name=".Activities.PaymentActivity" />
         <activity android:name=".Activities.ViewPaymentActivity" />
         <activity android:name=".Activities.HistoryActivity" />
-
-
         <activity android:name=".Activities.MyPGActivity" />
-        <activity android:name=".Activities.AddWorkerActivity"></activity>
+        <activity android:name=".Activities.AddWorkerActivity" />
+        <activity android:name=".Activities.SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

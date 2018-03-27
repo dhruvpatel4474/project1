@@ -107,11 +107,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Parse.initialize(HomeActivity.this);
         intialize();
         Constant.mcontext = HomeActivity.this;
-        if (!Constant.getValueForKeyBoolean("isLogin")) {
-            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        } else  {
+
             if (Constant.getValueForKeyBoolean("isAdmin")) {
 
                 adminLiner.setVisibility(View.VISIBLE);
@@ -166,7 +162,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //            });
 
 
-        }
+
     }
 
     @Override
