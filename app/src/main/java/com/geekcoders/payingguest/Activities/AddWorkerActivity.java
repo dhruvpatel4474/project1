@@ -42,7 +42,7 @@ import java.util.Random;
 public class AddWorkerActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ImageView imgWorker;
-    private EditText edtFname,edtLname,edtWorkerType,edtNumber,edtDescription,edtPrice;
+    private EditText edtFname,edtWorkerType,edtNumber,edtDescription,edtPrice;
     private Spinner spnrCity;
     private Button btnAddWorker;
     private String TAG = "Permission";
@@ -64,7 +64,6 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
     {
         imgWorker = (ImageView)findViewById(R.id.img_worker);
         edtFname = (EditText)findViewById(R.id.edtFname);
-        edtLname = (EditText)findViewById(R.id.edtLname);
         edtWorkerType = (EditText)findViewById(R.id.edtWorkerType);
         edtNumber = (EditText)findViewById(R.id.edtNumber);
         edtDescription = (EditText)findViewById(R.id.edtDescription);
@@ -213,10 +212,6 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
         {
             edtFname.setError("Please Enter First Name");
             return false;
-        }else if (edtLname.getText().toString().trim().equals(""))
-        {
-            edtLname.setError("Please Enter Last Name");
-            return false;
         }else if (edtDescription.getText().toString().trim().equals(""))
         {
             edtDescription.setError("Please Enter Description");
@@ -259,7 +254,7 @@ public class AddWorkerActivity extends AppCompatActivity implements View.OnClick
        ParseObject objP = new ParseObject("Worker");
 
         String name,price,number,type,cityname,description;
-        name = edtFname.getText().toString() +" "+edtLname.getText().toString();
+        name = edtFname.getText().toString();
         price = edtPrice.getText().toString();
         number = edtNumber.getText().toString();
         type = edtWorkerType.getText().toString();
